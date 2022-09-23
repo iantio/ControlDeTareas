@@ -3,5 +3,5 @@ Aplicacion de portafolio de titulo, esta aplicacion consta de una aplicacion web
 
 # Base de Datos
 Tipo de base de datos: Oracle
-Usuario administrador: Jefe
-Contraseña: 1234
+/Usuario administrador: Jefe
+/Contraseña: 1234
