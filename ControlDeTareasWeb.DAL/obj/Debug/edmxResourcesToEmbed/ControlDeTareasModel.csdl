@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EMPLEADO">
+    <Key>
+      <PropertyRef Name="ID_RUT" />
+    </Key>
+    <Property Name="ID_RUT" Type="Int32" Nullable="false" />
+    <Property Name="ID_EMPRESA_EMP" Type="Int32" />
+    <Property Name="ID_ROL_EMP" Type="Int32" />
+    <Property Name="FECHA_INGRESO" Type="DateTime" />
+    <Property Name="NOMBRE_EMP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="USUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CLAVE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.SYS_C008258" FromRole="EMPLEADO" ToRole="EMPRESA" />
+    <NavigationProperty Name="ROL" Relationship="Self.SYS_C008259" FromRole="EMPLEADO" ToRole="ROL" />
+  </EntityType>
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_EMPRESA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EMPLEADO" Relationship="Self.SYS_C008258" FromRole="EMPRESA" ToRole="EMPLEADO" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EMPLEADO" Relationship="Self.SYS_C008259" FromRole="ROL" ToRole="EMPLEADO" />
+  </EntityType>
+  <Association Name="SYS_C008258">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="EMPLEADO">
+        <PropertyRef Name="ID_EMPRESA_EMP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SYS_C008259">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="EMPLEADO">
+        <PropertyRef Name="ID_ROL_EMP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ControlDeTareasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" />
+    <AssociationSet Name="SYS_C008258" Association="Self.SYS_C008258">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+    </AssociationSet>
+    <AssociationSet Name="SYS_C008259" Association="Self.SYS_C008259">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

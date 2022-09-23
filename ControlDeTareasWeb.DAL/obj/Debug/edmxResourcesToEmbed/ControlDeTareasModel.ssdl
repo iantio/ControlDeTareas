@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EMPLEADO">
+    <Key>
+      <PropertyRef Name="ID_RUT" />
+    </Key>
+    <Property Name="ID_RUT" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_EMPRESA_EMP" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_ROL_EMP" Type="number" Precision="10" Scale="0" />
+    <Property Name="FECHA_INGRESO" Type="date" />
+    <Property Name="NOMBRE_EMP" Type="varchar2" MaxLength="100" />
+    <Property Name="USUARIO" Type="varchar2" MaxLength="100" />
+    <Property Name="CLAVE" Type="varchar2" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_EMPRESA" Type="varchar2" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_ROL" Type="varchar2" MaxLength="50" />
+  </EntityType>
+  <Association Name="SYS_C008258">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="EMPLEADO">
+        <PropertyRef Name="ID_EMPRESA_EMP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SYS_C008259">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="EMPLEADO">
+        <PropertyRef Name="ID_ROL_EMP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="JEFE" store:Type="Tables" />
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="JEFE" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="JEFE" store:Type="Tables" />
+    <AssociationSet Name="SYS_C008258" Association="Self.SYS_C008258">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+    </AssociationSet>
+    <AssociationSet Name="SYS_C008259" Association="Self.SYS_C008259">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

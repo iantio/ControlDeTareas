@@ -1,0 +1,38 @@
+﻿<Window x:Class="ControlDeTareasDesk.MenuPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlDeTareasDesk"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Control de Tareas - Menu Principal" Height="647" Width="1200" Background="#FF131313"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" MinHeight="150"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Stretch" Grid.Row="0" Background="{StaticResource PrimaryHueDarkBrush}" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Background="Green"/>
+            <Image x:Name="imgEmpresa"/>
+            <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,5,0,52">
+                <StackPanel x:Name="Menu" Margin="10"/>
+            </ScrollViewer>
+            <Button x:Name="btnCerrarSesion" Content="Cerrar Sesión" HorizontalAlignment="Stretch" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="37" BorderBrush="White" Background="White" FontWeight="Bold" FontSize="14" Click="btnCerrarSesion_Click" Foreground="Black" Grid.Row="1"/>
+        </Grid>
+        <StackPanel x:Name="StackPanelMain"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"/>
+        <Image x:Name="imgUsuario" HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="68" Margin="47,10,0,0" Source="usuario.png" Grid.Column="1"/>
+        <Label x:Name="lblBienvenida" Content="¡Bienvenido Usuario!" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" Height="51" Width="818" Grid.Column="1"/>
+        <Label x:Name="lblRol" Content="Rol" HorizontalAlignment="Left" Margin="121,43,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Grid.Column="1" Height="29" Width="818"/>
+    </Grid>
+</Window>

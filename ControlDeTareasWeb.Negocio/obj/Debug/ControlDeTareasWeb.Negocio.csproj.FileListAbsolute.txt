@@ -1,0 +1,13 @@
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.pdb
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\EntityFramework.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.dll.config
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\EntityFramework.xml
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.AssemblyReference.cache
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.CopyComplete
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.pdb
+C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.dll.config

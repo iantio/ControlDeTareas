@@ -1,0 +1,10 @@
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.AssemblyReference.cache
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.dll.config
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Edge\source\repos\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.CopyComplete
