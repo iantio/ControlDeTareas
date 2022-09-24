@@ -22,14 +22,43 @@ namespace ControlDeTareasDesk
     public partial class UserControlUsuarios : UserControl
     {
         Empleado empleadoAux;
+        Empleado empleadoTemp;
         public UserControlUsuarios(Empleado empleadoAux)
         {
             InitializeComponent();
             this.empleadoAux = empleadoAux;
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
+            //dgUsuarios.ItemsSource = empleadoAux.ReadAll();               *OTRA FORMA DE OBTENER LA LISTA DE USUARIOS*
             dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
             dgUsuarios.Items.Refresh();
+        }
+
+        private void btnBuscarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            Empleado empleado = new Empleado();
+            String rut = txtBuscar.Text;
+            try 
+            {
+                empleado.Read(int.Parse(rut));
+            } 
+            catch 
+            {
+                MessageBox.Show("Usuario no encontrado"); 
+                empleado = null;
+            }
+            if (empleado == null)
+            {
+                MessageBox.Show("Usuario no encontrado");
+            }
+            else
+            {
+                empleadoTemp = empleado; //GUARDA EL EMPLEADO ENCONTRADO
+                EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+                dgUsuarios.ItemsSource = null;
+                dgUsuarios.ItemsSource = empleadoCollection.FindByRut(int.Parse(txtBuscar.Text), empleadoAux.id_empresa_emp);
+                dgUsuarios.Items.Refresh();
+            }
         }
     }
 }

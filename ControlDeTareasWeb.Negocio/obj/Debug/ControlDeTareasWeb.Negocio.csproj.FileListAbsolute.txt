@@ -11,3 +11,16 @@ C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasW
 C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.dll
 C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.pdb
 C:\Users\Edge\source\repos\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.dll.config
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.dll.config
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.dll
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.Negocio.pdb
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.dll
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\EntityFramework.dll
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\ControlDeTareasWeb.DAL.dll.config
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\bin\Debug\EntityFramework.xml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.AssemblyReference.cache
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.CoreCompileInputs.cache
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.csproj.CopyComplete
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.dll
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.Negocio\obj\Debug\ControlDeTareasWeb.Negocio.pdb

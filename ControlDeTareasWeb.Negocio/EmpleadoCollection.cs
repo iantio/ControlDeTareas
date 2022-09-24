@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ControlDeTareasWeb.Negocio
 {
+    // CLASE ENCARGADA DE GUARDAR LOS TIPOS DE FILTROS PARA EL DATAGRID
      public class EmpleadoCollection
     {
-        private List<ControlDeTareasWeb.Negocio.Empleado> GenerarListaCli(List<ControlDeTareasWeb.DAL.EMPLEADO> empleadosDAL)
+        //OBTENCION DE LOS DATOS DE LA TABLA EMPLEADO
+        private List<ControlDeTareasWeb.Negocio.Empleado> GenerarListaEmp(List<ControlDeTareasWeb.DAL.EMPLEADO> empleadosDAL)
         {
-            List<Empleado> listaCli = new List<Empleado>();
+            List<Empleado> listaEmp = new List<Empleado>();
             foreach (ControlDeTareasWeb.DAL.EMPLEADO empleadoDAL in empleadosDAL)
             {
                 Empleado empleadoTemp = new Empleado();
@@ -23,15 +25,23 @@ namespace ControlDeTareasWeb.Negocio
                 empleadoTemp.usuario = empleadoDAL.USUARIO;
                 empleadoTemp.clave = empleadoDAL.CLAVE;
 
-                listaCli.Add(empleadoTemp);
+                listaEmp.Add(empleadoTemp);
             }
-            return listaCli;
+            return listaEmp;
         }
+        //CARGAR LOS DATOS DE LA TABLA EMPLEADO
         public List<Empleado> ReadAll()
         {
-            var clientes = ConectarDAL.Modelo.EMPLEADO;
+            var empleados = ConectarDAL.Modelo.EMPLEADO;
 
-            return GenerarListaCli(clientes.ToList());
+            return GenerarListaEmp(empleados.ToList());
+        }
+        //FILTRAR POR RUT
+        public List<Empleado> FindByRut(int rut, decimal id_empresa)
+        {
+            var empleados = ConectarDAL.Modelo.EMPLEADO.Where(x => x.ID_RUT == rut && x.ID_EMPRESA_EMP == id_empresa);
+
+            return GenerarListaEmp(empleados.ToList());
         }
         //public List<Empleado> FindByRut(String rut)
         //{
@@ -39,11 +49,5 @@ namespace ControlDeTareasWeb.Negocio
 
         //    return GenerarListaCli(clientes.ToList());
         //}
-        public List<Empleado> FindByUser(String usuario)
-        {
-            var clientes = ConectarDAL.Modelo.EMPLEADO.Where(x => x.USUARIO.Contains(usuario));
-
-            return GenerarListaCli(clientes.ToList());
-        }
     }
 }

@@ -35,11 +35,14 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Button x:Name="btnBuscarUsuario" Content="Buscar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Width="75" Margin="645,0,0,0"/>
+        <Button x:Name="btnBuscarUsuario" Content="Buscar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Width="75" Margin="645,0,0,0" Click="btnBuscarUsuario_Click"/>
         <DataGrid x:Name="dgUsuarios" Grid.Column="1" HorizontalAlignment="Stretch" Height="335" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top" Width="720" IsReadOnly="True"/>
         <Button x:Name="btnCrearUsuario" Content="Crear Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="0,377,600,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnEditarUsuario" Content="Editar Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="125,377,473,0" Grid.Row="1" VerticalAlignment="Top" Width="122"/>
         <Button x:Name="btnEliminarUsuario" Content="Eliminar" Grid.Column="1" HorizontalAlignment="Center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFC7504A" BorderBrush="#FFC7504A"/>
+        <ComboBox x:Name="cmbFiltro" Grid.Column="1" HorizontalAlignment="Stretch" Margin="243,0,333,0" VerticalAlignment="Top" Width="144" Height="30" Foreground="White" BorderBrush="#8951FF49" Grid.Row="1" IsReadOnly="True" SelectedIndex="0" Background="{x:Null}">
+            <Label Content="Rut"/>
+        </ComboBox>
     </Grid>
 
 </UserControl>

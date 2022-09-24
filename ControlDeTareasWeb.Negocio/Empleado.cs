@@ -46,6 +46,29 @@ namespace ControlDeTareasWeb.Negocio
                 }
             }).ToList();
         }
+        public Empleado Read(int id_rut)
+        {
+            return this.db.EMPLEADO.Select(p => new Empleado()
+            {
+                id_rut = (decimal)p.ID_RUT,
+                id_empresa_emp = (decimal)p.ID_EMPRESA_EMP,
+                id_rol_emp = (decimal)p.ID_ROL_EMP,
+                fecha_ingreso = (DateTime)p.FECHA_INGRESO,
+                nombre_emp = p.NOMBRE_EMP,
+                usuario = p.USUARIO,
+                clave = p.CLAVE,
+                empresa = new Empresa()
+                {
+                    id_empresa = (decimal)p.ID_EMPRESA_EMP,
+                    nombre_empresa = p.EMPRESA.NOMBRE_EMPRESA
+                },
+                rol = new Rol()
+                {
+                    id_rol = (decimal)p.ID_ROL_EMP,
+                    nombre_rol = p.ROL.NOMBRE_ROL
+                }
+            }).Where(p => p.id_rut == id_rut ).FirstOrDefault();
+        }
         public Empleado Find(String usuario) 
         {
             return this.db.EMPLEADO.Select(p => new Empleado()
