@@ -79,6 +79,9 @@
     <Compile Include="UserControlUsuarios.xaml.cs">
       <DependentUpon>UserControlUsuarios.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinCrearUsuario.xaml.cs">
+      <DependentUpon>WinCrearUsuario.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinCrearUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

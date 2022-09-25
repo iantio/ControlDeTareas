@@ -80,3 +80,5 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDe
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.csproj.CopyComplete
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.exe
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.pdb
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.baml

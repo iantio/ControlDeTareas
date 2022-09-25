@@ -24,7 +24,16 @@ namespace ControlDeTareasWeb.Negocio
                 empleadoTemp.nombre_emp = empleadoDAL.NOMBRE_EMP;
                 empleadoTemp.usuario = empleadoDAL.USUARIO;
                 empleadoTemp.clave = empleadoDAL.CLAVE;
-
+                empleadoTemp.empresa = new Empresa()
+                {
+                    id_empresa = (decimal)empleadoDAL.ID_EMPRESA_EMP,
+                    nombre_empresa = empleadoDAL.EMPRESA.NOMBRE_EMPRESA
+                };
+                empleadoTemp.rol = new Rol()
+                {
+                    id_rol = (decimal)empleadoDAL.ID_ROL_EMP,
+                    nombre_rol = empleadoDAL.ROL.NOMBRE_ROL
+                };
                 listaEmp.Add(empleadoTemp);
             }
             return listaEmp;

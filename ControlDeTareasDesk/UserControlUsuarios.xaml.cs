@@ -60,5 +60,11 @@ namespace ControlDeTareasDesk
                 dgUsuarios.Items.Refresh();
             }
         }
+
+        private void btnCrearUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            WinCrearUsuario crearUsuario = new WinCrearUsuario(empleadoAux);
+            crearUsuario.ShowDialog();
+        }
     }
 }

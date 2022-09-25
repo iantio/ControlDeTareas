@@ -24,5 +24,17 @@ namespace ControlDeTareasWeb.Negocio
                 nombre_rol = p.NOMBRE_ROL
             }).ToList();
         }
+        public List<String> ListarNombres()
+        {
+            Rol rolTemp = new Rol();
+            List<String> ListNombre = new List<String>();
+            ListNombre.Add("--Selecciones un rol--");
+            foreach (Rol rol in rolTemp.ReadAll()) 
+            {
+                String a = rol.nombre_rol;
+                ListNombre.Add(a);
+            };
+            return ListNombre;
+        }
     }
 }
