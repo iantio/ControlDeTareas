@@ -14,9 +14,9 @@
         <Label x:Name="lblNombre" Content="Nombre" HorizontalAlignment="Left" Margin="53,105,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="25" Margin="58,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
         <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="53,156,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="58,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White"/>
+        <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="25" Margin="58,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White"/>
         <Label x:Name="lblClave" Content="Contraseña" HorizontalAlignment="Left" Margin="53,206,0,0" VerticalAlignment="Top" Width="208" Foreground="#DDFFFFFF"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="58,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
+        <TextBox x:Name="pwdClave" HorizontalAlignment="Left" Height="25" Margin="58,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
         <ComboBox x:Name="cmbRol" HorizontalAlignment="Left" Margin="58,279,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True"/>
         <Label Content="Rol" HorizontalAlignment="Left" Margin="53,258,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <Button x:Name="btnGuardar" Content="Guardar Usuario" HorizontalAlignment="Left" Margin="53,356,0,0" VerticalAlignment="Top" Width="137" Click="btnGuardar_Click"/>

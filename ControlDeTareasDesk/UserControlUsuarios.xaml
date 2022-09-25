@@ -47,7 +47,7 @@
         </DataGrid>
         <Button x:Name="btnCrearUsuario" Content="Crear Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="0,377,600,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="btnCrearUsuario_Click"/>
         <Button x:Name="btnEditarUsuario" Content="Editar Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="125,377,473,0" Grid.Row="1" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="btnEliminarUsuario" Content="Eliminar" Grid.Column="1" HorizontalAlignment="Center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFC7504A" BorderBrush="#FFC7504A"/>
+        <Button x:Name="btnEliminarUsuario" Content="Eliminar" Grid.Column="1" HorizontalAlignment="Center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarUsuario_Click"/>
         <ComboBox x:Name="cmbFiltro" Grid.Column="1" HorizontalAlignment="Stretch" Margin="243,0,333,0" VerticalAlignment="Top" Width="144" Height="30" Foreground="White" BorderBrush="#8951FF49" Grid.Row="1" SelectedIndex="0" Background="#FF131313">
             <ComboBoxItem Content="Rut" Foreground="#DDFFFFFF" Background="#00000000"/>
             <ComboBoxItem Content="Nombre" Foreground="#DDFFFFFF" Background="#00000000"/>

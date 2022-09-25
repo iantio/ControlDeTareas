@@ -116,5 +116,19 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        public Boolean Delete() 
+        {
+            try
+            {
+                ControlDeTareasWeb.DAL.EMPLEADO empleado = ConectarDAL.Modelo.EMPLEADO.First(x => x.ID_RUT == id_rut);
+                ConectarDAL.Modelo.EMPLEADO.Remove(empleado);
+                ConectarDAL.Modelo.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
     }
 }

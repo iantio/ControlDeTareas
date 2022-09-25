@@ -65,6 +65,32 @@ namespace ControlDeTareasDesk
         {
             WinCrearUsuario crearUsuario = new WinCrearUsuario(empleadoAux);
             crearUsuario.ShowDialog();
+            EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+            dgUsuarios.ItemsSource = null;
+            dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
+            dgUsuarios.Items.Refresh();
+        }
+
+        private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
+            if (dgUsuarios.SelectedItem != null)
+            {
+                if (empleadoTemp.Delete())
+                {
+                    empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
+                    MessageBox.Show("empleado eliminado");
+                    EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+                    dgUsuarios.ItemsSource = null;
+                    dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
+                    dgUsuarios.Items.Refresh();
+                }
+                else 
+                {
+                    MessageBox.Show("Errorr al eliminar");
+                }
+            }
+            else { MessageBox.Show("Debe seleccionar un empleado"); }
         }
     }
 }
