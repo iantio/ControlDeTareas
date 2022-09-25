@@ -29,9 +29,13 @@ alter table EMPLEADO
     add foreign key (id_rol_emp) references ROL (id_rol);
 --INSERT------------------------------------------------------------------------
 insert into empresa values (1,'process sa');
+insert into empresa values (2,'empresa');
 insert into rol values(1,'administrador');
 insert into rol values(2,'diseñador de procesos');
 insert into rol values(3,'funcionario');
+insert into empleado values (101655849,2,1,'19/09/22','testeo','test','1234');
 insert into empleado values (205533990,1,1,'19/09/22','isaias antio','is.antio','1234');
 insert into empleado values (123456789,1,2,'20/09/22','diego flores','die.flores','1234');
 insert into empleado values (987654321,1,2,'21/09/22','sebastian sandoval','se.sandoval','1234');
+
+commit;

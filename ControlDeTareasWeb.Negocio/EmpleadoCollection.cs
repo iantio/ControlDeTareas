@@ -45,6 +45,12 @@ namespace ControlDeTareasWeb.Negocio
 
             return GenerarListaEmp(empleados.ToList());
         }
+        public List<Empleado> ReadByEmpresa(decimal id_empresa)
+        {
+            var empleados = ConectarDAL.Modelo.EMPLEADO.Where(x =>x.ID_EMPRESA_EMP == id_empresa);
+
+            return GenerarListaEmp(empleados.ToList());
+        }
         //FILTRAR POR RUT
         public List<Empleado> FindByRut(int rut, decimal id_empresa)
         {
@@ -52,11 +58,11 @@ namespace ControlDeTareasWeb.Negocio
 
             return GenerarListaEmp(empleados.ToList());
         }
-        //public List<Empleado> FindByRut(String rut)
-        //{
-        //    var clientes = ConectarDAL.Modelo.EMPLEADO.Where(x => x.RutEmpleado.Contains(rut));
+        public List<Empleado> FindByNombre(String nombre,decimal id_empresa)
+        {
+            var empleados = ConectarDAL.Modelo.EMPLEADO.Where(x => x.NOMBRE_EMP.Contains(nombre) && x.ID_EMPRESA_EMP == id_empresa);
 
-        //    return GenerarListaCli(clientes.ToList());
-        //}
+            return GenerarListaEmp(empleados.ToList());
+        }
     }
 }

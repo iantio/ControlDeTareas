@@ -30,34 +30,44 @@ namespace ControlDeTareasDesk
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
             //dgUsuarios.ItemsSource = empleadoAux.ReadAll();               *OTRA FORMA DE OBTENER LA LISTA DE USUARIOS*
-            dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
+            dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
             dgUsuarios.Items.Refresh();
         }
 
         private void btnBuscarUsuario_Click(object sender, RoutedEventArgs e)
         {
             Empleado empleado = new Empleado();
-            String rut = txtBuscar.Text;
-            try 
+            String test = (String)cmbFiltro.Text;
+            String busqueda = txtBuscar.Text;
+            EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+            switch (test.Trim())
             {
-                empleado.Read(int.Parse(rut));
-            } 
-            catch 
-            {
-                MessageBox.Show("Usuario no encontrado"); 
-                empleado = null;
-            }
-            if (empleado == null)
-            {
-                MessageBox.Show("Usuario no encontrado");
-            }
-            else
-            {
-                empleadoTemp = empleado; //GUARDA EL EMPLEADO ENCONTRADO
-                EmpleadoCollection empleadoCollection = new EmpleadoCollection();
-                dgUsuarios.ItemsSource = null;
-                dgUsuarios.ItemsSource = empleadoCollection.FindByRut(int.Parse(txtBuscar.Text), empleadoAux.id_empresa_emp);
-                dgUsuarios.Items.Refresh();
+                case "":
+                    Console.WriteLine("busqueda vacia");
+                    break;
+                case "Rut":
+                    try
+                    {
+                        dgUsuarios.ItemsSource = null;
+                        dgUsuarios.ItemsSource = empleadoCollection.FindByRut(int.Parse(txtBuscar.Text), empleadoAux.id_empresa_emp);
+                        dgUsuarios.Items.Refresh();
+                    }
+                    catch { MessageBox.Show("Usuario no encontrado"); }
+                    break;
+                case "Nombre":
+                    try
+                    {
+                        empleadoCollection.FindByNombre(busqueda, empleadoAux.id_empresa_emp);
+                        if ((empleadoCollection.FindByNombre(txtBuscar.Text, empleadoAux.id_empresa_emp)).First() == null)
+                        {
+                            Console.WriteLine("error");
+                        }
+                        dgUsuarios.ItemsSource = null;
+                        dgUsuarios.ItemsSource = empleadoCollection.FindByNombre(txtBuscar.Text, empleadoAux.id_empresa_emp);
+                        dgUsuarios.Items.Refresh();
+                    }
+                    catch { MessageBox.Show("Usuario no encontrado"); }
+                    break;
             }
         }
 
@@ -87,7 +97,7 @@ namespace ControlDeTareasDesk
                 }
                 else 
                 {
-                    MessageBox.Show("Errorr al eliminar");
+                    MessageBox.Show("Error al eliminar");
                 }
             }
             else { MessageBox.Show("Debe seleccionar un empleado"); }
