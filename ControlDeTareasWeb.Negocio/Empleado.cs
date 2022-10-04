@@ -42,6 +42,7 @@ namespace ControlDeTareasWeb.Negocio
                 rol = new Rol()
                 {
                     id_rol = (decimal)p.ID_ROL_EMP,
+                    id_empresa_rol = (decimal)p.ID_EMPRESA_EMP,
                     nombre_rol = p.ROL.NOMBRE_ROL
                 }
             }).ToList();
@@ -65,6 +66,7 @@ namespace ControlDeTareasWeb.Negocio
                 rol = new Rol()
                 {
                     id_rol = (decimal)p.ID_ROL_EMP,
+                    id_empresa_rol = (decimal)p.ID_EMPRESA_EMP,
                     nombre_rol = p.ROL.NOMBRE_ROL
                 }
             }).Where(p => p.id_rut == id_rut ).FirstOrDefault();
@@ -88,6 +90,7 @@ namespace ControlDeTareasWeb.Negocio
                 rol = new Rol()
                 {
                     id_rol = (decimal)p.ID_ROL_EMP,
+                    id_empresa_rol = (decimal)p.ID_EMPRESA_EMP,
                     nombre_rol = p.ROL.NOMBRE_ROL
                 }
             }).Where(p => p.usuario == usuario).FirstOrDefault();
@@ -107,6 +110,29 @@ namespace ControlDeTareasWeb.Negocio
                 empleado.CLAVE = clave;
 
                 ConectarDAL.Modelo.EMPLEADO.Add(empleado);
+                ConectarDAL.Modelo.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public Boolean Update()
+        {
+            try
+            {
+                ControlDeTareasWeb.DAL.EMPLEADO empleado = ConectarDAL.Modelo.EMPLEADO.First(x => x.ID_RUT == id_rut);
+
+                empleado.ID_RUT = (int)id_rut;
+                empleado.ID_ROL_EMP = (int)id_rol_emp;
+                empleado.ID_EMPRESA_EMP = (int)id_empresa_emp;
+                empleado.FECHA_INGRESO = fecha_ingreso;
+                empleado.NOMBRE_EMP = nombre_emp;
+                empleado.USUARIO = usuario;
+                empleado.CLAVE = clave;
+
                 ConectarDAL.Modelo.SaveChanges();
 
                 return true;

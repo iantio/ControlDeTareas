@@ -55,6 +55,7 @@ namespace ControlDeTareasDesk
                 }
                 else if (txtEmpresa.Text.ToLower() != empleadoAux.empresa.nombre_empresa || txtUsuario.Text.ToLower() != empleadoAux.usuario || pwdClave.Password != empleadoAux.clave)
                 {
+                    Console.WriteLine(empleadoAux.id_rut+' '+ empleadoAux.usuario +' '+ empleadoAux.clave);
                     MessageBox.Show("Credenciales invalidas");
                 }
                 else

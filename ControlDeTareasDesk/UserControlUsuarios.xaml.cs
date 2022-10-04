@@ -37,10 +37,10 @@ namespace ControlDeTareasDesk
         private void btnBuscarUsuario_Click(object sender, RoutedEventArgs e)
         {
             Empleado empleado = new Empleado();
-            String test = (String)cmbFiltro.Text;
+            String filtro = (String)cmbFiltro.Text;
             String busqueda = txtBuscar.Text;
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
-            switch (test.Trim())
+            switch (filtro.Trim())
             {
                 case "":
                     Console.WriteLine("busqueda vacia");
@@ -73,11 +73,11 @@ namespace ControlDeTareasDesk
 
         private void btnCrearUsuario_Click(object sender, RoutedEventArgs e)
         {
-            WinCrearUsuario crearUsuario = new WinCrearUsuario(empleadoAux);
+            WinCrearUsuario crearUsuario = new WinCrearUsuario(empleadoAux,null,false);
             crearUsuario.ShowDialog();
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
-            dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
+            dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
             dgUsuarios.Items.Refresh();
         }
 
@@ -89,18 +89,36 @@ namespace ControlDeTareasDesk
                 if (empleadoTemp.Delete())
                 {
                     empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
-                    MessageBox.Show("empleado eliminado");
-                    EmpleadoCollection empleadoCollection = new EmpleadoCollection();
-                    dgUsuarios.ItemsSource = null;
-                    dgUsuarios.ItemsSource = empleadoCollection.ReadAll();
-                    dgUsuarios.Items.Refresh();
+                    MessageBox.Show("Empleado eliminado");
                 }
-                else 
+                else
                 {
                     MessageBox.Show("Error al eliminar");
                 }
             }
             else { MessageBox.Show("Debe seleccionar un empleado"); }
+            EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+            dgUsuarios.ItemsSource = null;
+            dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
+            dgUsuarios.Items.Refresh();
+        }
+
+        private void btnEditarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
+            if (dgUsuarios.SelectedItem != null)
+            {
+                WinCrearUsuario editarUsuario = new WinCrearUsuario(empleadoAux, empleadoTemp, true);
+                editarUsuario.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un empleado");
+            }
+            EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+            dgUsuarios.ItemsSource = null;
+            dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
+            dgUsuarios.Items.Refresh();
         }
     }
 }

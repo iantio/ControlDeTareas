@@ -12,18 +12,22 @@ namespace ControlDeTareasWeb.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ROL
+    public partial class PROCESO
     {
-        public ROL()
+        public PROCESO()
         {
-            this.EMPLEADO = new HashSet<EMPLEADO>();
+            this.UNIDAD = new HashSet<UNIDAD>();
         }
     
-        public int ID_ROL { get; set; }
-        public Nullable<int> ID_EMPRESA_ROL { get; set; }
-        public string NOMBRE_ROL { get; set; }
+        public int ID_PROCESO { get; set; }
+        public Nullable<short> ID_ESTADO_PRO { get; set; }
+        public Nullable<int> ID_EMPRESA_PRO { get; set; }
+        public string NOMBRE_PROCESO { get; set; }
+        public Nullable<System.DateTime> FECHA_INICIO { get; set; }
+        public Nullable<System.DateTime> FECHA_TERMINO { get; set; }
     
-        public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
+        public virtual ESTADO ESTADO { get; set; }
+        public virtual ICollection<UNIDAD> UNIDAD { get; set; }
     }
 }

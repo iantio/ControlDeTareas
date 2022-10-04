@@ -32,13 +32,13 @@ namespace ControlDeTareasDesk
             var menuUsuarios = new List<SubItem>();
             menuUsuarios.Add(new SubItem("Administracion usuarios",new UserControlUsuarios(empleadoAux)));
             menuUsuarios.Add(new SubItem("Roles"));
-            var item0 = new ItemMenu("Register", menuUsuarios, PackIconKind.Register);
+            var item0 = new ItemMenu("Registro", menuUsuarios, PackIconKind.Register);
 
             var menuProcesos = new List<SubItem>();
             menuProcesos.Add(new SubItem("Procesos", new UserControlProcesos()));
             menuProcesos.Add(new SubItem("Unidades",new UserControlUnidad()));
             menuProcesos.Add(new SubItem("Tareas"));
-            var item1 = new ItemMenu("Procesos", menuProcesos, PackIconKind.Register);
+            var item1 = new ItemMenu("Procesos", menuProcesos, PackIconKind.Ballot);
 
             Menu.Children.Add(new UserControlMenuItem(item0, this));
             Menu.Children.Add(new UserControlMenuItem(item1, this));

@@ -25,8 +25,14 @@ namespace ControlDeTareasWeb.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<DETALLE_TAREA> DETALLE_TAREA { get; set; }
         public DbSet<EMPLEADO> EMPLEADO { get; set; }
         public DbSet<EMPRESA> EMPRESA { get; set; }
+        public DbSet<ESTADO> ESTADO { get; set; }
+        public DbSet<FLUJO> FLUJO { get; set; }
+        public DbSet<PROCESO> PROCESO { get; set; }
         public DbSet<ROL> ROL { get; set; }
+        public DbSet<TAREA> TAREA { get; set; }
+        public DbSet<UNIDAD> UNIDAD { get; set; }
     }
 }

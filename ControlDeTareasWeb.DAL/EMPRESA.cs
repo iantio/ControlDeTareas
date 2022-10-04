@@ -17,11 +17,19 @@ namespace ControlDeTareasWeb.DAL
         public EMPRESA()
         {
             this.EMPLEADO = new HashSet<EMPLEADO>();
+            this.ROL = new HashSet<ROL>();
+            this.PROCESO = new HashSet<PROCESO>();
+            this.UNIDAD = new HashSet<UNIDAD>();
+            this.TAREA = new HashSet<TAREA>();
         }
     
         public int ID_EMPRESA { get; set; }
         public string NOMBRE_EMPRESA { get; set; }
     
         public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
+        public virtual ICollection<ROL> ROL { get; set; }
+        public virtual ICollection<PROCESO> PROCESO { get; set; }
+        public virtual ICollection<UNIDAD> UNIDAD { get; set; }
+        public virtual ICollection<TAREA> TAREA { get; set; }
     }
 }

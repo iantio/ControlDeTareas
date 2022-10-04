@@ -12,18 +12,13 @@ namespace ControlDeTareasWeb.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ROL
+    public partial class DETALLE_TAREA
     {
-        public ROL()
-        {
-            this.EMPLEADO = new HashSet<EMPLEADO>();
-        }
+        public int ID_DETALLE { get; set; }
+        public Nullable<int> ID_RUT_DETALLE { get; set; }
+        public Nullable<int> ID_TAREA_DETALLE { get; set; }
     
-        public int ID_ROL { get; set; }
-        public Nullable<int> ID_EMPRESA_ROL { get; set; }
-        public string NOMBRE_ROL { get; set; }
-    
-        public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
-        public virtual EMPRESA EMPRESA { get; set; }
+        public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual TAREA TAREA { get; set; }
     }
 }

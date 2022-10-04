@@ -43,7 +43,7 @@ namespace ControlDeTareasDesk
             }
             else
             {
-                Console.WriteLine("xd");
+                Console.WriteLine("cambio de seleccion");
             }
             //_context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
         }

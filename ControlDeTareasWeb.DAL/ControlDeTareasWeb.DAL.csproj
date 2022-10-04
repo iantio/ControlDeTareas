@@ -63,44 +63,60 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlDeTareasModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DETALLE_TAREA.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EMPLEADO.cs">
       <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EMPRESA.cs">
       <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ESTADO.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLUJO.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PROCESO.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ROL.cs">
       <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TAREA.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNIDAD.cs">
+      <DependentUpon>ControlDeTareasModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="ControlDeTareasModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ControlDeTareasModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="ControlDeTareasModel.edmx.diagram">
       <DependentUpon>ControlDeTareasModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ControlDeTareasModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ControlDeTareasModel.Context.cs</LastGenOutput>
       <DependentUpon>ControlDeTareasModel.edmx</DependentUpon>
+      <LastGenOutput>ControlDeTareasModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ControlDeTareasModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ControlDeTareasModel.edmx</DependentUpon>
       <LastGenOutput>ControlDeTareasModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

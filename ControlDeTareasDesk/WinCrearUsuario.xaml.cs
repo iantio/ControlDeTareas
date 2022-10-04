@@ -22,21 +22,31 @@ namespace ControlDeTareasDesk
     {
         Empleado empleadoAux;
         Empleado empleadoTemp { get; set; }
-
-        public WinCrearUsuario(Empleado empleadoAux)
+        bool editar { get; set; }
+        public WinCrearUsuario(Empleado empleadoAux,Empleado empleadoTemp,bool editar)
         {
             this.empleadoAux = empleadoAux;
-            
+            this.editar = editar;
+            this.empleadoTemp = new Empleado();
             InitializeComponent();
-            empleadoTemp = new Empleado();
-
+            dtpFechaIngreso.SelectedDate = System.DateTime.Now;
+            if (editar == true)
+            {
+                this.empleadoTemp = empleadoTemp;
+                txtRut.IsEnabled = false;
+                txtRut.Text = empleadoTemp.id_rut.ToString();
+                txtNombre.Text = empleadoTemp.nombre_emp;
+                txtUsuario.Text = empleadoTemp.usuario;
+                pwdClave.IsEnabled = false;
+                pwdClave.Text = empleadoTemp.clave;
+                cmbRol.SelectedIndex = (int)empleadoTemp.id_rol_emp;
+            };
             Rol rolCombo = new Rol();
-            cmbRol.ItemsSource = rolCombo.ListarNombres();
+            cmbRol.ItemsSource = rolCombo.ListarNombres(empleadoAux.id_empresa_emp);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(System.DateTime.Now);
             this.Close();
         }
 
@@ -71,27 +81,39 @@ namespace ControlDeTareasDesk
             }
             else 
             {
-                empleadoTemp.id_rut = int.Parse(txtRut.Text);
+                empleadoTemp.id_rut = (decimal)int.Parse(txtRut.Text);
                 empleadoTemp.id_empresa_emp = empleadoAux.id_empresa_emp;
-                empleadoTemp.id_rol_emp = cmbRol.SelectedIndex;
-                empleadoTemp.fecha_ingreso = System.DateTime.Now.Date;
+                empleadoTemp.id_rol_emp = (decimal)cmbRol.SelectedIndex;
+                empleadoTemp.fecha_ingreso = dtpFechaIngreso.SelectedDate.Value;
                 empleadoTemp.nombre_emp = txtNombre.Text;
                 empleadoTemp.usuario = txtUsuario.Text;
                 empleadoTemp.clave = pwdClave.Text;
                 try
                 {
-                    if (empleadoTemp.Create())
+                    switch (editar)
                     {
-                        MessageBox.Show("Usuario Creado");
-                    }
-                    else 
-                    {
-                        MessageBox.Show("Error al crear");
+                        case false:
+                            if (empleadoTemp.Create())
+                            {
+                                MessageBox.Show("Usuario Creado");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al crear");
+                            }
+                            break;
+                        case true:
+                            if (empleadoTemp.Update())
+                            {
+                                MessageBox.Show("Usuario Actualizado");
+                            }
+                            else { MessageBox.Show("Error al actualizar"); }
+                            break;
                     }
                 }
                 catch 
                 {
-                    MessageBox.Show("Error al crear");
+                    MessageBox.Show("Error al guardar");
                 }
 
             }
