@@ -19,7 +19,7 @@
 
         <Border Margin="5" Grid.Column="0" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
         <Border Margin="5" Grid.Column="1" Background="Green" VerticalAlignment="Stretch" CornerRadius="12">
-            <Label Content="Administracion de procesos" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
+            <Label Content="Administracion de Procesos" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
         </Border>
         <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
         <TextBox x:Name="txtBuscar" Grid.Row="1" Grid.Column="1" Margin="392,0,75,0" Foreground="White" Background="#FF2C2C2C" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="253" Height="32" />
@@ -36,9 +36,17 @@
             </TextBlock.Style>
         </TextBlock>
         <Button Content="Buscar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Width="75" Margin="645,0,0,0"/>
-        <DataGrid Grid.Column="1" HorizontalAlignment="Stretch" Height="335" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top" Width="720" IsReadOnly="True"/>
-        <Button Content="Crear" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,377,645,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Editar" Grid.Column="1" HorizontalAlignment="Stretch" Margin="80,377,565,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Eliminar" Grid.Column="1" HorizontalAlignment="Center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgProcesos" Grid.Column="1" HorizontalAlignment="Stretch" Height="335" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top" Width="720" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id_proceso}" ClipboardContentBinding="{x:Null}" Header="id Proceso"/>
+                <DataGridTextColumn Binding="{Binding nombre_proceso}" ClipboardContentBinding="{x:Null}" Header="Nombre Proceso"/>
+                <DataGridTextColumn Binding="{Binding estado.nombre_estado}" ClipboardContentBinding="{x:Null}" Header="Estado"/>
+                <DataGridTextColumn Binding="{Binding fecha_inicio}" ClipboardContentBinding="{x:Null}" Header="Fecha de Inicio"/>
+                <DataGridTextColumn Binding="{Binding fecha_termino}" ClipboardContentBinding="{x:Null}" Header="Fecha de Termino"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnCrear" Content="Crear Poceso" Grid.Column="1" HorizontalAlignment="center" Margin="0,377,606,0" Grid.Row="1" VerticalAlignment="Top" Click="btnCrear_Click"/>
+        <Button x:Name="btnEditar" Content="Editar Proceso" Grid.Column="1" HorizontalAlignment="Center" Margin="119,377,478,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="1" HorizontalAlignment="center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFC7504A" BorderBrush="#FFC7504A"/>
     </Grid>
 </UserControl>

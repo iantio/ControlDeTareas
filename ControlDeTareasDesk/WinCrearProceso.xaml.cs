@@ -10,31 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControlDeTareasWeb.Negocio;
 
 namespace ControlDeTareasDesk
 {
     /// <summary>
-    /// Lógica de interacción para UserControlProcesos.xaml
+    /// Lógica de interacción para WinCrearProceso.xaml
     /// </summary>
-    public partial class UserControlProcesos : UserControl
+    public partial class WinCrearProceso : Window
     {
         Empleado empleadoAux { get; set; }
-        public UserControlProcesos(Empleado empleadoAux)
+        public WinCrearProceso(Empleado empleadoAux)
         {
             this.empleadoAux = empleadoAux;
             InitializeComponent();
-            Proceso proceso = new Proceso();
-            dgProcesos.ItemsSource = null;
-            dgProcesos.ItemsSource = proceso.Read(empleadoAux.id_empresa_emp);
-            dgProcesos.Items.Refresh();
         }
-        private void btnCrear_Click(object sender, RoutedEventArgs e)
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            WinCrearProceso crear = new WinCrearProceso(empleadoAux);
-            crear.ShowDialog();
+            this.Close();
         }
     }
 }

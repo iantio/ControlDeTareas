@@ -82,3 +82,5 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDe
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.pdb
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearProceso.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearProceso.baml

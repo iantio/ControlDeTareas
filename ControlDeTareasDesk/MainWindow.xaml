@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ControlDeTareasDesk"
         mc:Ignorable="d"
         Title="Control de tareas - Login" Height="450" Width="800" Background="#FF131313"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="563*"/>
