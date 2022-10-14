@@ -41,10 +41,6 @@ namespace ControlDeTareasDesk
                 _context.SwitchScreen((itemSeleccionado).Screen);
                 ListViewMenu.SelectedItem = null;
             }
-            else
-            {
-                Console.WriteLine("cambio de seleccion");
-            }
             //_context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
         }
     }

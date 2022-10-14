@@ -41,6 +41,28 @@ namespace ControlDeTareasWeb.Negocio
                 }
             }).ToList();
         }
+        public Boolean Create()
+        {
+            try
+            {
+                PROCESO dbProceso = new PROCESO();
+                dbProceso.ID_PROCESO = (int)id_proceso;
+                dbProceso.ID_ESTADO_PRO = (short)id_estado_pro;
+                dbProceso.ID_EMPRESA_PRO = (int)id_empresa_pro;
+                dbProceso.NOMBRE_PROCESO = nombre_proceso.ToUpper();
+                dbProceso.FECHA_INICIO = fecha_inicio;
+                dbProceso.FECHA_TERMINO = fecha_termino;
+
+                db.PROCESO.Add(dbProceso);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public List<Proceso> Read(decimal id_empresa)
         {
             List<Proceso> listaProcesos = new List<Proceso>();
@@ -73,6 +95,76 @@ namespace ControlDeTareasWeb.Negocio
                 return listaProcesos;
             }
             catch 
+            {
+                Console.WriteLine("error al cargar datos de proceso");
+                return listaProcesos;
+            }
+        }
+        public Boolean Update()
+        {
+            try
+            {
+                PROCESO dbProceso = db.PROCESO.First(x => x.ID_PROCESO == id_proceso);
+
+                dbProceso.ID_ESTADO_PRO = (short)id_estado_pro;
+                dbProceso.NOMBRE_PROCESO = nombre_proceso.ToUpper();
+                dbProceso.FECHA_INICIO = fecha_inicio;
+                dbProceso.FECHA_TERMINO = fecha_termino;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public Boolean Delete()
+        {
+            try
+            {
+                PROCESO dbProceso = db.PROCESO.First(x => x.ID_PROCESO == id_proceso);
+                db.PROCESO.Remove(dbProceso);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public List<Proceso> Find(String proceso_buscado, decimal id_empresa)
+        {
+            List<Proceso> listaProcesos = new List<Proceso>();
+            try
+            {
+                var procesos = from p in db.PROCESO
+                               where p.ID_EMPRESA_PRO == id_empresa && p.NOMBRE_PROCESO.Contains(proceso_buscado)
+                               select p;
+                foreach (ControlDeTareasWeb.DAL.PROCESO x in procesos)
+                {
+                    Proceso p = new Proceso();
+                    p.id_proceso = (decimal)x.ID_PROCESO;
+                    p.id_estado_pro = (decimal)x.ID_ESTADO_PRO;
+                    p.id_empresa_pro = (decimal)x.ID_EMPRESA_PRO;
+                    p.nombre_proceso = x.NOMBRE_PROCESO;
+                    p.fecha_inicio = (DateTime)x.FECHA_INICIO;
+                    p.fecha_termino = (DateTime)x.FECHA_TERMINO;
+                    p.estado = new Estado()
+                    {
+                        id_estado = (decimal)x.ID_ESTADO_PRO,
+                        nombre_estado = x.ESTADO.NOMBRE_ESTADO
+                    };
+                    p.empresa = new Empresa()
+                    {
+                        id_empresa = (decimal)x.ID_EMPRESA_PRO,
+                        nombre_empresa = x.EMPRESA.NOMBRE_EMPRESA
+                    };
+                    listaProcesos.Add(p);
+                };
+                return listaProcesos;
+            }
+            catch
             {
                 Console.WriteLine("error al cargar datos de proceso");
                 return listaProcesos;

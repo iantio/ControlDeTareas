@@ -36,7 +36,7 @@ namespace ControlDeTareasDesk
 
             var menuProcesos = new List<SubItem>();
             menuProcesos.Add(new SubItem("Procesos", new UserControlProcesos(empleadoAux)));
-            menuProcesos.Add(new SubItem("Unidades",new UserControlUnidad()));
+            menuProcesos.Add(new SubItem("Unidades",new UserControlUnidad(empleadoAux)));
             menuProcesos.Add(new SubItem("Tareas"));
             var item1 = new ItemMenu("Procesos", menuProcesos, PackIconKind.Ballot);
 

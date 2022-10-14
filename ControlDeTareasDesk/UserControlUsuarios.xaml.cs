@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using ControlDeTareasWeb.Negocio;
 
 namespace ControlDeTareasDesk
@@ -26,6 +27,7 @@ namespace ControlDeTareasDesk
         public UserControlUsuarios(Empleado empleadoAux)
         {
             InitializeComponent();
+            iconRefrescar.Kind = PackIconKind.Refresh;
             this.empleadoAux = empleadoAux;
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
@@ -115,6 +117,14 @@ namespace ControlDeTareasDesk
             {
                 MessageBox.Show("Debe seleccionar un empleado");
             }
+            EmpleadoCollection empleadoCollection = new EmpleadoCollection();
+            dgUsuarios.ItemsSource = null;
+            dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
+            dgUsuarios.Items.Refresh();
+        }
+
+        private void btnRefrescar_Click(object sender, RoutedEventArgs e)
+        {
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
             dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);

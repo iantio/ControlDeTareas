@@ -151,7 +151,7 @@ namespace ControlDeTareasWeb.Negocio
                 ConectarDAL.Modelo.SaveChanges();
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
