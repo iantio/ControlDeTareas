@@ -37,17 +37,40 @@ namespace ControlDeTareasDesk
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
+            if (txtBuscar.Text.Trim() == "")
+            {
+                MessageBox.Show("debe ingresar un nombre para buscar");
+                txtBuscar.Focus();
+            }
+            else
+            {
+                Unidad unidadTemp = new Unidad();
+                dgUnidades.ItemsSource = null;
+                dgUnidades.ItemsSource = unidadTemp.Find(txtBuscar.Text,empleadoAux.id_empresa_emp);
+                dgUnidades.Items.Refresh();
 
+            }
         }
 
         private void btnCrear_Click(object sender, RoutedEventArgs e)
         {
-
+            WinCrearUnidad winCrear = new WinCrearUnidad(empleadoAux,null,false);
+            winCrear.ShowDialog();
+            btnRefrescar_Click(null, null);
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dgUnidades.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una unidad para editar");
+            }
+            else
+            {
+                WinCrearUnidad winEditar = new WinCrearUnidad(empleadoAux, (Unidad)dgUnidades.SelectedItem, true);
+                winEditar.ShowDialog();
+                btnRefrescar_Click(null,null);
+            }
         }
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
@@ -60,7 +83,16 @@ namespace ControlDeTareasDesk
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dgUnidades.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una unidad para eliminar");
+            }
+            else
+            {
+                Unidad unidadTemp = (Unidad)dgUnidades.SelectedItem;
+                unidadTemp.Delete();
+                btnRefrescar_Click(null,null);
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ControlDeTareasWeb.Negocio
             try
             {
                 PROCESO dbProceso = new PROCESO();
-                dbProceso.ID_PROCESO = (int)id_proceso;
+                dbProceso.ID_PROCESO = db.PROCESO.Max(x => x.ID_PROCESO) + 1;
                 dbProceso.ID_ESTADO_PRO = (short)id_estado_pro;
                 dbProceso.ID_EMPRESA_PRO = (int)id_empresa_pro;
                 dbProceso.NOMBRE_PROCESO = nombre_proceso.ToUpper();

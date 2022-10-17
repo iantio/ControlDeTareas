@@ -82,6 +82,9 @@
     <Compile Include="WinCrearProceso.xaml.cs">
       <DependentUpon>WinCrearProceso.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinCrearUnidad.xaml.cs">
+      <DependentUpon>WinCrearUnidad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinCrearUsuario.xaml.cs">
       <DependentUpon>WinCrearUsuario.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinCrearProceso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinCrearUnidad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

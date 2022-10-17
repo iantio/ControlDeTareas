@@ -45,7 +45,6 @@ namespace ControlDeTareasDesk
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             Proceso proceso = new Proceso();
-            decimal nueva_id = proceso.ReadAll().Max(x => x.id_proceso);
             Console.WriteLine();
             proceso.id_estado_pro = 2;
             proceso.id_empresa_pro = empleadoAux.id_empresa_emp;
@@ -55,7 +54,7 @@ namespace ControlDeTareasDesk
             switch (editar)
             {
                 case false:
-                    proceso.id_proceso = nueva_id + 1;
+                    proceso.id_proceso = 0;
                     if (proceso.Create())
                     {
                         MessageBox.Show("Proceso creado correctamente");

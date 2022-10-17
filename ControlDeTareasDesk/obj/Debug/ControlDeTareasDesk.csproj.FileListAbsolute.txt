@@ -84,3 +84,5 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.g
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.baml
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearProceso.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearProceso.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUnidad.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUnidad.baml
