@@ -73,6 +73,9 @@
     <Compile Include="UserControlProcesos.xaml.cs">
       <DependentUpon>UserControlProcesos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlTarea.xaml.cs">
+      <DependentUpon>UserControlTarea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlUnidad.xaml.cs">
       <DependentUpon>UserControlUnidad.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
     </Compile>
     <Compile Include="WinCrearProceso.xaml.cs">
       <DependentUpon>WinCrearProceso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinCrearTarea.xaml.cs">
+      <DependentUpon>WinCrearTarea.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinCrearUnidad.xaml.cs">
       <DependentUpon>WinCrearUnidad.xaml</DependentUpon>
@@ -113,6 +119,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlTarea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlUnidad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinCrearProceso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinCrearTarea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

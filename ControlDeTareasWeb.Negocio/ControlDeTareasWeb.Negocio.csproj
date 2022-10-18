@@ -57,6 +57,7 @@
     <Compile Include="Proceso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="Tarea.cs" />
     <Compile Include="Unidad.cs" />
   </ItemGroup>
   <ItemGroup>

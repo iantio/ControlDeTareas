@@ -67,7 +67,7 @@ namespace ControlDeTareasWeb.Negocio
         }
         public List<Unidad> Read(decimal id_empresa)
         {
-            List<Unidad> listaProcesos = new List<Unidad>();
+            List<Unidad> listaUnidades = new List<Unidad>();
             try
             {
                 var unidades = from p in db.UNIDAD
@@ -112,14 +112,14 @@ namespace ControlDeTareasWeb.Negocio
                         id_empresa = (decimal)x.ID_EMPRESA_UNI,
                         nombre_empresa = x.EMPRESA.NOMBRE_EMPRESA
                     };
-                    listaProcesos.Add(p);
+                    listaUnidades.Add(p);
                 };
-                return listaProcesos;
+                return listaUnidades;
             }
             catch
             {
                 Console.WriteLine("error al cargar datos de unidad");
-                return listaProcesos;
+                return listaUnidades;
             }
         }
         public Boolean Create()
