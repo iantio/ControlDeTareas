@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControlDeTareasDesk"
         mc:Ignorable="d"
-        Title="WinCrearTarea" Height="450" Width="800">
+        Title="ControlDeTareas - Crear Tareas" Height="517.5" Width="316.25" Background="#FF131313" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Label x:Name="lblNombreUnidad" Content="Nombre unidad" HorizontalAlignment="Left" Margin="46,84,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="22" Margin="50,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
+        <Label x:Name="lblTitle" Content="Creacion de tareas" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="20"/>
+        <Label x:Name="lblFechaInicio" Content="Fecha de inicio" HorizontalAlignment="Left" Margin="46,133,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="50,154,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <Label x:Name="lblFechaTermino" Content="Fecha de termino" HorizontalAlignment="Left" Margin="46,184,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <Label x:Name="lblProceso" Content="Proceso" HorizontalAlignment="Left" Margin="46,235,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <ComboBox x:Name="cmbProceso" DisplayMemberPath="nombre_proceso" SelectedValuePath="id_proceso" HorizontalAlignment="Left" Margin="50,257,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True" Height="25" SelectionChanged="cmbProceso_SelectionChanged"/>
+        <Label x:Name="lblUnidad" Content="Unidad" HorizontalAlignment="Left" Margin="46,287,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <ComboBox x:Name="cmbUnidad" DisplayMemberPath="nombre_unidad" SelectedValuePath="id_unidad" HorizontalAlignment="Left" Margin="50,309,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" SelectedIndex="0" Foreground="White"/>
+        <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="46,424,0,0" VerticalAlignment="Top" Width="101" Click="btnGuardar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="163,424,0,0" VerticalAlignment="Top" Width="95" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnCancelar_Click"/>
+        <Label x:Name="lbl_Estado" Content="Estado tarea" HorizontalAlignment="Left" Margin="46,341,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <ComboBox x:Name="cmbEstado" DisplayMemberPath="nombre_estado" SelectedValuePath="id_estado" HorizontalAlignment="Left" Margin="50,363,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" IsReadOnly="True" SelectedIndex="0"/>
     </Grid>
 </Window>

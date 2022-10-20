@@ -43,9 +43,16 @@ namespace ControlDeTareasDesk
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            WinCrearTarea editarTarea = new WinCrearTarea(empleadoAux, null, false);
-            editarTarea.ShowDialog();
-            btnRefrescar_Click(null, null);
+            if (dgTareas.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una tarea para editar");
+            }
+            else
+            {
+                WinCrearTarea editarTarea = new WinCrearTarea(empleadoAux, (Tarea)dgTareas.SelectedItem, true);
+                editarTarea.ShowDialog();
+                btnRefrescar_Click(null, null);
+            }
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
@@ -80,6 +87,7 @@ namespace ControlDeTareasDesk
             else
             {
                 Tarea tarea = (Tarea)dgTareas.SelectedItem;
+                tarea.Delete();
                 btnRefrescar_Click(null,null);
             }
         }

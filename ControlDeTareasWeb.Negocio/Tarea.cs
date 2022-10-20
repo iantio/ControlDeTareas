@@ -27,13 +27,16 @@ namespace ControlDeTareasWeb.Negocio
             try
             {
                 TAREA dbTarea = new TAREA();
-                dbTarea.ID_TAREA = (int)id_tarea;
+                dbTarea.ID_TAREA = db.TAREA.Max(x => x.ID_TAREA) + 1;
                 dbTarea.ID_UNIDAD_TAREA = (int)id_unidad_tarea;
                 dbTarea.ID_ESTADO_TAREA = (short)id_estado_tarea;
                 dbTarea.ID_EMPRESA_TAREA = (int)id_empresa_tarea;
-                dbTarea.NOMBRE_TAREA = nombre_tarea;
+                dbTarea.NOMBRE_TAREA = nombre_tarea.ToUpper();
                 dbTarea.FECHA_INICIO = fecha_inicio;
                 dbTarea.FECHA_TERMINO = fecha_termino;
+
+                db.TAREA.Add(dbTarea);
+                db.SaveChanges();
                 return true;
             }
             catch
@@ -127,7 +130,7 @@ namespace ControlDeTareasWeb.Negocio
                 dbTarea.ID_UNIDAD_TAREA = (int)id_unidad_tarea;
                 dbTarea.ID_ESTADO_TAREA = (short)id_estado_tarea;
                 dbTarea.ID_EMPRESA_TAREA = (int)id_empresa_tarea;
-                dbTarea.NOMBRE_TAREA = nombre_tarea;
+                dbTarea.NOMBRE_TAREA = nombre_tarea.ToUpper();
                 dbTarea.FECHA_INICIO = fecha_inicio;
                 dbTarea.FECHA_TERMINO = fecha_termino;
                 db.SaveChanges();

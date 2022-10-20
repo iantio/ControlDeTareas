@@ -240,5 +240,62 @@ namespace ControlDeTareasWeb.Negocio
                 return listaUnidades;
             }
         }
+        public List<Unidad> FindByProceso(String unidad_buscada, decimal id_empresa)
+        {
+            List<Unidad> listaUnidades = new List<Unidad>();
+            try
+            {
+                var unidades = from p in db.UNIDAD
+                               where p.ID_EMPRESA_UNI == id_empresa && p.PROCESO.NOMBRE_PROCESO.Contains(unidad_buscada.ToUpper())
+                               select p;
+                foreach (ControlDeTareasWeb.DAL.UNIDAD x in unidades)
+                {
+                    Unidad p = new Unidad();
+                    p.id_unidad = (decimal)x.ID_UNIDAD;
+                    p.id_proceso_uni = (decimal)x.ID_PROCESO_UNI;
+                    p.id_estado_uni = (decimal)x.ID_ESTADO_UNI;
+                    p.id_empresa_uni = (decimal)x.ID_EMPRESA_UNI;
+                    p.nombre_unidad = x.NOMBRE_UNIDAD;
+                    p.fecha_inicio = (DateTime)x.FECHA_INICIO;
+                    p.fecha_termino = (DateTime)x.FECHA_TERMINO;
+                    p.proceso = new Proceso()
+                    {
+                        id_proceso = (decimal)x.ID_PROCESO_UNI,
+                        id_estado_pro = (decimal)x.PROCESO.ID_ESTADO_PRO,
+                        id_empresa_pro = (decimal)x.PROCESO.ID_EMPRESA_PRO,
+                        nombre_proceso = x.PROCESO.NOMBRE_PROCESO,
+                        fecha_inicio = (DateTime)x.PROCESO.FECHA_INICIO,
+                        fecha_termino = (DateTime)x.PROCESO.FECHA_TERMINO,
+                        estado = new Estado()
+                        {
+                            id_estado = (decimal)x.PROCESO.ID_ESTADO_PRO,
+                            nombre_estado = x.ESTADO.NOMBRE_ESTADO
+                        },
+                        empresa = new Empresa()
+                        {
+                            id_empresa = (decimal)x.PROCESO.ID_EMPRESA_PRO,
+                            nombre_empresa = x.EMPRESA.NOMBRE_EMPRESA
+                        }
+                    };
+                    p.estado = new Estado()
+                    {
+                        id_estado = (decimal)x.ID_ESTADO_UNI,
+                        nombre_estado = x.ESTADO.NOMBRE_ESTADO
+                    };
+                    p.empresa = new Empresa()
+                    {
+                        id_empresa = (decimal)x.ID_EMPRESA_UNI,
+                        nombre_empresa = x.EMPRESA.NOMBRE_EMPRESA
+                    };
+                    listaUnidades.Add(p);
+                };
+                return listaUnidades;
+            }
+            catch
+            {
+                Console.WriteLine("error al cargar datos de las unidades");
+                return listaUnidades;
+            }
+        }
     }
 }
