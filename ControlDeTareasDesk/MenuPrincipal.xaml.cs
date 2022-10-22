@@ -40,8 +40,16 @@ namespace ControlDeTareasDesk
             menuProcesos.Add(new SubItem("Tareas",new UserControlTarea(empleadoAux)));
             var item1 = new ItemMenu("Procesos", menuProcesos, PackIconKind.Ballot);
 
+            var menuDiseño = new List<SubItem>();
+            menuDiseño.Add(new SubItem("Diseñar flujo", new UserControlCrearFlujo(empleadoAux)));
+            var item2 = new ItemMenu("Diseño", menuDiseño, PackIconKind.DeveloperBoard);
+
+            var item = new ItemMenu("Dashboad", new UserControlInicio(), PackIconKind.ViewDashboard);
+
+            Menu.Children.Add(new UserControlMenuItem(item, this));
             Menu.Children.Add(new UserControlMenuItem(item0, this));
             Menu.Children.Add(new UserControlMenuItem(item1, this));
+            Menu.Children.Add(new UserControlMenuItem(item2, this));
         }
         internal void SwitchScreen(object sender) 
         {

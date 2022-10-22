@@ -23,39 +23,45 @@
             <Label Content="Administracion de Usuarios" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
         </Border>
         <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
-        <TextBox x:Name="txtBuscar" Grid.Row="1" Grid.Column="1" Margin="392,0,75,0" Foreground="White" Background="#FF2C2C2C" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="253" Height="32" />
-        <TextBlock Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" Text="Ingrese termino a buscar" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="404,8,184,0" Foreground="DarkGray"  Height="16" >
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=txtBuscar}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <Button x:Name="btnBuscarUsuario" Content="Buscar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Width="75" Margin="645,0,0,0" Click="btnBuscarUsuario_Click"/>
-        <DataGrid x:Name="dgUsuarios" Grid.Column="1" HorizontalAlignment="Stretch" Height="335" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top" Width="720" IsReadOnly="True" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding id_rut}" ClipboardContentBinding="{x:Null}" Header="Rut"/>
-                <DataGridTextColumn Binding="{Binding nombre_emp}" ClipboardContentBinding="{x:Null}" Header="Nombre"/>
-                <DataGridTextColumn Binding="{Binding usuario}" ClipboardContentBinding="{x:Null}" Header="Usuario"/>
-                <DataGridTextColumn Binding="{Binding fecha_ingreso}" ClipboardContentBinding="{x:Null}" Header="Fecha de ingreso"/>
-                <DataGridTextColumn Binding="{Binding rol.nombre_rol}" ClipboardContentBinding="{x:Null}" Header="Rol"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="btnCrearUsuario" Content="Crear Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="0,377,600,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="btnCrearUsuario_Click"/>
-        <Button x:Name="btnEditarUsuario" Content="Editar Usuario" Grid.Column="1" HorizontalAlignment="Center" Margin="125,377,473,0" Grid.Row="1" VerticalAlignment="Top" Width="122" Click="btnEditarUsuario_Click"/>
-        <Button x:Name="btnRefrescar" Grid.Column="1" HorizontalAlignment="Center" Margin="252,377,422,0" Grid.Row="1" VerticalAlignment="Center" Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
-            <materialDesign:PackIcon x:Name="iconRefrescar" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
-        </Button>
-        <Button x:Name="btnEliminarUsuario" Content="Eliminar" Grid.Column="1" HorizontalAlignment="Center" Margin="645,377,2,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarUsuario_Click"/>
-        <ComboBox x:Name="cmbFiltro" Grid.Column="1" HorizontalAlignment="Stretch" Margin="243,0,333,0" VerticalAlignment="Top" Width="144" Height="30" Foreground="White" BorderBrush="#8951FF49" Grid.Row="1" SelectedIndex="0" Background="#FF131313">
-            <ComboBoxItem Content="Rut" Foreground="#DDFFFFFF" Background="#00000000"/>
-            <ComboBoxItem Content="Nombre" Foreground="#DDFFFFFF" Background="#00000000"/>
-        </ComboBox>
+        <Grid Grid.Column="1" Grid.Row="1" Margin="4,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32*"/>
+                <RowDefinition Height="341*"/>
+                <RowDefinition Height="36*"/>
+            </Grid.RowDefinitions>
+            <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Right" Margin="0,2,347,0" VerticalAlignment="Center" Width="144" Height="30" Foreground="White" BorderBrush="#8951FF49" SelectedIndex="0" Background="#FF131313">
+                <ComboBoxItem Content="Rut" Foreground="#DDFFFFFF" Background="#00000000"/>
+                <ComboBoxItem Content="Nombre" Foreground="#DDFFFFFF" Background="#00000000"/>
+            </ComboBox>
+            <TextBox x:Name="txtBuscar" Margin="0,0,74,0" Foreground="White" Background="#FF2C2C2C" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"  Height="32" RenderTransformOrigin="0.5,0.5" Width="268" />
+            <TextBlock IsHitTestVisible="False" Text="Enter Search Term Here" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,8,211,8" Foreground="DarkGray"  Height="16" >
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=txtBuscar}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Button x:Name="btnBuscarUsuario" Content="Buscar" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnBuscarUsuario_Click"/>
+            <DataGrid x:Name="dgUsuarios" HorizontalAlignment="Stretch" Height="340" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding id_rut}" ClipboardContentBinding="{x:Null}" Header="Rut"/>
+                    <DataGridTextColumn Binding="{Binding nombre_emp}" ClipboardContentBinding="{x:Null}" Header="Nombre"/>
+                    <DataGridTextColumn Binding="{Binding usuario}" ClipboardContentBinding="{x:Null}" Header="Usuario"/>
+                    <DataGridTextColumn Binding="{Binding fecha_ingreso, StringFormat=dd/MM/yyyy}" ClipboardContentBinding="{x:Null}" Header="Fecha de ingreso"/>
+                    <DataGridTextColumn Binding="{Binding rol.nombre_rol}" ClipboardContentBinding="{x:Null}" Header="Rol"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="btnCrearUsuario" Grid.Row="2" Content="Crear Unidad" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,0,0"  Click="btnCrearUsuario_Click" Width="120"/>
+            <Button x:Name="btnEditarUsuario" Grid.Row="2" Content="Editar Unidad" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="125,4,0,0" Click="btnEditarUsuario_Click" Width="123"/>
+            <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="253,4,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
+                <materialDesign:PackIcon x:Name="iconRefrescar" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
+            </Button>
+            <Button x:Name="btnEliminarUsuario" Grid.Row="2" Content="Eliminar" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarUsuario_Click" Width="84" Margin="0,4,0,0"/>
+        </Grid>
     </Grid>
-
 </UserControl>

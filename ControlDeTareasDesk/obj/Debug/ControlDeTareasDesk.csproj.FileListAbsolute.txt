@@ -90,3 +90,7 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTarea.
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTarea.baml
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearTarea.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearTarea.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlCrearFlujo.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlCrearFlujo.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlInicio.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlInicio.baml

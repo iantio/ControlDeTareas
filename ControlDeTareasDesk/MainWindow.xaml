@@ -12,13 +12,15 @@
             <ColumnDefinition Width="563*"/>
             <ColumnDefinition Width="231*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="imgLogin" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="561" Source="portada.jpg" Stretch="Fill"/>
+        <Image x:Name="imgLogin" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Source="portada.jpg" Stretch="Fill"/>
+        
         <Label x:Name="lblEmpresa" Content="Empresa" HorizontalAlignment="Left" Margin="15,13,0,0" VerticalAlignment="Top" Background="#00000000" Foreground="White" Width="181" FontSize="14" Grid.Column="1" Height="29"/>
         <TextBox x:Name="txtEmpresa" HorizontalAlignment="Left" Height="30" Margin="21,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="14" Foreground="White" BorderBrush="#89009C2B" Grid.Column="1"/>
         <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Left" Margin="15,77,0,0" VerticalAlignment="Top" Width="181" Foreground="White" FontSize="14" Grid.Column="1" Height="29"/>
         <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="30" Margin="21,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="14" Foreground="White" BorderBrush="#89009C2B" SelectionBrush="#FF17FF00" CaretBrush="#FF17FF00" Grid.Column="1"/>
         <Label x:Name="lblClave" Content="Contraseña" HorizontalAlignment="Left" Margin="15,149,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Grid.Column="1" Height="29" Width="80"/>
         <PasswordBox x:Name="pwdClave" HorizontalAlignment="Left" Margin="21,176,0,0" VerticalAlignment="Top" Width="181" Height="30" FontSize="14" Foreground="White" BorderBrush="#89009C2B" CaretBrush="#FF17FF00" SelectionBrush="#FF17FF00" Grid.Column="1"/>
+        
         <Button x:Name="btnInicioSesion" Content="Iniciar sesion" HorizontalAlignment="Left" Margin="53,227,0,0" VerticalAlignment="Top" Width="119" FontSize="14" Background="White" Click="btnInicioSesion_Click" Foreground="Black" Grid.Column="1"/>
 
     </Grid>
