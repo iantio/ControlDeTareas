@@ -11,9 +11,9 @@
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="22" Margin="50,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
         <Label x:Name="lblTitle" Content="Creacion de unidades" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="20"/>
         <Label x:Name="lblFechaInicio" Content="Fecha de inicio" HorizontalAlignment="Left" Margin="46,133,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="50,154,0,0" VerticalAlignment="Top" Width="204" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="50,154,0,0" VerticalAlignment="Top" Width="204" BorderBrush="#89009C2B" Foreground="White" Background="#00000000"/>
         <Label x:Name="lblFechaTermino" Content="Fecha de termino" HorizontalAlignment="Left" Margin="46,184,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Width="204" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Width="204" BorderBrush="#89009C2B" Foreground="White" Background="#00000000"/>
         <ComboBox x:Name="cmbProceso" DisplayMemberPath="nombre_proceso" SelectedValuePath="id_proceso" HorizontalAlignment="Left" Margin="50,256,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True" Height="25"/>
         <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="46,373,0,0" VerticalAlignment="Top" Width="101" Click="btnGuardar_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="163,373,0,0" VerticalAlignment="Top" Width="95" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnCancelar_Click"/>

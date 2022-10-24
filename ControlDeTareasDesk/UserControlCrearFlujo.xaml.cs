@@ -22,10 +22,47 @@ namespace ControlDeTareasDesk
     public partial class UserControlCrearFlujo : UserControl
     {
         Empleado empleadoAux { get; set; }
+        List<Tarea> listTareas = new List<Tarea>();
+        List<Empleado> listEmpleado = new List<Empleado>();
         public UserControlCrearFlujo(Empleado empleadoAux)
         {
             this.empleadoAux = empleadoAux;
+            Proceso proceso = new Proceso();
+            Unidad unidad = new Unidad();
+            Tarea tarea = new Tarea();
             InitializeComponent();
+            cmbProceso.ItemsSource = null;
+            cmbProceso.ItemsSource = proceso.Read(empleadoAux.id_empresa_emp);
+            cmbProceso.SelectedIndex = 0;
+            cmbUnidad.ItemsSource = null;
+            cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue,empleadoAux.id_empresa_emp);
+            cmbUnidad.SelectedIndex = 0;
+            EmpleadoCollection listaEmpleado = new EmpleadoCollection();
+            lstUsuarios.ItemsSource = listaEmpleado.ReadByEmpresa(empleadoAux.id_empresa_emp);
+        }
+
+        private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Unidad unidad = new Unidad();
+            cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
+            cmbUnidad.Items.Refresh();
+            cmbUnidad.SelectedIndex = 0;
+        }
+
+        private void cmbUnidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (cmbUnidad.SelectedValue != null)
+                {
+                    Tarea tarea = new Tarea();
+                    lstTareas.ItemsSource = tarea.FindByUnidad((decimal)cmbUnidad.SelectedValue, empleadoAux.id_empresa_emp);
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

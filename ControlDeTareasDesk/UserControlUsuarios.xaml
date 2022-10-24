@@ -47,7 +47,7 @@
                 </TextBlock.Style>
             </TextBlock>
             <Button x:Name="btnBuscarUsuario" Content="Buscar" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnBuscarUsuario_Click"/>
-            <DataGrid x:Name="dgUsuarios" HorizontalAlignment="Stretch" Height="340" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid x:Name="dgUsuarios" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="340" MinWidth="500" Margin="0,6,0,0" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding id_rut}" ClipboardContentBinding="{x:Null}" Header="Rut"/>
                     <DataGridTextColumn Binding="{Binding nombre_emp}" ClipboardContentBinding="{x:Null}" Header="Nombre"/>
@@ -56,8 +56,8 @@
                     <DataGridTextColumn Binding="{Binding rol.nombre_rol}" ClipboardContentBinding="{x:Null}" Header="Rol"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="btnCrearUsuario" Grid.Row="2" Content="Crear Unidad" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,0,0"  Click="btnCrearUsuario_Click" Width="120"/>
-            <Button x:Name="btnEditarUsuario" Grid.Row="2" Content="Editar Unidad" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="125,4,0,0" Click="btnEditarUsuario_Click" Width="123"/>
+            <Button x:Name="btnCrearUsuario" Grid.Row="2" Content="Crear Usuario" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,0,0"  Click="btnCrearUsuario_Click" Width="120"/>
+            <Button x:Name="btnEditarUsuario" Grid.Row="2" Content="Editar Usuario" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="125,4,0,0" Click="btnEditarUsuario_Click" Width="123"/>
             <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="253,4,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
                 <materialDesign:PackIcon x:Name="iconRefrescar" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
             </Button>

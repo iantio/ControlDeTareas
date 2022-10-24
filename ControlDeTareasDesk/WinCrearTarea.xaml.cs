@@ -107,8 +107,7 @@ namespace ControlDeTareasDesk
         private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Unidad unidad = new Unidad();
-            Console.WriteLine(((Proceso)cmbProceso.SelectedItem).nombre_proceso, cmbUnidad.SelectedIndex.ToString());
-            cmbUnidad.ItemsSource = unidad.FindByProceso(((Proceso)cmbProceso.SelectedItem).nombre_proceso, empleadoAux.id_empresa_emp);
+            cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
             cmbUnidad.SelectedIndex = 0;
         }
     }

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ControlDeTareasDesk"
         mc:Ignorable="d"
         Title="ControlDeTareas - Creacion de proceso" Height="394.688" Width="266.564" Background="#FF131313" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
@@ -11,9 +12,9 @@
         <Label x:Name="lblNombre" Content="Nombre Proceso" HorizontalAlignment="Left" Margin="23,72,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <TextBox x:Name="txtNombreProceso" HorizontalAlignment="Left" Height="24" Margin="28,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White"/>
         <Label x:Name="lblFechaInicio" Content="Fecha Inicio" HorizontalAlignment="Left" Margin="23,126,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="28,152,0,0" VerticalAlignment="Top" Width="208" Height="24" Foreground="#FF7A7A7A" BorderBrush="#89009C2B"/>
+        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="28,152,0,0" VerticalAlignment="Top" Width="208" Height="24" Foreground="White" BorderBrush="#89009C2B"/>
         <Label x:Name="lblFechaTermino" Content="Fecha Termino" HorizontalAlignment="Left" Margin="23,180,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="28,206,0,0" VerticalAlignment="Top" Width="208" Height="24" BorderBrush="#89009C2B" Foreground="#FF7A7A7A"/>
+        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="28,206,0,0" VerticalAlignment="Top" Width="208" Height="24" BorderBrush="#89009C2B" Foreground="White"/>
         <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="28,304,0,0" VerticalAlignment="Top" Width="94" Click="btnGuardar_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="142,304,0,0" VerticalAlignment="Top" Width="94" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnCancelar_Click"/>
 

@@ -240,13 +240,13 @@ namespace ControlDeTareasWeb.Negocio
                 return listaUnidades;
             }
         }
-        public List<Unidad> FindByProceso(String unidad_buscada, decimal id_empresa)
+        public List<Unidad> FindByProceso(decimal id_proceso, decimal id_empresa)
         {
             List<Unidad> listaUnidades = new List<Unidad>();
             try
             {
                 var unidades = from p in db.UNIDAD
-                               where p.ID_EMPRESA_UNI == id_empresa && p.PROCESO.NOMBRE_PROCESO.Contains(unidad_buscada.ToUpper())
+                               where p.ID_EMPRESA_UNI == id_empresa && p.ID_PROCESO_UNI == id_proceso
                                select p;
                 foreach (ControlDeTareasWeb.DAL.UNIDAD x in unidades)
                 {

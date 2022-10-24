@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="ControlDeTareas - Crear Tareas" Height="517.5" Width="316.25" Background="#FF131313" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label x:Name="lblNombreUnidad" Content="Nombre unidad" HorizontalAlignment="Left" Margin="46,84,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
+        <Label x:Name="lblNombreTarea" Content="Nombre tarea" HorizontalAlignment="Left" Margin="46,84,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="22" Margin="50,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
         <Label x:Name="lblTitle" Content="Creacion de tareas" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontSize="20"/>
         <Label x:Name="lblFechaInicio" Content="Fecha de inicio" HorizontalAlignment="Left" Margin="46,133,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="50,154,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <DatePicker x:Name="dtpFechaInicio" HorizontalAlignment="Left" Margin="50,154,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" Background="#00000000"/>
         <Label x:Name="lblFechaTermino" Content="Fecha de termino" HorizontalAlignment="Left" Margin="46,184,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
-        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="#FF7A7A7A" Background="#00000000"/>
+        <DatePicker x:Name="dtpFechaTermino" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" Background="#00000000"/>
         <Label x:Name="lblProceso" Content="Proceso" HorizontalAlignment="Left" Margin="46,235,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <ComboBox x:Name="cmbProceso" DisplayMemberPath="nombre_proceso" SelectedValuePath="id_proceso" HorizontalAlignment="Left" Margin="50,257,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True" Height="25" SelectionChanged="cmbProceso_SelectionChanged"/>
         <Label x:Name="lblUnidad" Content="Unidad" HorizontalAlignment="Left" Margin="46,287,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>

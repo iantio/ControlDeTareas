@@ -23,12 +23,11 @@ namespace ControlDeTareasDesk
         public UserControlInicio()
         {
             InitializeComponent();
+
         }
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
-            dgProgreso.ItemsSource = null;
-            dgProgreso.Items.Refresh();
         }
     }
 }

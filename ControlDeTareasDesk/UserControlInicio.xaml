@@ -17,29 +17,47 @@
             <RowDefinition Height="41"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
         <Border Margin="5" Grid.Column="0" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
         <Border Margin="5" Grid.Column="1" Background="Green" VerticalAlignment="Stretch" CornerRadius="12">
-            <Label x:Name="lblTitle" Content="Administracion de Procesos" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
+            <Label x:Name="lblTitle" Content="Nombre Proceso" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
         </Border>
         <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
+
         <Grid Grid.Column="1" Grid.Row="1" Margin="4,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="32*"/>
                 <RowDefinition Height="341*"/>
                 <RowDefinition Height="36*"/>
             </Grid.RowDefinitions>
-            <ProgressBar x:Name="pbProgreso" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Width="712" Minimum="0" Maximum="100" Value="50" BorderBrush="#FF383838">
-            </ProgressBar>
-            <TextBlock x:Name="tbProgreso" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=pbProgreso, Path=Value, StringFormat={}{0:0%}}" Foreground="Black" FontWeight="Bold"/>
-            <DataGrid x:Name="dgProgreso" HorizontalAlignment="Stretch" Height="340" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding estado.nombre_estado}" ClipboardContentBinding="{x:Null}" Header="Estado"/>
-                    <DataGridTextColumn Binding="{Binding nombre_proceso}" ClipboardContentBinding="{x:Null}" Header="Nombre Proceso"/>
-                    <DataGridTextColumn Binding="{Binding fecha_inicio, StringFormat=dd/MM/yyyy}" ClipboardContentBinding="{x:Null}" Header="Fecha de Inicio"/>
-                    <DataGridTextColumn Binding="{Binding fecha_termino, StringFormat=dd/MM/yyyy}" ClipboardContentBinding="{x:Null}" Header="Fecha de Termino"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ProgressBar x:Name="pbProgreso" Grid.Row="0" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Minimum="0" Maximum="1" Value="0.50" BorderBrush="#FF383838" Margin="0,6" materialDesign:TransitionAssist.DisableTransitions="True"/>
+            <TextBlock x:Name="tbProgreso" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=pbProgreso, Path=Value, StringFormat={}{0:0%}}" Foreground="White" FontWeight="Bold"/>
+            <TreeView x:Name="tvwUnidad" MinWidth="220" MinHeight="340" Grid.Row="1">
+                <TreeViewItem>
+                    <TreeViewItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
+                            <TextBlock Text="Unidad"/>
+                            <ProgressBar HorizontalAlignment="Right" Height="10" Width="100" Margin="50,0,0,0" Minimum="0" Maximum="1" Value="0.50" materialDesign:TransitionAssist.DisableTransitions="True"/>
+                        </StackPanel>
+                    </TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
+                        <TextBlock Text="test Tarea"/>
+                    </StackPanel>
+                </TreeViewItem>
+                <TreeViewItem Header="Proceso">
+                    <TreeViewItem Header="Unidad 1">
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Fill="Green" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Tarea 1"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
             <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
                 <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
             </Button>
