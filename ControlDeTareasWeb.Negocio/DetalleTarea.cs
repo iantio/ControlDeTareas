@@ -12,18 +12,31 @@ namespace ControlDeTareasWeb.Negocio
         public decimal id_detalle { get; set; }
         public decimal id_rut_detalle { get; set; }
         public decimal id_tarea_detalle { get; set; }
-        public int MyProperty { get; set; }
-        public Empleado empleado;
-        public Tarea tarea;
+
+        public Empleado empleado { get; set; }
+        public Tarea tarea { get; set; }
 
         ControlDeTareasEntities db = new ControlDeTareasEntities();
 
         public Boolean Create()
         {
-            DETALLE_TAREA dbDetalleTarea = new DETALLE_TAREA();
-            dbDetalleTarea.ID_DETALLE = (int)id_detalle;
+            try
+            {
+                DETALLE_TAREA dbDetalleTarea = new DETALLE_TAREA();
+                dbDetalleTarea.ID_DETALLE = db.DETALLE_TAREA.Max(x => x.ID_DETALLE) + 1;
+                dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
+                dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
 
-            return true;
+                db.DETALLE_TAREA.Add(dbDetalleTarea);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al crear Detalle Tarea");
+                return false;
+            }
         }
         public List<DetalleTarea> Read(decimal id_empresa)
         {
@@ -38,6 +51,7 @@ namespace ControlDeTareasWeb.Negocio
                     id_detalle = (decimal)x.ID_DETALLE;
                     id_rut_detalle = (decimal)x.ID_RUT_DETALLE;
                     id_tarea_detalle = (decimal)x.ID_TAREA_DETALLE;
+                    empleado = new Empleado();
                     empleado.LoadEmpleado((decimal)x.ID_RUT_DETALLE);
                     tarea.LoadTarea(id_tarea_detalle);
                     listDetalle.Add(this);
@@ -48,6 +62,40 @@ namespace ControlDeTareasWeb.Negocio
                 Console.WriteLine("Error al leer datos");
             }
             return listDetalle;
+        }
+        public Boolean Delete()
+        {
+            try
+            {
+                DETALLE_TAREA dbDetalleTarea = db.DETALLE_TAREA.First(x => x.ID_DETALLE == id_detalle);
+                db.DETALLE_TAREA.Remove(dbDetalleTarea);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al eliminar el Detalle Tarea");
+                return false;
+            }
+        }
+        public List<DetalleTarea> FindByEmpleado(decimal id_rut)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.ID_RUT_DETALLE == id_rut);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado(id_rut);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
         }
     }
 }

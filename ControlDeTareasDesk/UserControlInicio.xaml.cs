@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ControlDeTareasWeb.Negocio;
 
 namespace ControlDeTareasDesk
 {
@@ -20,14 +21,18 @@ namespace ControlDeTareasDesk
     /// </summary>
     public partial class UserControlInicio : UserControl
     {
-        public UserControlInicio()
+        Empleado empleadoAux;
+        public UserControlInicio(Empleado empleadoAux)
         {
+            this.empleadoAux = empleadoAux;
             InitializeComponent();
 
         }
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
+            TreeViewItemMenu tree = new TreeViewItemMenu();
+            tree.ReadDetalle(empleadoAux.id_rut);
         }
     }
 }

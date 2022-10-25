@@ -24,6 +24,7 @@ namespace ControlDeTareasDesk
         Empleado empleadoAux { get; set; }
         List<Tarea> listTareas = new List<Tarea>();
         List<Empleado> listEmpleado = new List<Empleado>();
+
         TreeViewItemMenu itemProceso { get; set; }
         TreeViewItemMenu itemUnidad { get; set; }
         TreeViewItemMenu itemTarea { get; set; }
@@ -52,6 +53,8 @@ namespace ControlDeTareasDesk
         {
             if (itemProceso != null)
             {
+                itemProceso.Items.Clear();
+                itemProceso.Items.Add(itemUnidad);
                 Unidad unidad = new Unidad();
                 cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
                 cmbUnidad.Items.Refresh();
@@ -142,6 +145,100 @@ namespace ControlDeTareasDesk
                     itemUnidad.Items.Add(itemTarea);
                     tvwFlujo.Items.Refresh();
                 };
+                
+            }
+        }
+
+        private void btnGuardarUnidad_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (itemUnidad.Items != null || itemUnidad.Items.Count != 0)
+                {
+                    TreeViewItemMenu itemUnidadTemp = new TreeViewItemMenu() { Titulo = itemUnidad.Titulo, unidad = itemUnidad.unidad };
+                    foreach (TreeViewItemMenu ta in itemUnidad.Items)
+                    {
+                        if (ta.Items != null || ta.Items.Count != 0)
+                        {
+                            TreeViewItemMenu itemTareaTemp = new TreeViewItemMenu() { Titulo = ta.Titulo, tarea = ta.tarea };
+                            foreach (TreeViewItemMenu te in ta.Items)
+                            {
+                                TreeViewItemMenu itemEmpleadoTemp = new TreeViewItemMenu() { Titulo = te.empleado.nombre_emp, empleado = te.empleado };
+                                itemTareaTemp.Items.Add(itemEmpleadoTemp);
+                            }
+                            itemUnidadTemp.Items.Add(itemTareaTemp);
+                        }
+                    }
+                    itemProceso.Items.Add(itemUnidadTemp);
+                    tvwFlujo.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Primero debe agregar tareas a la unidad");
+                }
+            }
+            catch { }
+        }
+
+        private void btnGuardarFlujo_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                if (itemProceso.Items.Count > 1)
+                {
+                    //AQUI crear iterador que salte la pimera unidad
+                    int ciclos = 0;
+                    foreach (TreeViewItemMenu unidadEncontrada in itemProceso.Items)
+                    {
+                        if (ciclos == 0)
+                        {
+                            ciclos += 1;
+                            Console.WriteLine(unidadEncontrada.Titulo);
+                        }
+                        else if (unidadEncontrada.Items != null || unidadEncontrada.Items.Count != 0)
+                        {
+                            foreach (TreeViewItemMenu tareaEncontrada in unidadEncontrada.Items)
+                            {
+                                if (tareaEncontrada.Items != null || tareaEncontrada.Items.Count != 0)
+                                {
+                                    foreach (TreeViewItemMenu empleadoEncontrado in tareaEncontrada.Items)
+                                    {
+                                        DetalleTarea detalleTarea = new DetalleTarea()
+                                        {
+                                            id_detalle = 0,
+                                            id_rut_detalle = empleadoEncontrado.empleado.id_rut,
+                                            id_tarea_detalle = tareaEncontrada.tarea.id_tarea
+                                        };
+                                        if (detalleTarea.Create())
+                                        {
+                                            Console.WriteLine("Detalle creado exitosamente");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Error al crear detalle");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Para guardar debe agregar empleados a las tarea");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Para guardar debe agregar tareas a la unidad");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Para guardar el flujo debe agregar al menos una unidad");
+                }
+            }
+            catch
+            {
             }
         }
     }

@@ -58,14 +58,15 @@
                 <Button x:Name="btnEliminarUsuario" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="42,4,0,2" Height="26" Width="26" Grid.Row="2" Grid.Column="1" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarUsuario_Click">
                     <materialDesign:PackIcon Kind="Minus" Height="24" Width="24" />
                 </Button>
-                <Button Content="Guardar" HorizontalAlignment="Left" Margin="0,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="86"/>
-                <Button x:Name="btnAnadir" Content="Añadir" HorizontalAlignment="Left" Margin="91,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" Click="btnAnadir_Click"/>
-                <Button x:Name="btnRefrescar" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" BorderBrush="#FF0096DC" Background="#FF0096DC" Margin="171,55,0,0">
-                    <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" Grid.Row="1" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
+                <Button x:Name="btnGuardarUnidad" Content="Guardar Unidad" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="1"  VerticalAlignment="Bottom" Width="133" Click="btnGuardarUnidad_Click"/>
+                <Button x:Name="btnAnadir" Content="Añadir Tarea" HorizontalAlignment="Left" Margin="138,0,0,0" Grid.Row="3" VerticalAlignment="Bottom" Width="112" Click="btnAnadir_Click" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnRefrescar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="45" BorderBrush="#FF0096DC" Background="#FF0096DC" Margin="255,0,0,0">
+                    <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
                 </Button>
+                <Button x:Name="btnGuardarFlujo" Content="Guardar Flujo" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="125" Height="61" Click="btnGuardarFlujo_Click"/>
             </Grid>
             <StackPanel  Grid.Column="1" HorizontalAlignment="Stretch" Background="#FF323232" Margin="10,10,10,0">
-                <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch" MaxHeight="183">
+                <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch" MaxHeight="400">
                     <TreeView.Resources>
                         <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
                             <Setter Property="IsExpanded" Value="True"></Setter>

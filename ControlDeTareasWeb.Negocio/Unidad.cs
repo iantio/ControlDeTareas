@@ -308,6 +308,7 @@ namespace ControlDeTareasWeb.Negocio
             nombre_unidad = dbUnidad.NOMBRE_UNIDAD;
             fecha_inicio = (DateTime)dbUnidad.FECHA_INICIO;
             fecha_termino = (DateTime)dbUnidad.FECHA_TERMINO;
+            proceso = new Proceso();
             proceso.LoadProceso(id_proceso_uni);
             estado = new Estado()
             {

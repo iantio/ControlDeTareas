@@ -321,6 +321,7 @@ namespace ControlDeTareasWeb.Negocio
             nombre_tarea = dbTarea.NOMBRE_TAREA;
             fecha_inicio = (DateTime)dbTarea.FECHA_INICIO;
             fecha_termino = (DateTime)dbTarea.FECHA_TERMINO;
+            unidad = new Unidad();
             unidad.LoadUnidad(id_unidad_tarea);
             estado = new Estado()
             {
