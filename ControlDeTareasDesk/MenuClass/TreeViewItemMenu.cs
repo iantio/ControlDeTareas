@@ -23,6 +23,7 @@ namespace ControlDeTareasDesk
         public Proceso proceso { get; set; }
         public Unidad unidad { get; set; }
         public Tarea tarea { get; set; }
+        public Empleado empleado { get; set; }
         public List<TreeViewItemMenu> Items { get; set; }
     }
 }

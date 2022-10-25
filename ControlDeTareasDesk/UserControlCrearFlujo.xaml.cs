@@ -24,6 +24,9 @@ namespace ControlDeTareasDesk
         Empleado empleadoAux { get; set; }
         List<Tarea> listTareas = new List<Tarea>();
         List<Empleado> listEmpleado = new List<Empleado>();
+        TreeViewItemMenu itemProceso { get; set; }
+        TreeViewItemMenu itemUnidad { get; set; }
+        TreeViewItemMenu itemTarea { get; set; }
         public UserControlCrearFlujo(Empleado empleadoAux)
         {
             this.empleadoAux = empleadoAux;
@@ -38,20 +41,37 @@ namespace ControlDeTareasDesk
             cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue,empleadoAux.id_empresa_emp);
             cmbUnidad.SelectedIndex = 0;
             EmpleadoCollection listaEmpleado = new EmpleadoCollection();
+            //TREEVIEW
+            itemProceso = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso };
+            itemUnidad = new TreeViewItemMenu() { Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad };
+            itemProceso.Items.Add(itemUnidad);
+            tvwFlujo.Items.Add(itemProceso);
         }
 
         private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Unidad unidad = new Unidad();
-            cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
-            cmbUnidad.Items.Refresh();
-            cmbUnidad.SelectedIndex = 0;
-            lstTareas.ItemsSource = null;
-            lstUsuarios.ItemsSource = null;
+            if (itemProceso != null)
+            {
+                Unidad unidad = new Unidad();
+                cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
+                cmbUnidad.Items.Refresh();
+                cmbUnidad.SelectedIndex = 0;
+                lstTareas.ItemsSource = null;
+                lstUsuarios.ItemsSource = null;
+                itemProceso.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
+                tvwFlujo.Items.Refresh();
+            }
         }
 
         private void cmbUnidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (cmbUnidad.SelectedValue != null && itemProceso != null)
+            {
+                lstTareas.ItemsSource = null;
+                itemUnidad.Items.Clear();
+                itemUnidad.Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad;
+                tvwFlujo.Items.Refresh();
+            }
         }
 
         private void btnAgregarTarea_Click(object sender, RoutedEventArgs e)
@@ -96,6 +116,32 @@ namespace ControlDeTareasDesk
             else
             {
                 MessageBox.Show("Seleccione un empleado para quitar de la lista");
+            }
+        }
+
+        private void btnAnadir_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstTareas.Items == null || lstTareas.Items.Count == 0)
+            {
+                MessageBox.Show("Primero debe agregar tareas a la lista para guardar");
+            }
+            else if (lstUsuarios.Items == null || lstUsuarios.Items.Count == 0)
+            {
+                MessageBox.Show("Primero debe agregar empleados a la lista para guardar");
+            }
+            else
+            {
+                foreach (Tarea t in lstTareas.Items)
+                {
+                    itemTarea = new TreeViewItemMenu() { Titulo = t.nombre_tarea, tarea = t };
+                    foreach (Empleado emp in lstUsuarios.Items)
+                    {
+                        TreeViewItemMenu itemUsuario = new TreeViewItemMenu() { Titulo = emp.nombre_emp, empleado = emp };
+                        itemTarea.Items.Add(itemUsuario);
+                    };
+                    itemUnidad.Items.Add(itemTarea);
+                    tvwFlujo.Items.Refresh();
+                };
             }
         }
     }

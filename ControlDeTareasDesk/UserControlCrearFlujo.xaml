@@ -59,21 +59,23 @@
                     <materialDesign:PackIcon Kind="Minus" Height="24" Width="24" />
                 </Button>
                 <Button Content="Guardar" HorizontalAlignment="Left" Margin="0,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="86"/>
+                <Button x:Name="btnAnadir" Content="Añadir" HorizontalAlignment="Left" Margin="91,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" Click="btnAnadir_Click"/>
+                <Button x:Name="btnRefrescar" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" BorderBrush="#FF0096DC" Background="#FF0096DC" Margin="171,55,0,0">
+                    <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" Grid.Row="1" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
+                </Button>
             </Grid>
-            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,10,10,0" Background="#FF323232">
-                <TreeView x:Name="tvwFlujo"  Grid.Column="1" HorizontalAlignment="Stretch" Margin="10">
-                    <TreeViewItem IsExpanded="True">
-                        <TreeViewItem.Header>
-                            <TextBlock Text="{Binding ElementName=cmbProceso, Path=SelectedItem.nombre_proceso}"/>
-                        </TreeViewItem.Header>
-                        <TreeViewItem x:Name="tvwiUnidad" Header="{Binding ElementName=cmbUnidad, Path=SelectedItem.nombre_unidad}" IsExpanded="True">
-                            <TreeViewItem.ItemTemplate>
-                                <HierarchicalDataTemplate>
-                                    <TextBlock Text="{Binding nombre_tarea}"></TextBlock>
-                                </HierarchicalDataTemplate>
-                            </TreeViewItem.ItemTemplate>
-                        </TreeViewItem>
-                    </TreeViewItem>
+            <StackPanel  Grid.Column="1" HorizontalAlignment="Stretch" Background="#FF323232" Margin="10,10,10,0">
+                <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch" MaxHeight="183">
+                    <TreeView.Resources>
+                        <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True"></Setter>
+                        </Style>
+                    </TreeView.Resources>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type local:TreeViewItemMenu}" ItemsSource="{Binding Items}" >
+                            <TextBlock Text="{Binding Titulo}" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
                 </TreeView>
             </StackPanel>
         </Grid>
