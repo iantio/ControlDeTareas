@@ -311,5 +311,28 @@ namespace ControlDeTareasWeb.Negocio
                 return listaTareas;
             }
         }
+        public Tarea LoadTarea(decimal id_tarea)
+        {
+            TAREA dbTarea = db.TAREA.First(x => x.ID_TAREA == id_tarea);
+            id_tarea = (decimal)dbTarea.ID_TAREA;
+            id_unidad_tarea = (decimal)dbTarea.ID_UNIDAD_TAREA;
+            id_estado_tarea = (decimal)dbTarea.ID_ESTADO_TAREA;
+            id_empresa_tarea = (decimal)dbTarea.ID_EMPRESA_TAREA;
+            nombre_tarea = dbTarea.NOMBRE_TAREA;
+            fecha_inicio = (DateTime)dbTarea.FECHA_INICIO;
+            fecha_termino = (DateTime)dbTarea.FECHA_TERMINO;
+            unidad.LoadUnidad(id_unidad_tarea);
+            estado = new Estado()
+            {
+                id_estado = (decimal)dbTarea.ID_ESTADO_TAREA,
+                nombre_estado = dbTarea.ESTADO.NOMBRE_ESTADO
+            };
+            empresa = new Empresa()
+            {
+                id_empresa = (decimal)dbTarea.ID_EMPRESA_TAREA,
+                nombre_empresa = dbTarea.EMPRESA.NOMBRE_EMPRESA
+            };
+            return this;
+        }
     }
 }

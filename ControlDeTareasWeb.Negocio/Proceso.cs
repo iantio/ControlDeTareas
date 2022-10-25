@@ -170,5 +170,26 @@ namespace ControlDeTareasWeb.Negocio
                 return listaProcesos;
             }
         }
+        public Proceso LoadProceso(decimal id_proceso)
+        {
+            PROCESO dbProceso = db.PROCESO.First(x => x.ID_PROCESO == id_proceso);
+            id_proceso = (decimal)dbProceso.ID_PROCESO;
+            id_estado_pro = (decimal)dbProceso.ID_ESTADO_PRO;
+            id_empresa_pro = (decimal)dbProceso.ID_EMPRESA_PRO;
+            nombre_proceso = dbProceso.NOMBRE_PROCESO;
+            fecha_inicio = (DateTime)dbProceso.FECHA_INICIO;
+            fecha_termino = (DateTime)dbProceso.FECHA_TERMINO;
+            estado = new Estado()
+            {
+                id_estado = (decimal)dbProceso.ID_ESTADO_PRO,
+                nombre_estado = dbProceso.ESTADO.NOMBRE_ESTADO
+            };
+            empresa = new Empresa()
+            {
+                id_empresa = (decimal)dbProceso.ID_EMPRESA_PRO,
+                nombre_empresa = dbProceso.EMPRESA.NOMBRE_EMPRESA
+            };
+            return this;
+        }
     }
 }

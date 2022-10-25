@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\App.xaml
-131880860582
+15977418467
 
-20554395244
+23-1835306298
 17-892693661
-MainWindow.xaml;MenuPrincipal.xaml;UserControlCrearFlujo.xaml;UserControlInicio.xaml;UserControlMenuItem.xaml;UserControlProcesos.xaml;UserControlTarea.xaml;UserControlUnidad.xaml;UserControlUsuarios.xaml;WinCrearProceso.xaml;WinCrearTarea.xaml;WinCrearUnidad.xaml;WinCrearUsuario.xaml;
+MainWindow.xaml;MenuPrincipal.xaml;UserControlCrearFlujo.xaml;UserControlInicio.xaml;UserControlMenuItem.xaml;UserControlProcesos.xaml;UserControlTarea.xaml;UserControlTest.xaml;UserControlUnidad.xaml;UserControlUsuarios.xaml;WinCrearProceso.xaml;WinCrearTarea.xaml;WinCrearUnidad.xaml;WinCrearUsuario.xaml;WinLista.xaml;
 
 True
 

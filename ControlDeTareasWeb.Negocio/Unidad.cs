@@ -297,5 +297,29 @@ namespace ControlDeTareasWeb.Negocio
                 return listaUnidades;
             }
         }
+
+        public Unidad LoadUnidad(decimal id_unidad)
+        {
+            UNIDAD dbUnidad = db.UNIDAD.First(x => x.ID_UNIDAD == id_unidad);
+            id_unidad = (decimal)dbUnidad.ID_UNIDAD;
+            id_proceso_uni = (decimal)dbUnidad.ID_PROCESO_UNI;
+            id_estado_uni = (decimal)dbUnidad.ID_ESTADO_UNI;
+            id_empresa_uni = (decimal)dbUnidad.ID_EMPRESA_UNI;
+            nombre_unidad = dbUnidad.NOMBRE_UNIDAD;
+            fecha_inicio = (DateTime)dbUnidad.FECHA_INICIO;
+            fecha_termino = (DateTime)dbUnidad.FECHA_TERMINO;
+            proceso.LoadProceso(id_proceso_uni);
+            estado = new Estado()
+            {
+                id_estado = (decimal)dbUnidad.ID_ESTADO_UNI,
+                nombre_estado = dbUnidad.ESTADO.NOMBRE_ESTADO
+            };
+            empresa = new Empresa()
+            {
+                id_empresa = (decimal)dbUnidad.ID_EMPRESA_UNI,
+                nombre_empresa = dbUnidad.EMPRESA.NOMBRE_EMPRESA
+            };
+            return this;
+        }
     }
 }

@@ -38,7 +38,6 @@ namespace ControlDeTareasDesk
             cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue,empleadoAux.id_empresa_emp);
             cmbUnidad.SelectedIndex = 0;
             EmpleadoCollection listaEmpleado = new EmpleadoCollection();
-            lstUsuarios.ItemsSource = listaEmpleado.ReadByEmpresa(empleadoAux.id_empresa_emp);
         }
 
         private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,21 +46,56 @@ namespace ControlDeTareasDesk
             cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
             cmbUnidad.Items.Refresh();
             cmbUnidad.SelectedIndex = 0;
+            lstTareas.ItemsSource = null;
+            lstUsuarios.ItemsSource = null;
         }
 
         private void cmbUnidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                if (cmbUnidad.SelectedValue != null)
-                {
-                    Tarea tarea = new Tarea();
-                    lstTareas.ItemsSource = tarea.FindByUnidad((decimal)cmbUnidad.SelectedValue, empleadoAux.id_empresa_emp);
-                }
-            }
-            catch
-            {
+        }
 
+        private void btnAgregarTarea_Click(object sender, RoutedEventArgs e)
+        {
+            WinLista winListaTarea = new WinLista(empleadoAux,"tarea",(Unidad)cmbUnidad.SelectedItem);
+            winListaTarea.ShowDialog();
+            this.listTareas = winListaTarea.listaTareas;
+            lstTareas.ItemsSource = this.listTareas;
+        }
+
+        private void btnAgregarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            WinLista winListaEmpleado = new WinLista(empleadoAux, "empleado", null);
+            winListaEmpleado.ShowDialog();
+            this.listEmpleado = winListaEmpleado.listaEmpleados;
+            lstUsuarios.ItemsSource = this.listEmpleado;
+            lstUsuarios.Items.Refresh();
+        }
+
+        private void btnEliminarTarea_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstTareas.SelectedItem != null)
+            {
+                listTareas.Remove((Tarea)lstTareas.SelectedItem);
+                //lstTareas.Items.Remove(lstTareas.SelectedItem);
+                lstTareas.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una tarea para quitar de la lista");
+            }
+        }
+
+        private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstUsuarios.SelectedItem != null)
+            {
+                listEmpleado.Remove((Empleado)lstUsuarios.SelectedItem);
+                //lstTareas.Items.Remove(lstTareas.SelectedItem);
+                lstUsuarios.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un empleado para quitar de la lista");
             }
         }
     }

@@ -46,10 +46,13 @@ namespace ControlDeTareasDesk
 
             var item = new ItemMenu("Dashboad", new UserControlInicio(), PackIconKind.ViewDashboard);
 
+            var test = new ItemMenu("Test", new UserControlTest(empleadoAux), PackIconKind.Engine);
+
             Menu.Children.Add(new UserControlMenuItem(item, this));
             Menu.Children.Add(new UserControlMenuItem(item0, this));
             Menu.Children.Add(new UserControlMenuItem(item1, this));
             Menu.Children.Add(new UserControlMenuItem(item2, this));
+            Menu.Children.Add(new UserControlMenuItem(test, this));
         }
         internal void SwitchScreen(object sender) 
         {

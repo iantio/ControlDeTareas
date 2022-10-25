@@ -156,5 +156,28 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        public Empleado LoadEmpleado(decimal id_rut)
+        {
+            EMPLEADO dbEmp = db.EMPLEADO.First(x => x.ID_RUT == id_rut );
+            id_rut = dbEmp.ID_RUT;
+            id_empresa_emp = (decimal)dbEmp.ID_EMPRESA_EMP;
+            id_rol_emp = (decimal)dbEmp.ID_ROL_EMP;
+            fecha_ingreso = (DateTime)dbEmp.FECHA_INGRESO;
+            nombre_emp = dbEmp.NOMBRE_EMP;
+            usuario = dbEmp.USUARIO;
+            clave = dbEmp.CLAVE;
+            empresa = new Empresa()
+            {
+                id_empresa = (decimal)dbEmp.ID_EMPRESA_EMP,
+                nombre_empresa = dbEmp.EMPRESA.NOMBRE_EMPRESA
+            };
+            rol = new Rol()
+            {
+                id_rol = (decimal)dbEmp.ID_ROL_EMP,
+                id_empresa_rol = (decimal)dbEmp.ID_EMPRESA_EMP,
+                nombre_rol = dbEmp.ROL.NOMBRE_ROL
+            };
+            return this;
+        }
     }
 }

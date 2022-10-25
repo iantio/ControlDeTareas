@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MenuClass\SubItem.cs" />
+    <Compile Include="MenuClass\TreeViewItemMenu.cs" />
     <Compile Include="UserControlCrearFlujo.xaml.cs">
       <DependentUpon>UserControlCrearFlujo.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="UserControlTarea.xaml.cs">
       <DependentUpon>UserControlTarea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlTest.xaml.cs">
+      <DependentUpon>UserControlTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlUnidad.xaml.cs">
       <DependentUpon>UserControlUnidad.xaml</DependentUpon>
@@ -99,6 +103,9 @@
     </Compile>
     <Compile Include="WinCrearUsuario.xaml.cs">
       <DependentUpon>WinCrearUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinLista.xaml.cs">
+      <DependentUpon>WinLista.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlUnidad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinCrearUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinLista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,34 +24,58 @@
         <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="497*"/>
+                <ColumnDefinition Width="223*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel  Orientation="Vertical">
-                <Label x:Name="lblProceso" Content="Proceso" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0"/>
-                <ComboBox x:Name="cmbProceso" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="3,0,0,0"  DisplayMemberPath="nombre_proceso" SelectedValuePath="id_proceso" SelectionChanged="cmbProceso_SelectionChanged" Foreground="White"/>
-                <Label x:Name="lblUnidad" Content="Unidad" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0"/>
-                <ComboBox x:Name="cmbUnidad" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="3,0,0,0" DisplayMemberPath="nombre_unidad" SelectedValuePath="id_unidad" SelectionChanged="cmbUnidad_SelectionChanged" Foreground="White"/>
-                <Label x:Name="lblTarea" Content="Tareas" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0"/>
-                <ListBox x:Name="lstTareas" HorizontalAlignment="Stretch" Height="120" MinWidth="237" Foreground="#DDFFFFFF" Margin="3,0,0,0" DisplayMemberPath="nombre_tarea" SelectedValuePath="id_tarea" BorderBrush="#00000000" Background="#FF2B2B2B"/>
-                <Label x:Name="lblUsuario" Content="Usuarios" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0"/>
-                <Grid>
-                    <ListBox x:Name="lstUsuarios" Foreground="#DDFFFFFF" Height="120"  DisplayMemberPath="nombre_emp" SelectedValuePath="id_rut" BorderBrush="#00000000" Background="#FF2B2B2B" Margin="0,0,0,0"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Left" ToolTip="MaterialDesignFloatingActionMiniButton">
-                        <materialDesign:PackIcon Kind="Alarm" Height="24" Width="24" />
-                    </Button>
-                </Grid>
-                </StackPanel>
-
-            <TreeView Grid.Column="1" HorizontalAlignment="Stretch" Margin="10">
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <TextBlock Text="Nombre Proceso"/>
-                    </TreeViewItem.Header>
-                    <TreeViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="59*"/>
+                    <RowDefinition Height="231*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="87*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblProceso" Grid.Column="0" Content="Proceso" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="26" FontSize="14"/>
+                <ComboBox x:Name="cmbProceso" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="5,26,5,0"  DisplayMemberPath="nombre_proceso" SelectedValuePath="id_proceso" SelectionChanged="cmbProceso_SelectionChanged" Foreground="White" Height="28"/>
+                <Label x:Name="lblUnidad" Grid.Column="1" Grid.Row="0" Content="Unidad" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="26" FontSize="14"/>
+                <ComboBox x:Name="cmbUnidad" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,26,5,0" DisplayMemberPath="nombre_unidad" SelectedValuePath="id_unidad" SelectionChanged="cmbUnidad_SelectionChanged" Foreground="White" Height="28"/>
+                <Label x:Name="lblTarea" Grid.Column="0" Grid.Row="1" Content="Tareas" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="26" FontSize="14"/>
+                <ListBox x:Name="lstTareas" Grid.Column="0" Margin="5,26,5,0" HorizontalAlignment="Stretch" MinWidth="237" MinHeight="200" Foreground="#DDFFFFFF" DisplayMemberPath="nombre_tarea" SelectedValuePath="id_tarea" BorderBrush="#00000000" Background="#FF2B2B2B" Grid.Row="1"/>
+                <Button x:Name="btnAgregarTarea" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="5,4,0,2" Height="26" Width="26" Grid.Row="2" Grid.Column="0" Click="btnAgregarTarea_Click">
+                    <materialDesign:PackIcon Kind="Add" Height="24" Width="24" />
+                </Button>
+                <Button x:Name="btnEliminarTarea" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="43,4,0,2" Height="26" Width="26" Grid.Row="2" Grid.Column="0" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarTarea_Click">
+                    <materialDesign:PackIcon Kind="Minus" Height="24" Width="24" />
+                </Button>
+                <Label x:Name="lblUsuario" Grid.Column="1" Grid.Row="1" Content="Usuarios" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="26" FontSize="14"/>
+                <ListBox x:Name="lstUsuarios" Grid.Column="1" Margin="5,26,5,0" Foreground="#DDFFFFFF"  DisplayMemberPath="nombre_emp" SelectedValuePath="id_rut" BorderBrush="#00000000" Background="#FF2B2B2B" Grid.Row="1"/>
+                <Button x:Name="btnAgregarUsuario" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="5,4,0,2" Height="26" Width="26" Grid.Row="2" Grid.Column="1" Click="btnAgregarUsuario_Click">
+                    <materialDesign:PackIcon Kind="Add" Height="24" Width="24" />
+                </Button>
+                <Button x:Name="btnEliminarUsuario" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="42,4,0,2" Height="26" Width="26" Grid.Row="2" Grid.Column="1" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarUsuario_Click">
+                    <materialDesign:PackIcon Kind="Minus" Height="24" Width="24" />
+                </Button>
+                <Button Content="Guardar" HorizontalAlignment="Left" Margin="0,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="86"/>
+            </Grid>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,10,10,0" Background="#FF323232">
+                <TreeView x:Name="tvwFlujo"  Grid.Column="1" HorizontalAlignment="Stretch" Margin="10">
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <TextBlock Text="{Binding ElementName=cmbProceso, Path=SelectedItem.nombre_proceso}"/>
+                        </TreeViewItem.Header>
+                        <TreeViewItem x:Name="tvwiUnidad" Header="{Binding ElementName=cmbUnidad, Path=SelectedItem.nombre_unidad}" IsExpanded="True">
+                            <TreeViewItem.ItemTemplate>
+                                <HierarchicalDataTemplate>
+                                    <TextBlock Text="{Binding nombre_tarea}"></TextBlock>
+                                </HierarchicalDataTemplate>
+                            </TreeViewItem.ItemTemplate>
+                        </TreeViewItem>
                     </TreeViewItem>
-                </TreeViewItem>
-            </TreeView>
+                </TreeView>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
