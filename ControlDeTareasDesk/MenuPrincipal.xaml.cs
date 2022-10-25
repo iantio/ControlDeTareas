@@ -47,12 +47,25 @@ namespace ControlDeTareasDesk
             var item = new ItemMenu("Dashboad", new UserControlInicio(empleadoAux), PackIconKind.ViewDashboard);
 
             var test = new ItemMenu("Test", new UserControlTest(empleadoAux), PackIconKind.Engine);
-
-            Menu.Children.Add(new UserControlMenuItem(item, this));
-            Menu.Children.Add(new UserControlMenuItem(item0, this));
-            Menu.Children.Add(new UserControlMenuItem(item1, this));
-            Menu.Children.Add(new UserControlMenuItem(item2, this));
-            Menu.Children.Add(new UserControlMenuItem(test, this));
+            if (empleadoAux.rol.nombre_rol == "ADMINISTRADOR")
+            {
+                Menu.Children.Add(new UserControlMenuItem(item, this));
+                Menu.Children.Add(new UserControlMenuItem(item0, this));
+                Menu.Children.Add(new UserControlMenuItem(item1, this));
+                Menu.Children.Add(new UserControlMenuItem(item2, this));
+                Menu.Children.Add(new UserControlMenuItem(test, this));
+            }
+            else if (empleadoAux.rol.nombre_rol == "DISEÑADOR")
+            {
+                Menu.Children.Add(new UserControlMenuItem(item, this));
+                Menu.Children.Add(new UserControlMenuItem(item1, this));
+                Menu.Children.Add(new UserControlMenuItem(item2, this));
+            }
+            else if (empleadoAux.rol.nombre_rol == "FUNCIONARIO")
+            {
+                Menu.Children.Add(new UserControlMenuItem(item, this));
+                Menu.Children.Add(new UserControlMenuItem(test, this));
+            }
         }
         internal void SwitchScreen(object sender) 
         {

@@ -311,6 +311,83 @@ namespace ControlDeTareasWeb.Negocio
                 return listaTareas;
             }
         }
+        public List<Tarea> FindByTareaUnidad(String tareaBuscada,decimal id_unidad, decimal id_empresa)
+        {
+            List<Tarea> listaTareas = new List<Tarea>();
+            try
+            {
+                var tareas = from p in db.TAREA
+                             where p.ID_EMPRESA_TAREA == id_empresa && p.ID_UNIDAD_TAREA == id_unidad && p.NOMBRE_TAREA.Contains(tareaBuscada)
+                             select p;
+                foreach (ControlDeTareasWeb.DAL.TAREA x in tareas)
+                {
+                    Tarea p = new Tarea();
+                    p.id_tarea = (decimal)x.ID_TAREA;
+                    p.id_unidad_tarea = (decimal)x.ID_UNIDAD_TAREA;
+                    p.id_estado_tarea = (decimal)x.ID_ESTADO_TAREA;
+                    p.id_empresa_tarea = (decimal)x.ID_EMPRESA_TAREA;
+                    p.nombre_tarea = x.NOMBRE_TAREA;
+                    p.fecha_inicio = (DateTime)x.FECHA_INICIO;
+                    p.fecha_termino = (DateTime)x.FECHA_TERMINO;
+                    p.unidad = new Unidad()
+                    {
+                        id_unidad = (decimal)x.ID_UNIDAD_TAREA,
+                        id_proceso_uni = (decimal)x.UNIDAD.ID_PROCESO_UNI,
+                        id_estado_uni = (decimal)x.UNIDAD.ID_ESTADO_UNI,
+                        id_empresa_uni = (decimal)x.UNIDAD.ID_EMPRESA_UNI,
+                        nombre_unidad = x.UNIDAD.NOMBRE_UNIDAD,
+                        fecha_inicio = (DateTime)x.UNIDAD.FECHA_INICIO,
+                        fecha_termino = (DateTime)x.UNIDAD.FECHA_TERMINO,
+                        estado = new Estado()
+                        {
+                            id_estado = (decimal)x.UNIDAD.ID_ESTADO_UNI,
+                            nombre_estado = x.UNIDAD.ESTADO.NOMBRE_ESTADO
+                        },
+                        proceso = new Proceso()
+                        {
+                            id_proceso = (decimal)x.UNIDAD.ID_PROCESO_UNI,
+                            id_estado_pro = (decimal)x.UNIDAD.PROCESO.ID_ESTADO_PRO,
+                            id_empresa_pro = (decimal)x.UNIDAD.PROCESO.ID_EMPRESA_PRO,
+                            nombre_proceso = x.UNIDAD.PROCESO.NOMBRE_PROCESO,
+                            fecha_inicio = (DateTime)x.UNIDAD.PROCESO.FECHA_INICIO,
+                            fecha_termino = (DateTime)x.UNIDAD.PROCESO.FECHA_TERMINO,
+                            estado = new Estado()
+                            {
+                                id_estado = (decimal)x.UNIDAD.PROCESO.ID_ESTADO_PRO,
+                                nombre_estado = x.UNIDAD.PROCESO.ESTADO.NOMBRE_ESTADO
+                            },
+                            empresa = new Empresa()
+                            {
+                                id_empresa = (decimal)x.UNIDAD.PROCESO.ID_EMPRESA_PRO,
+                                nombre_empresa = x.UNIDAD.PROCESO.EMPRESA.NOMBRE_EMPRESA
+                            }
+                        },
+                        empresa = new Empresa()
+                        {
+                            id_empresa = (decimal)x.UNIDAD.ID_EMPRESA_UNI,
+                            nombre_empresa = x.UNIDAD.EMPRESA.NOMBRE_EMPRESA
+                        }
+                    };
+                    p.estado = new Estado()
+                    {
+                        id_estado = (decimal)x.ID_ESTADO_TAREA,
+                        nombre_estado = x.ESTADO.NOMBRE_ESTADO
+                    };
+                    p.empresa = new Empresa()
+                    {
+                        id_empresa = (decimal)x.ID_EMPRESA_TAREA,
+                        nombre_empresa = x.EMPRESA.NOMBRE_EMPRESA
+                    };
+                    listaTareas.Add(p);
+                };
+                return listaTareas;
+            }
+            catch
+            {
+                Console.WriteLine("error al cargar datos de tarea");
+                return listaTareas;
+            }
+        }
         public Tarea LoadTarea(decimal id_tarea)
         {
             TAREA dbTarea = db.TAREA.First(x => x.ID_TAREA == id_tarea);

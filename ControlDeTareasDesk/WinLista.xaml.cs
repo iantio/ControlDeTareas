@@ -23,6 +23,7 @@ namespace ControlDeTareasDesk
         Empleado empleadoAux { get; set; }
         public List<Tarea> listaTareas { get; set; }
         public List<Empleado> listaEmpleados { get; set; }
+        decimal id_unidad { get; set; }
         String tipo;
         public WinLista(Empleado empleadoAux,String tipo,Unidad unidad)
         {
@@ -41,6 +42,7 @@ namespace ControlDeTareasDesk
                     this.dgTareas.Visibility = Visibility.Visible;
                     dgTareas.ItemsSource = tarea.FindByUnidad(unidad.id_unidad, empleadoAux.id_empresa_emp);
                     dgTareas.Items.Refresh();
+                    this.id_unidad = unidad.id_unidad;
                     break;
                 case "empleado":
                     listaEmpleados = new List<Empleado>();
@@ -99,6 +101,32 @@ namespace ControlDeTareasDesk
         {
             dgTareas.SelectedItem = null;
             dgEmpleados.SelectedItem = null;
+        }
+
+        private void btn_Buscar_Click(object sender, RoutedEventArgs e)
+        {
+            Tarea tareaBusqueda = new Tarea();
+            EmpleadoCollection listaEmpleado = new EmpleadoCollection();
+            if (txtBuscar.Text.Trim() == "")
+            {
+                MessageBox.Show("ingrese un nombre a buscar");
+            }
+            else
+            {
+                switch (tipo)
+                {
+                    case "tarea":
+                        dgTareas.ItemsSource = null;
+                        dgTareas.ItemsSource = tareaBusqueda.FindByTareaUnidad(txtBuscar.Text.ToUpper(),id_unidad ,empleadoAux.id_empresa_emp);
+                        dgTareas.Items.Refresh();
+                        break;
+                    case "empleado":
+                        dgEmpleados.ItemsSource = null;
+                        dgEmpleados.ItemsSource = listaEmpleado.FindByNombre(txtBuscar.Text.ToUpper(), empleadoAux.id_empresa_emp);
+                        dgEmpleados.Items.Refresh();
+                        break;
+                }
+            }
         }
     }
 }
