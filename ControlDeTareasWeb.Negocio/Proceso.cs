@@ -173,7 +173,7 @@ namespace ControlDeTareasWeb.Negocio
         public Proceso LoadProceso(decimal id_proceso)
         {
             PROCESO dbProceso = db.PROCESO.First(x => x.ID_PROCESO == id_proceso);
-            id_proceso = (decimal)dbProceso.ID_PROCESO;
+            this.id_proceso = (decimal)dbProceso.ID_PROCESO;
             id_estado_pro = (decimal)dbProceso.ID_ESTADO_PRO;
             id_empresa_pro = (decimal)dbProceso.ID_EMPRESA_PRO;
             nombre_proceso = dbProceso.NOMBRE_PROCESO;

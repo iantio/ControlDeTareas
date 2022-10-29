@@ -31,32 +31,21 @@
             </Grid.RowDefinitions>
             <ProgressBar x:Name="pbProgreso" Grid.Row="0" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Minimum="0" Maximum="1" Value="0.50" BorderBrush="#FF383838" Margin="0,6" materialDesign:TransitionAssist.DisableTransitions="True"/>
             <TextBlock x:Name="tbProgreso" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=pbProgreso, Path=Value, StringFormat={}{0:0%}}" Foreground="White" FontWeight="Bold"/>
-            <TreeView x:Name="tvwUnidad" MinWidth="220" MinHeight="340" Grid.Row="1">
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <StackPanel Orientation="Horizontal">
+            <TreeView x:Name="tvwFlujo" Grid.Row="1" HorizontalAlignment="Stretch" MinHeight="340">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True"></Setter>
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type local:TreeViewItemMenu}" ItemsSource="{Binding Items}" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                             <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
-                            <TextBlock Text="Unidad"/>
-                            <ProgressBar HorizontalAlignment="Right" Height="10" Width="100" Margin="50,0,0,0" Minimum="0" Maximum="1" Value="0.50" materialDesign:TransitionAssist.DisableTransitions="True"/>
+                            <TextBlock HorizontalAlignment="Stretch" Text="{Binding Titulo}"/>
+                            <ProgressBar HorizontalAlignment="Right" Height="10" Width="100" Margin="50,0,0,0" Minimum="0" Maximum="1" Value="{Binding Porcentaje}" materialDesign:TransitionAssist.DisableTransitions="True"/>
                         </StackPanel>
-                    </TreeViewItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
-                        <TextBlock Text="test Tarea"/>
-                    </StackPanel>
-                </TreeViewItem>
-                <TreeViewItem Header="Proceso">
-                    <TreeViewItem Header="Unidad 1">
-                        <TreeViewItem>
-                            <TreeViewItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Ellipse Width="10" Height="10" Fill="Green" Margin="0,0,5,0"/>
-                                    <TextBlock Text="Tarea 1"/>
-                                </StackPanel>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
-                    </TreeViewItem>
-                </TreeViewItem>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
             </TreeView>
             <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
                 <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>

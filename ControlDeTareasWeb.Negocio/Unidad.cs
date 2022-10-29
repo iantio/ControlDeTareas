@@ -301,7 +301,7 @@ namespace ControlDeTareasWeb.Negocio
         public Unidad LoadUnidad(decimal id_unidad)
         {
             UNIDAD dbUnidad = db.UNIDAD.First(x => x.ID_UNIDAD == id_unidad);
-            id_unidad = (decimal)dbUnidad.ID_UNIDAD;
+            this.id_unidad = (decimal)dbUnidad.ID_UNIDAD;
             id_proceso_uni = (decimal)dbUnidad.ID_PROCESO_UNI;
             id_estado_uni = (decimal)dbUnidad.ID_ESTADO_UNI;
             id_empresa_uni = (decimal)dbUnidad.ID_EMPRESA_UNI;

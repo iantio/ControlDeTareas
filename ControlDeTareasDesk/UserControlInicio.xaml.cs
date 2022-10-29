@@ -22,17 +22,25 @@ namespace ControlDeTareasDesk
     public partial class UserControlInicio : UserControl
     {
         Empleado empleadoAux;
+        TreeViewItemMenu tree { get; set; }
         public UserControlInicio(Empleado empleadoAux)
         {
             this.empleadoAux = empleadoAux;
             InitializeComponent();
-
+            try
+            {
+                tree = new TreeViewItemMenu();
+                tree.ReadDetalle(empleadoAux);
+                tvwFlujo.Items.Add(tree);
+                tvwFlujo.Items.Refresh();
+            }
+            catch { }
         }
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
             TreeViewItemMenu tree = new TreeViewItemMenu();
-            tree.ReadDetalle(empleadoAux.id_rut);
+            tree.ReadDetalle(empleadoAux);
         }
     }
 }

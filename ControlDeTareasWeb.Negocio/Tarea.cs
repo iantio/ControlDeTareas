@@ -391,7 +391,7 @@ namespace ControlDeTareasWeb.Negocio
         public Tarea LoadTarea(decimal id_tarea)
         {
             TAREA dbTarea = db.TAREA.First(x => x.ID_TAREA == id_tarea);
-            id_tarea = (decimal)dbTarea.ID_TAREA;
+            this.id_tarea = (decimal)dbTarea.ID_TAREA;
             id_unidad_tarea = (decimal)dbTarea.ID_UNIDAD_TAREA;
             id_estado_tarea = (decimal)dbTarea.ID_ESTADO_TAREA;
             id_empresa_tarea = (decimal)dbTarea.ID_EMPRESA_TAREA;

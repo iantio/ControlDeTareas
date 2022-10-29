@@ -46,7 +46,7 @@ namespace ControlDeTareasDesk
 
             var item = new ItemMenu("Dashboad", new UserControlInicio(empleadoAux), PackIconKind.ViewDashboard);
 
-            var test = new ItemMenu("Test", new UserControlTest(empleadoAux), PackIconKind.Engine);
+            var test = new ItemMenu("Test", new UserControlTest(empleadoAux), PackIconKind.Settings);
             if (empleadoAux.rol.nombre_rol == "ADMINISTRADOR")
             {
                 Menu.Children.Add(new UserControlMenuItem(item, this));

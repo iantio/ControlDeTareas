@@ -13,39 +13,67 @@ namespace ControlDeTareasDesk
         {
             this.Items = new List<TreeViewItemMenu>();
         }
-        public TreeViewItemMenu(Tarea tarea)
-        {
-            this.Items = new List<TreeViewItemMenu>();
-            this.tarea = tarea;
-        }
 
         public string Titulo { get; set; }
         public Proceso proceso { get; set; }
         public Unidad unidad { get; set; }
         public Tarea tarea { get; set; }
         public Empleado empleado { get; set; }
-        public List<List<DetalleTarea>> listaListaDetalles { get; set; }
+        public double Porcentaje { get; set; }
         public List<TreeViewItemMenu> Items { get; set; }
 
-        public TreeViewItemMenu ReadDetalle(decimal id_rut)
+        public TreeViewItemMenu ReadDetalle(Empleado empleadoAux)
         {
-            DetalleTarea detalle = new DetalleTarea();
-            List<DetalleTarea> listaDetalles;
-            listaDetalles = detalle.FindByEmpleado(id_rut);
-            var test = (from x in listaDetalles
-                        select x.tarea.unidad.id_proceso_uni);
-            foreach (var tes in test) 
+            this.Titulo = "Prueba";
+            try
             {
-                Console.WriteLine(tes.ToString());
+                DetalleTarea detalle = new DetalleTarea();
+                List<DetalleTarea> listaDetalles = detalle.FindByEmpleado(empleadoAux.id_rut);
+
+                listaDetalles = detalle.FindByEmpleado(empleadoAux.id_rut);
+                List<String> listaProcesos = (from x in listaDetalles
+                                              select x.tarea.unidad.proceso.nombre_proceso).Distinct().ToList();
+                foreach (String nombreProceso in listaProcesos)
+                {
+                    Proceso proceso = new Proceso();
+                    TreeViewItemMenu itemProceso = new TreeViewItemMenu() {Titulo=nombreProceso, Porcentaje= 0.1};
+                    List<String> listaUnidades = (from x in listaDetalles
+                                                  where x.tarea.unidad.proceso.nombre_proceso == nombreProceso
+                                                  select x.tarea.unidad.nombre_unidad).Distinct().ToList();
+                    Console.WriteLine(nombreProceso);
+                    foreach (String nombreUnidad in listaUnidades)
+                    {
+                        Unidad unidad = new Unidad();
+                        TreeViewItemMenu itemUnidad = new TreeViewItemMenu() { Titulo = nombreUnidad, Porcentaje = 0.5 };
+                        List<decimal> listaTareas = (from x in listaDetalles
+                                                    where x.tarea.unidad.proceso.nombre_proceso == nombreProceso && x.tarea.unidad.nombre_unidad == nombreUnidad
+                                                    select x.tarea.id_tarea).Distinct().ToList();
+                        Console.WriteLine("|_"+nombreUnidad);
+                        foreach (decimal idTarea in listaTareas)
+                        {
+                            if (idTarea != 0)
+                            {
+                                Tarea tarea = new Tarea();
+                                Console.WriteLine(listaTareas.Count);
+                                Console.WriteLine(idTarea);
+                                tarea.LoadTarea(idTarea);
+                                TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0.9, tarea = tarea };
+
+                                itemUnidad.unidad = tarea.unidad;
+                                itemProceso.proceso = tarea.unidad.proceso;
+                                itemUnidad.Items.Add(itemTarea);
+                                Console.WriteLine(" |_" + tarea.nombre_tarea);
+                            }
+                        }
+                        itemProceso.Items.Add(itemUnidad);
+                    }
+                    this.Items.Add(itemProceso);
+                }
             }
-            //foreach (DetalleTarea detalleEncontrado in listaDetalles)
-            //{
-            //    //List<DetalleTarea> listaDetalles;
-            //    listaDetalles = detalle.FindByEmpleado(id_rut);
-            //    this.empleado = empleado.Read((int)id_rut);
-            //    //this.tarea.LoadTarea();
-            //}
-            return null;
+            catch
+            {
+            }
+            return this;
         }
     }
 }

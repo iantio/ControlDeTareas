@@ -53,6 +53,7 @@ namespace ControlDeTareasWeb.Negocio
                     id_tarea_detalle = (decimal)x.ID_TAREA_DETALLE;
                     empleado = new Empleado();
                     empleado.LoadEmpleado((decimal)x.ID_RUT_DETALLE);
+                    tarea = new Tarea();
                     tarea.LoadTarea(id_tarea_detalle);
                     listDetalle.Add(this);
                 }
