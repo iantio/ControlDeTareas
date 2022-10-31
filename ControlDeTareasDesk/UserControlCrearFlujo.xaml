@@ -80,5 +80,8 @@
                 </TreeView>
             </StackPanel>
         </Grid>
+        <Button x:Name="btnEliminarGrilla" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="0,0,0,85" Height="26" Width="26" Grid.Row="2" Grid.Column="2" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminarGrilla_Click">
+            <materialDesign:PackIcon Kind="Minus" Height="24" Width="24" />
+        </Button>
     </Grid>
 </UserControl>

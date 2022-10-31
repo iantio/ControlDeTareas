@@ -26,7 +26,7 @@ namespace ControlDeTareasDesk
         List<Empleado> listEmpleado = new List<Empleado>();
 
         TreeViewItemMenu itemProceso { get; set; }
-        TreeViewItemMenu itemUnidad { get; set; }
+        TreeViewItemMenu itemUnidad { get; set; } = new TreeViewItemMenu();
         TreeViewItemMenu itemTarea { get; set; }
         public UserControlCrearFlujo(Empleado empleadoAux)
         {
@@ -41,11 +41,21 @@ namespace ControlDeTareasDesk
             cmbUnidad.ItemsSource = null;
             cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue,empleadoAux.id_empresa_emp);
             cmbUnidad.SelectedIndex = 0;
+            Console.WriteLine(cmbUnidad.Items.Count);
             EmpleadoCollection listaEmpleado = new EmpleadoCollection();
             //TREEVIEW
-            itemProceso = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso };
-            itemUnidad = new TreeViewItemMenu() { Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad };
-            itemProceso.Items.Add(itemUnidad);
+            itemProceso = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso, proceso = (Proceso)cmbProceso.SelectedItem};
+            if (cmbUnidad.Items.Count != 0)
+            {
+                itemUnidad.Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad;
+                itemUnidad.unidad = (Unidad)cmbUnidad.SelectedItem;
+                itemProceso.Items.Add(itemUnidad);
+            }
+            else
+            {
+                itemUnidad = new TreeViewItemMenu();
+                itemProceso.Items.Add(itemUnidad);
+            }
             tvwFlujo.Items.Add(itemProceso);
         }
 
@@ -62,6 +72,7 @@ namespace ControlDeTareasDesk
                 lstTareas.ItemsSource = null;
                 lstUsuarios.ItemsSource = null;
                 itemProceso.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
+                itemProceso.proceso = (Proceso)cmbProceso.SelectedItem;
                 tvwFlujo.Items.Refresh();
             }
         }
@@ -70,19 +81,34 @@ namespace ControlDeTareasDesk
         {
             if (cmbUnidad.SelectedValue != null && itemProceso != null)
             {
+                Console.WriteLine("Prueba cambio de unidad");
                 lstTareas.ItemsSource = null;
                 itemUnidad.Items.Clear();
                 itemUnidad.Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad;
+                itemUnidad.unidad = (Unidad)cmbUnidad.SelectedItem;
                 tvwFlujo.Items.Refresh();
+            }
+            else
+            {
+                //itemUnidad = new TreeViewItemMenu();
+                itemUnidad.Titulo = "";
+                itemUnidad.unidad = new Unidad() {id_unidad = 0};
             }
         }
 
         private void btnAgregarTarea_Click(object sender, RoutedEventArgs e)
         {
-            WinLista winListaTarea = new WinLista(empleadoAux,"tarea",(Unidad)cmbUnidad.SelectedItem);
-            winListaTarea.ShowDialog();
-            this.listTareas = winListaTarea.listaTareas;
-            lstTareas.ItemsSource = this.listTareas;
+            if (cmbUnidad.Items.Count != 0)
+            {
+                WinLista winListaTarea = new WinLista(empleadoAux, "tarea", (Unidad)cmbUnidad.SelectedItem);
+                winListaTarea.ShowDialog();
+                this.listTareas = winListaTarea.listaTareas;
+                lstTareas.ItemsSource = this.listTareas;
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron unidades con tareas");
+            }
         }
 
         private void btnAgregarUsuario_Click(object sender, RoutedEventArgs e)
@@ -126,7 +152,7 @@ namespace ControlDeTareasDesk
         {
             if (lstTareas.Items == null || lstTareas.Items.Count == 0)
             {
-                MessageBox.Show("Primero debe agregar tareas a la lista para guardar");
+                MessageBox.Show("Primero debe añadir tareas a la lista para sumarlos a la vista");
             }
             else if (lstUsuarios.Items == null || lstUsuarios.Items.Count == 0)
             {
@@ -153,7 +179,7 @@ namespace ControlDeTareasDesk
         {
             try
             {
-                if (itemUnidad.Items != null || itemUnidad.Items.Count != 0)
+                if (itemUnidad.Items != null && itemUnidad.Items.Count != 0)
                 {
                     TreeViewItemMenu itemUnidadTemp = new TreeViewItemMenu() { Titulo = itemUnidad.Titulo, unidad = itemUnidad.unidad };
                     foreach (TreeViewItemMenu ta in itemUnidad.Items)
@@ -239,6 +265,37 @@ namespace ControlDeTareasDesk
             }
             catch
             {
+            }
+        }
+
+        private void btnEliminarGrilla_Click(object sender, RoutedEventArgs e)
+        {
+            if (tvwFlujo.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un elemento para eliminar del flujo");
+            }
+            else
+            {
+                if (((TreeViewItemMenu)tvwFlujo.SelectedItem).proceso != null)
+                {
+                    tvwFlujo.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
+                    tvwFlujo.Items.Refresh();
+                }
+                else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).unidad != null)
+                {
+                    itemProceso.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
+                    tvwFlujo.Items.Refresh();
+                }
+                else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea != null)
+                {
+                    itemUnidad.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
+                    tvwFlujo.Items.Refresh();
+                }
+                else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).empleado != null)
+                {
+                    itemTarea.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
+                    tvwFlujo.Items.Refresh();
+                }
             }
         }
     }

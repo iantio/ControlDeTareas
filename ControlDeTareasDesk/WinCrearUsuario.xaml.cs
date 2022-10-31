@@ -30,6 +30,8 @@ namespace ControlDeTareasDesk
             this.empleadoTemp = new Empleado();
             InitializeComponent();
             dtpFechaIngreso.SelectedDate = System.DateTime.Now;
+            Rol rolCombo = new Rol();
+            cmbRol.ItemsSource = rolCombo.ListarNombres(empleadoAux.id_empresa_emp);
             if (editar == true)
             {
                 this.empleadoTemp = empleadoTemp;
@@ -39,10 +41,8 @@ namespace ControlDeTareasDesk
                 txtUsuario.Text = empleadoTemp.usuario;
                 pwdClave.IsEnabled = false;
                 pwdClave.Text = empleadoTemp.clave;
-                cmbRol.SelectedIndex = (int)empleadoTemp.id_rol_emp;
+                cmbRol.SelectedValue = empleadoTemp.id_rol_emp;
             };
-            Rol rolCombo = new Rol();
-            cmbRol.ItemsSource = rolCombo.ListarNombres(empleadoAux.id_empresa_emp);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace ControlDeTareasDesk
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             int num; //variable utilizada para la conversion a int
-
+            Rut validador = new Rut();
             if (txtRut.Text.Trim() == "")
             {
                 MessageBox.Show("Debe ingresar un rut");
@@ -61,7 +61,7 @@ namespace ControlDeTareasDesk
             }
             else if (!int.TryParse(txtRut.Text, out num))
             {
-                MessageBox.Show("Debe ingresar un rut");
+                MessageBox.Show("Debe ingresar un rut valido");
                 txtRut.Focus();
             }
             else if (txtNombre.Text.Trim() == "")
@@ -79,11 +79,11 @@ namespace ControlDeTareasDesk
                 MessageBox.Show("Debe ingresar una contraseña");
                 pwdClave.Focus();
             }
-            else 
+            else
             {
                 empleadoTemp.id_rut = (decimal)int.Parse(txtRut.Text);
                 empleadoTemp.id_empresa_emp = empleadoAux.id_empresa_emp;
-                empleadoTemp.id_rol_emp = (decimal)cmbRol.SelectedIndex;
+                empleadoTemp.id_rol_emp = (decimal)cmbRol.SelectedValue;
                 empleadoTemp.fecha_ingreso = dtpFechaIngreso.SelectedDate.Value;
                 empleadoTemp.nombre_emp = txtNombre.Text;
                 empleadoTemp.usuario = txtUsuario.Text;
@@ -111,7 +111,7 @@ namespace ControlDeTareasDesk
                             break;
                     }
                 }
-                catch 
+                catch
                 {
                     MessageBox.Show("Error al guardar");
                 }

@@ -98,5 +98,23 @@ namespace ControlDeTareasWeb.Negocio
             }
             return listaDetalle;
         }
+        public List<DetalleTarea> FindByTarea(decimal id_tarea)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.ID_TAREA_DETALLE == id_tarea);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea(id_tarea);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
+        }
     }
 }

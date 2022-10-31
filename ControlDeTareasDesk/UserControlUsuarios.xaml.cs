@@ -31,7 +31,6 @@ namespace ControlDeTareasDesk
             this.empleadoAux = empleadoAux;
             EmpleadoCollection empleadoCollection = new EmpleadoCollection();
             dgUsuarios.ItemsSource = null;
-            //dgUsuarios.ItemsSource = empleadoAux.ReadAll();               *OTRA FORMA DE OBTENER LA LISTA DE USUARIOS*
             dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
             dgUsuarios.Items.Refresh();
         }
@@ -82,13 +81,25 @@ namespace ControlDeTareasDesk
             dgUsuarios.ItemsSource = empleadoCollection.ReadByEmpresa(empleadoAux.id_empresa_emp);
             dgUsuarios.Items.Refresh();
         }
-
+        //PENDIENTE DE OPTIMIZACION
         private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
             empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
             if (dgUsuarios.SelectedItem != null)
             {
-                if (empleadoTemp.Delete())
+                DetalleTarea detalle = new DetalleTarea();
+                if (detalle.FindByEmpleado(empleadoTemp.id_rut) != null)
+                {
+                    if (MessageBox.Show("Este empleado tiene tareas asignadas, ¿esta seguro de eliminarlo?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        foreach (DetalleTarea x in detalle.FindByEmpleado(empleadoTemp.id_rut))
+                        {
+                            x.Delete();
+                        }
+                        empleadoTemp.Delete();
+                    }
+                }
+                else if (empleadoTemp.Delete())
                 {
                     empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
                     MessageBox.Show("Empleado eliminado");

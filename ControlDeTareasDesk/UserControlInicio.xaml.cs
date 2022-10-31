@@ -39,8 +39,10 @@ namespace ControlDeTareasDesk
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
-            TreeViewItemMenu tree = new TreeViewItemMenu();
-            tree.ReadDetalle(empleadoAux);
+            this.tree.Items.Clear();
+            this.tree.ReadDetalle(empleadoAux);
+            //tvwFlujo.Items.Add(tree);
+            tvwFlujo.Items.Refresh();
         }
     }
 }

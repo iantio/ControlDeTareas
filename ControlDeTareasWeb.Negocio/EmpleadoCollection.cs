@@ -60,7 +60,7 @@ namespace ControlDeTareasWeb.Negocio
         }
         public List<Empleado> FindByNombre(String nombre,decimal id_empresa)
         {
-            var empleados = ConectarDAL.Modelo.EMPLEADO.Where(x => x.NOMBRE_EMP.Contains(nombre) && x.ID_EMPRESA_EMP == id_empresa);
+            var empleados = ConectarDAL.Modelo.EMPLEADO.Where(x => x.NOMBRE_EMP.Contains(nombre.ToUpper()) && x.ID_EMPRESA_EMP == id_empresa);
 
             return GenerarListaEmp(empleados.ToList());
         }

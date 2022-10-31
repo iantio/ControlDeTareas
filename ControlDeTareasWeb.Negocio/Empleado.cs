@@ -96,7 +96,7 @@ namespace ControlDeTareasWeb.Negocio
             }).Where(p => p.usuario == usuario).FirstOrDefault();
         }
 
-        public Boolean Create() 
+        public Boolean Create()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace ControlDeTareasWeb.Negocio
                 empleado.ID_EMPRESA_EMP = (int)id_empresa_emp;
                 empleado.ID_ROL_EMP = (int)id_rol_emp;
                 empleado.FECHA_INGRESO = fecha_ingreso;
-                empleado.NOMBRE_EMP = nombre_emp;
+                empleado.NOMBRE_EMP = nombre_emp.ToUpper();
                 empleado.USUARIO = usuario;
                 empleado.CLAVE = clave;
 
@@ -142,7 +142,7 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
-        public Boolean Delete() 
+        public Boolean Delete()
         {
             try
             {

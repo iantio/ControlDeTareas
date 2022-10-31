@@ -83,15 +83,40 @@ namespace ControlDeTareasDesk
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            Unidad unidadTemp = (Unidad)dgUnidades.SelectedItem;
+            Tarea tareaTemp = new Tarea();
+            DetalleTarea detalle = new DetalleTarea();
             if (dgUnidades.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar una unidad para eliminar");
             }
+            else if (tareaTemp.FindByUnidad(unidadTemp.id_unidad, unidadTemp.id_empresa_uni) != null)
+            {
+                foreach(Tarea tareaEncontrada in tareaTemp.FindByUnidad(unidadTemp.id_unidad, unidadTemp.id_empresa_uni))
+                {
+                    if (MessageBox.Show("Este unidad esta asignada a una tarea, ¿esta seguro de eliminarla considerando que la tarea puede estar en un flujo?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            foreach (DetalleTarea detalleEncontrado in detalle.FindByTarea(tareaEncontrada.id_tarea))
+                            {
+                                detalleEncontrado.Delete();
+                            }
+                            tareaEncontrada.Delete();
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Error: no se encontraron tareas en detalle");
+                        }
+                    }
+                }
+                unidadTemp.Delete();
+                btnRefrescar_Click(null, null);
+            }
             else
             {
-                Unidad unidadTemp = (Unidad)dgUnidades.SelectedItem;
                 unidadTemp.Delete();
-                btnRefrescar_Click(null,null);
+                btnRefrescar_Click(null, null);
             }
         }
     }

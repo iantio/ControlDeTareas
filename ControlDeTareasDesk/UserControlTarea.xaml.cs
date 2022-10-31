@@ -80,16 +80,29 @@ namespace ControlDeTareasDesk
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            Tarea tareaTemp = (Tarea)dgTareas.SelectedItem;
+            DetalleTarea detalle = new DetalleTarea();
             if (dgTareas.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar una tarea para eliminar");
             }
+            else if (detalle.FindByTarea(tareaTemp.id_tarea) != null)
+            {
+                if (MessageBox.Show("Este tarea esta asignada a un flujo, ¿esta seguro de eliminarla?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    foreach (DetalleTarea x in detalle.FindByTarea(tareaTemp.id_tarea))
+                    {
+                        x.Delete();
+                    }
+                    tareaTemp.Delete();
+                }
+            }
             else
             {
-                Tarea tarea = (Tarea)dgTareas.SelectedItem;
+                Tarea tarea = tareaTemp;
                 tarea.Delete();
-                btnRefrescar_Click(null,null);
             }
+            btnRefrescar_Click(null, null);
         }
     }
 }

@@ -29,6 +29,8 @@ namespace ControlDeTareasDesk
             this.editar = editar;
             this.empleadoAux = empleadoAux;
             InitializeComponent();
+            dtpFechaInicio.SelectedDate = System.DateTime.Now;
+            dtpFechaTermino.SelectedDate = System.DateTime.Now;
             if (editar == true)
             {
                 txtNombreProceso.Text = this.procesoTemp.nombre_proceso;

@@ -17,7 +17,7 @@
         <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="25" Margin="58,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White"/>
         <Label x:Name="lblClave" Content="Contraseña" HorizontalAlignment="Left" Margin="53,206,0,0" VerticalAlignment="Top" Width="208" Foreground="#DDFFFFFF"/>
         <TextBox x:Name="pwdClave" HorizontalAlignment="Left" Height="25" Margin="58,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Foreground="White" BorderBrush="#89009C2B"/>
-        <ComboBox x:Name="cmbRol" HorizontalAlignment="Left" Margin="58,279,0,0" VerticalAlignment="Top" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True"/>
+        <ComboBox x:Name="cmbRol" HorizontalAlignment="Left" Margin="58,279,0,0" VerticalAlignment="Top" DisplayMemberPath="nombre_rol" SelectedValuePath="id_rol" Width="208" BorderBrush="#89009C2B" Foreground="White" SelectedIndex="0" Background="#FF131313" IsReadOnly="True"/>
         <Label Content="Rol" HorizontalAlignment="Left" Margin="53,258,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <Label Content="Fecha de ingreso" HorizontalAlignment="Left" Margin="516,56,0,0" VerticalAlignment="Top" Foreground="#DDFFFFFF"/>
         <DatePicker x:Name="dtpFechaIngreso" HorizontalAlignment="Left" Margin="522,76,0,0" VerticalAlignment="Top" Width="164" BorderBrush="#89009C2B" Foreground="White" Background="#00000000"/>

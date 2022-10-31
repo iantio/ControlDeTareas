@@ -31,7 +31,7 @@ namespace ControlDeTareasDesk
 
             var menuUsuarios = new List<SubItem>();
             menuUsuarios.Add(new SubItem("Administracion usuarios",new UserControlUsuarios(empleadoAux)));
-            menuUsuarios.Add(new SubItem("Roles"));
+            //menuUsuarios.Add(new SubItem("Roles"));
             var item0 = new ItemMenu("Registro", menuUsuarios, PackIconKind.Register);
 
             var menuProcesos = new List<SubItem>();

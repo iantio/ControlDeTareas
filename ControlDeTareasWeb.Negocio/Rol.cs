@@ -32,20 +32,18 @@ namespace ControlDeTareasWeb.Negocio
                 }
             }).ToList();
         }
-        public List<String> ListarNombres(decimal id_empresa_rol)
+        public List<Rol> ListarNombres(decimal id_empresa_rol)
         {
             Rol rolTemp = new Rol();
-            List<String> ListNombre = new List<String>();
-            ListNombre.Add("--Seleccione un rol--");
-            foreach (Rol rol in rolTemp.ReadAll()) 
+            List<Rol> rol = new List<Rol>();
+            foreach (Rol rolEncontrado in rolTemp.ReadAll())
             {
-                if (rol.id_empresa_rol == id_empresa_rol)
+                if (rolEncontrado.id_empresa_rol == id_empresa_rol)
                 {
-                    String a = rol.nombre_rol;
-                    ListNombre.Add(a);
+                    rol.Add(rolEncontrado);
                 }
             };
-            return ListNombre;
+            return rol;
         }
     }
 }

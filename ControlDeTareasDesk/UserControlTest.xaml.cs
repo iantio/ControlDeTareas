@@ -47,7 +47,7 @@ namespace ControlDeTareasDesk
             lstUsuarios.ItemsSource = listaEmpleado.ReadByEmpresa(empleadoAux.id_empresa_emp);
             //TREEVIEW
             itemProceso = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso };
-            itemUnidad = new TreeViewItemMenu() { Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad };
+            //itemUnidad = new TreeViewItemMenu() { Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad };
             //itemTarea = new TreeViewItemMenu() { Titulo = "Tarea #1.1" };
             //agregar usuario
             //itemTarea.Items.Add(new TreeViewItemMenu() { Titulo = "Usuario #1" });
@@ -56,7 +56,7 @@ namespace ControlDeTareasDesk
             //agregar unidad
             itemProceso.Items.Add(itemUnidad);
             tvwFlujo.Items.Add(itemProceso);
-            lstTareas.ItemsSource = tarea.FindByUnidad((decimal)cmbUnidad.SelectedValue, empleadoAux.id_empresa_emp);
+            //lstTareas.ItemsSource = tarea.FindByUnidad((decimal)cmbUnidad.SelectedValue, empleadoAux.id_empresa_emp);
             lstTareas.Items.Refresh();
 
         }
