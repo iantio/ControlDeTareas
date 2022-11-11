@@ -32,7 +32,6 @@ namespace ControlDeTareasDesk
             dgUnidades.ItemsSource = null;
             dgUnidades.ItemsSource = unidad.Read(empleadoAux.id_empresa_emp);
             dgUnidades.Items.Refresh();
-
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)

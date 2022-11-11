@@ -125,7 +125,6 @@ namespace ControlDeTareasDesk
             if (lstTareas.SelectedItem != null)
             {
                 listTareas.Remove((Tarea)lstTareas.SelectedItem);
-                //lstTareas.Items.Remove(lstTareas.SelectedItem);
                 lstTareas.Items.Refresh();
             }
             else
@@ -211,6 +210,7 @@ namespace ControlDeTareasDesk
 
             try
             {
+                Boolean creacionExitosa = false;
                 if (itemProceso.Items.Count > 1)
                 {
                     //AQUI crear iterador que salte la pimera unidad
@@ -239,28 +239,37 @@ namespace ControlDeTareasDesk
                                         if (detalleTarea.Create())
                                         {
                                             Console.WriteLine("Detalle creado exitosamente");
+                                            creacionExitosa = true;
                                         }
                                         else
                                         {
                                             Console.WriteLine("Error al crear detalle");
+                                            creacionExitosa = false;
                                         }
                                     }
                                 }
                                 else
                                 {
                                     MessageBox.Show("Para guardar debe agregar empleados a las tarea");
+                                    creacionExitosa = false;
                                 }
                             }
                         }
                         else
                         {
                             MessageBox.Show("Para guardar debe agregar tareas a la unidad");
+                            creacionExitosa = false;
                         }
                     }
                 }
                 else
                 {
                     MessageBox.Show("Para guardar el flujo debe agregar al menos una unidad");
+                    creacionExitosa = false;
+                }
+                if (creacionExitosa == true)
+                {
+                    MessageBox.Show("flujo creado de manera exitosa");
                 }
             }
             catch

@@ -79,6 +79,42 @@ namespace ControlDeTareasDesk
             else
             {
                 Proceso proceso = (Proceso)dgProcesos.SelectedItem;
+                Unidad unidad = new Unidad();
+                List<Unidad> unidades = unidad.FindByProceso(proceso.id_proceso, empleadoAux.id_empresa_emp);
+                Tarea tarea = new Tarea();
+                List<Tarea> tareas = new List<Tarea>();
+                DetalleTarea detalle = new DetalleTarea();
+                List<DetalleTarea> detalles = new List<DetalleTarea>();
+
+                foreach (Unidad unidadEncontrada in unidades)
+                {
+                    tareas = tarea.FindByUnidad(unidadEncontrada.id_unidad,empleadoAux.id_empresa_emp);
+                    if (MessageBox.Show("Este Proceso esta asignado a una Unidad, ¿esta seguro de eliminarlo considerando que puede estar siendo utilizado en un flujo?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        foreach (Tarea tareaEncontrada in tareas)
+                        {
+                            detalles = detalle.FindByTarea(tareaEncontrada.id_tarea);
+                            foreach (DetalleTarea detalleEncontrado in detalles)
+                            {
+                                if (detalleEncontrado.Delete())
+                                {
+                                    Console.WriteLine("Detalle eliminado");
+                                }
+                                else { Console.WriteLine("Error al eliminar Detalle"); }
+                            }
+                            if (tareaEncontrada.Delete())
+                            {
+                                Console.WriteLine("Tarea eliminada");
+                            }
+                            else { Console.WriteLine("Error al eliminar Tarea"); }
+                        }
+                        if (unidadEncontrada.Delete())
+                        {
+                            Console.WriteLine("Unidad eliminada");
+                        }
+                        else { Console.WriteLine("Error al eliminar Unidad"); }
+                    }
+                }
                 if (proceso.Delete())
                 {
                     MessageBox.Show("Proceso eliminado correctamente");

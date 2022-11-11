@@ -57,6 +57,7 @@ namespace ControlDeTareasDesk
                                 Console.WriteLine(listaTareas.Count);
                                 Console.WriteLine(idTarea);
                                 tarea.LoadTarea(idTarea);
+
                                 TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0.9, tarea = tarea };
 
                                 itemUnidad.unidad = tarea.unidad;
