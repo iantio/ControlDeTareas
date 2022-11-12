@@ -1,0 +1,20 @@
+﻿@model ControlDeTareasWeb.DAL.EMPLEADO
+
+@{
+    ViewBag.Title = "UserDashBoard";
+}
+
+@using(Html.BeginForm("LogOff", "Home", FormMethod.Post)) { 
+<fieldset>
+    <legend> User DashBoard </legend>
+
+@if (Session["UserName"] != null)
+{<text>
+    Welcome @Session["UserName"].ToString() 
+</text>
+} </fieldset>
+
+<table>
+    <input type="submit" value="LogOff" />
+</table>
+}

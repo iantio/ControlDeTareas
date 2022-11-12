@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "InicioSesion";
+
+}
+
+<div class="container m-2">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col bg-light rounded">
+            @Html.AntiForgeryToken()
+            <form method="post">
+                <div class="form-group m-1">
+                    <label for="txtEmpresa">Empresa</label>
+                    <input type="text" class="form-control m-1" name="txtEmpresa" aria-describedby="empresaHelp" placeholder="Ingresa tu Empresa...">
+                </div>
+                <div class="form-group m-1">
+                    <label for="txtCorreo">Correo</label>
+                    <input type="text" class="form-control m-1" name="txtUsuario" aria-describedby="emailHelp" placeholder="Ingresa tu Correo...">
+
+                    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con nadie mas.</small>
+                </div>
+                <div class="form-group m-1">
+                    <label for="txtPassword">Contraseña</label>
+                    <input type="password" class="form-control input-group-lg m-1" name="txtPassword" placeholder="Ingresa tu Contraseña...">
+                </div>
+                <div class="row form-group m-1">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary m-2 w-100">Ingresar</button>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-primary m-2 w-100" href="/Home/OlvContrasena" role="button">Olvide Contraseña</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>

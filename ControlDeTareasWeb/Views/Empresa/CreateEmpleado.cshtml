@@ -1,0 +1,66 @@
+﻿@model ControlDeTareasWeb.Negocio.Empleado
+
+@{
+    ViewBag.Title = "CreateProceso";
+    Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
+}
+
+<h2>Crear Empleado</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <div id="contenedor">
+            <div class="column">
+                @Html.LabelFor(p => p.id_rut)
+                
+                <br />
+                @Html.LabelFor(p => p.id_empresa_emp)
+                
+                <br />
+                @Html.LabelFor(p => p.id_rol_emp)
+                
+                <br />
+                @Html.LabelFor(p => p.fecha_ingreso)
+                
+                <br />
+                @Html.LabelFor(p => p.usuario)
+                
+                <br />
+                @Html.LabelFor(p => p.clave)
+               
+                <br />
+                @Html.LabelFor(p => p.empresa)
+                
+                <br />
+                @Html.LabelFor(p => p.rol)
+               
+                <br />
+            </div>
+            <div class="column">
+                @Html.TextBoxFor(p => p.id_rut)
+                <br />
+                @Html.TextBoxFor(p => p.id_empresa_emp)
+                <br />
+                @Html.TextBoxFor(p => p.id_rol_emp)
+                <br />
+                @Html.TextBoxFor(p => p.fecha_ingreso)
+                <br />
+                @Html.TextBoxFor(p => p.usuario)
+                <br />
+                @Html.TextBoxFor(p => p.clave)
+                <br />
+                @Html.TextBoxFor(p => p.empresa)
+                <br />
+                @Html.TextBoxFor(p => p.rol)
+                <br />
+
+                <button>Guardar</button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+}
+@TempData["mensaje"]

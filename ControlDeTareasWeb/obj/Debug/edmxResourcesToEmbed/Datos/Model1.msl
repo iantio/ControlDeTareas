@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ControlDeTareasModelStoreContainer" CdmEntityContainer="ControlTareasEntities">
+    <EntitySetMapping Name="DETALLE_TAREA">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.DETALLE_TAREA">
+        <MappingFragment StoreEntitySet="DETALLE_TAREA">
+          <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
+          <ScalarProperty Name="ID_RUT_DETALLE" ColumnName="ID_RUT_DETALLE" />
+          <ScalarProperty Name="ID_TAREA_DETALLE" ColumnName="ID_TAREA_DETALLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLEADO">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.EMPLEADO">
+        <MappingFragment StoreEntitySet="EMPLEADO">
+          <ScalarProperty Name="ID_RUT" ColumnName="ID_RUT" />
+          <ScalarProperty Name="ID_EMPRESA_EMP" ColumnName="ID_EMPRESA_EMP" />
+          <ScalarProperty Name="ID_ROL_EMP" ColumnName="ID_ROL_EMP" />
+          <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+          <ScalarProperty Name="NOMBRE_EMP" ColumnName="NOMBRE_EMP" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPRESA">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.EMPRESA">
+        <MappingFragment StoreEntitySet="EMPRESA">
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="NOMBRE_EMPRESA" ColumnName="NOMBRE_EMPRESA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADO">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.ESTADO">
+        <MappingFragment StoreEntitySet="ESTADO">
+          <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+          <ScalarProperty Name="NOMBRE_ESTADO" ColumnName="NOMBRE_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FLUJO">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.FLUJO">
+        <MappingFragment StoreEntitySet="FLUJO">
+          <ScalarProperty Name="ID_FLUJO" ColumnName="ID_FLUJO" />
+          <ScalarProperty Name="ID_UNIDAD_FLUJO" ColumnName="ID_UNIDAD_FLUJO" />
+          <ScalarProperty Name="ID_TAREA_FLUJO" ColumnName="ID_TAREA_FLUJO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROCESO">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.PROCESO">
+        <MappingFragment StoreEntitySet="PROCESO">
+          <ScalarProperty Name="ID_PROCESO" ColumnName="ID_PROCESO" />
+          <ScalarProperty Name="ID_ESTADO_PRO" ColumnName="ID_ESTADO_PRO" />
+          <ScalarProperty Name="ID_EMPRESA_PRO" ColumnName="ID_EMPRESA_PRO" />
+          <ScalarProperty Name="NOMBRE_PROCESO" ColumnName="NOMBRE_PROCESO" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROL">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.ROL">
+        <MappingFragment StoreEntitySet="ROL">
+          <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+          <ScalarProperty Name="ID_EMPRESA_ROL" ColumnName="ID_EMPRESA_ROL" />
+          <ScalarProperty Name="NOMBRE_ROL" ColumnName="NOMBRE_ROL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAREA">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.TAREA">
+        <MappingFragment StoreEntitySet="TAREA">
+          <ScalarProperty Name="ID_TAREA" ColumnName="ID_TAREA" />
+          <ScalarProperty Name="ID_UNIDAD_TAREA" ColumnName="ID_UNIDAD_TAREA" />
+          <ScalarProperty Name="ID_ESTADO_TAREA" ColumnName="ID_ESTADO_TAREA" />
+          <ScalarProperty Name="ID_EMPRESA_TAREA" ColumnName="ID_EMPRESA_TAREA" />
+          <ScalarProperty Name="NOMBRE_TAREA" ColumnName="NOMBRE_TAREA" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UNIDAD">
+      <EntityTypeMapping TypeName="ControlDeTareasModel.UNIDAD">
+        <MappingFragment StoreEntitySet="UNIDAD">
+          <ScalarProperty Name="ID_UNIDAD" ColumnName="ID_UNIDAD" />
+          <ScalarProperty Name="ID_PROCESO_UNI" ColumnName="ID_PROCESO_UNI" />
+          <ScalarProperty Name="ID_ESTADO_UNI" ColumnName="ID_ESTADO_UNI" />
+          <ScalarProperty Name="ID_EMPRESA_UNI" ColumnName="ID_EMPRESA_UNI" />
+          <ScalarProperty Name="NOMBRE_UNIDAD" ColumnName="NOMBRE_UNIDAD" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

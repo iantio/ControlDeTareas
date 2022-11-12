@@ -1,0 +1,83 @@
+﻿@using ControlDeTareasWeb.Negocio;
+
+
+@{
+    ViewBag.Title = "AdministracionProcesos";
+    Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Control de Tareas WEB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/EstiloControlTareas.css" />
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col rounded m-2 p-2 text-white d-none d-sm-block">
+                <label class="align-content-center text-light m-2 p-2">Administracion de Procesos</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row d-none d-sm-block">
+
+            @{ List<Proceso> procesos = (List<Proceso>)ViewBag.procesos; }
+
+            <table class="table table-striped bg-light rounded">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Proceso</th>
+                        <th scope="col">Nombre Proceso</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Termino</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var proceso in procesos)
+                    {
+                        <tr>
+                            <td>@proceso.id_proceso</td>
+                            <td>@proceso.nombre_proceso</td>
+                            <td>@proceso.estado.nombre_estado</td>
+                            <td>@proceso.fecha_inicio</td>
+                            <td>@proceso.fecha_termino</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- COMENTARIO PARA QUE PONGA PANTALLA EN MODO PORTADA PARA VER DE MANERA CORRECTA LA TABLA-->
+        <div class="bg-danger rounded d-sm-none m-2 p-2 text-light">¡Este dispositivo es muy pequeño para ver de manera correcta los elementos! Ponga el dispositivo de manera horizontal para ver los elementos de manera correcta y poder interactuar con ellos.</div>
+        <a class="btn btn-outline-success btn-sm m-1 text-nowrap w-100 d-sm-none" href="/Empresa/" role="button">Volver al menu!</a>
+
+
+        <div class="row bg-light rounded d-none d-sm-block">
+            <div class="col m-2 p-2 text-white text-nowrap rounded">
+                <a type="button" class="btn btn-success" href="/Empresa/CreateProceso">Crear Proceso</a>
+                <button type="button" class="btn btn-success">Editar Proceso</button>
+                <button type="button" class="btn btn-info">Info?</button>
+                <button type="button" class="btn btn-danger float-end">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+

@@ -43,11 +43,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>packages\Oracle.ManagedDataAccess.19.9.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -92,7 +98,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\EstiloControlTareas.css" />
+    <Content Include="Content\SideBarStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -112,6 +119,18 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\Home\InicioSesion.cshtml" />
+    <Content Include="Views\Home\OlvContrasena.cshtml" />
+    <Content Include="Views\Home\Registrarse.cshtml" />
+    <Content Include="Views\Empresa\AdministracionUsuarios.cshtml" />
+    <Content Include="Views\Empresa\AdministracionUnidades.cshtml" />
+    <Content Include="Views\Empresa\AdministracionProcesos.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\UserDashBoard.cshtml" />
+    <Content Include="Views\Shared\_EmpresaLayout.cshtml" />
+    <Content Include="Views\Empresa\CreateProceso.cshtml" />
+    <Content Include="Views\Empresa\CreateEmpleado.cshtml" />
+    <Content Include="Views\Empresa\CreateUnidad.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,12 +141,27 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Acceso\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Empleado\" />
+    <Folder Include="Views\Estado\" />
+    <Folder Include="Views\Proceso\" />
+    <Folder Include="Views\Rol\" />
+    <Folder Include="Views\Tarea\" />
+    <Folder Include="Views\Unidad\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlDeTareasWeb.DAL\ControlDeTareasWeb.DAL.csproj">
+      <Project>{0A37DA5E-F06C-4B04-B8F8-CE4E3DC27DC4}</Project>
+      <Name>ControlDeTareasWeb.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlDeTareasWeb.Negocio\ControlDeTareasWeb.Negocio.csproj">
       <Project>{67e92630-9196-4ae3-a833-8faaca71cd4a}</Project>
       <Name>ControlDeTareasWeb.Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

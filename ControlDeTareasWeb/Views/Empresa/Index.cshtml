@@ -1,22 +1,17 @@
 ﻿@using ControlDeTareasWeb.Negocio;
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Listado</h2>
-
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EmpresaLayout.cshtml"; }
 @{List<Empresa> empresas = (List<Empresa>)ViewBag.empresas;}
 
-<table>
-    <tr>
-        <th>id</th>
-        <th>Nombre</th>
-    </tr>
-    @foreach(var empresa in empresas) 
-    {
-        <tr>
-            <td>@empresa.id_empresa</td>
-            <td>@empresa.nombre_empresa</td>
-        </tr>
+<fieldset>
+    <legend> User DashBoard </legend>
+
+    @if (Session["UserName"] != null)
+    {<text>
+            Welcome @Session["UserName"].ToString()
+    </text>
     }
-</table>
+</fieldset>
+
+
+

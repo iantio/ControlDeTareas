@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Registrarse";
+}
+
+<div class="container m-2">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col bg-light rounded">
+            <form>
+
+                <div class="form-group m-1">
+                    <label for="txtEmpresa">Empresa</label>
+                    <input type="text" class="form-control m-1" id="txtEmpresa" aria-describedby="empresaHelp" placeholder="Ingresa tu Empresa...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtNombre">Nombre</label>
+                    <input type="text" class="form-control m-1" id="txtNombre" aria-describedby="empresaHelp" placeholder="Nombre/s...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtApellido">Apellido</label>
+                    <input type="text" class="form-control m-1" id="txtApellido" aria-describedby="empresaHelp" placeholder="Apellido/s...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtApellido">Numero</label>
+                    <div class="input-group mb-3 m-1">
+                        <select class="form-select">
+                            <option selected>+ . . .</option>
+                            <option value="1">+56</option>
+                            <option value="2">+345</option>
+                            <option value="3">+23</option>
+                        </select>
+                        <input type="text" class="form-control w-75" id="txtNumero">
+                    </div>
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtEmpresa">Direccion</label>
+                    <input type="text" class="form-control m-1" id="txtDireccion" placeholder="Direccion...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtEmpresa">Cuidad</label>
+                    <input type="text" class="form-control m-1" id="txtCiudad" aria-describedby="empresaHelp" placeholder="Ciudad...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtCorreo">Correo</label>
+                    <input type="email" class="form-control m-1" id="txtCorreo" placeholder="Ingresa tu Correo...">
+
+                    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con nadie mas.</small>
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtPassword">Contraseña</label>
+                    <input type="password" class="form-control input-group-lg m-1" id="txtPassword" placeholder="Ingresa tu Contraseña...">
+                </div>
+
+                <div class="form-group m-1">
+                    <label for="txtPasswordAgain">Repite Contraseña</label>
+                    <input type="password" class="form-control input-group-lg m-1" id="txtPasswordAgain" placeholder="Ingresa tu Contraseña...">
+                </div>
+
+                <div class="row form-group m-1">
+                    <div class="col m-1 p-0">
+                        <button type="submit" class="btn btn-primary m-2 w-100" id="btnRegistrarse">Registrarse</button>
+                    </div>
+                    <div class="col m-1 p-0">
+                        <a class="btn btn-primary m-2 w-100" href="/Home/OlvContrasena" role="button">Olvide Contraseña</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>
+
