@@ -119,6 +119,7 @@ insert into EMPRESA VALUES(2,'inacap');
 insert into ROL VALUES(1,1,'ADMINISTRADOR');
 insert into ROL VALUES(2,1,'FUNCIONARIO');
 insert into ROL VALUES(3,2,'ADMINISTRADOR');
+insert into ROL VALUES(4,1,'DISENADOR');
 
 insert into EMPLEADO VALUES(205533990,1,1,SYSDATE,'ISAIAS ANTIO','is.antio','1234');
 insert into EMPLEADO VALUES(205533991,1,2,SYSDATE,'DIEGO FLORES','die.flores','1234');
