@@ -40,20 +40,26 @@
                 <thead>
                     <tr>
                         <th scope="col">RUT</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha Ingreso</th>
+                        <th scope="col">Empresa</th>
                         <th scope="col">Rol</th>
+                        <th scope="col">Fecha Ingreso</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Clave</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var empleado in empleados)
                     {
-                        <tr>
-                            <td>@empleado.id_rut</td>
-                            <td>@empleado.usuario</td>
-                            <td>@empleado.fecha_ingreso</td>
-                            <td>@empleado.rol.nombre_rol</td>
-                        </tr>
+                    <tr>
+                        <td>@empleado.id_rut</td>
+                        <td>@empleado.empresa.nombre_empresa</td>
+                        <td>@empleado.rol.nombre_rol</td>
+                        <td>@empleado.fecha_ingreso</td>
+                        <td>@empleado.nombre_emp</td>
+                        <td>@empleado.usuario</td>
+                        <td>@empleado.clave</td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -68,6 +74,8 @@
                 <a type="button" class="btn btn-success" href="/Empresa/CreateEmpleado">Crear Usuario</a>
                 <button type="button" class="btn btn-success">Editar Usuario</button>
                 <button type="button" class="btn btn-info">Info?</button>
+                <label>@TempData["mensaje"]</label>
+
                 <button type="button" class="btn btn-danger float-end">Eliminar</button>
             </div>
         </div>

@@ -39,8 +39,9 @@
                     <tr>
                         <th scope="col">ID Unidad</th>
                         <th scope="col">Nombre Unidad</th>
-                        <th scope="col">Nombre Proceso</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col">Proceso Unidad</th>
+                        <th scope="col">Estado Unidad</th>
+                        <th scope="col">Empresa Unidad</th>
                         <th scope="col">Fecha Inicio</th>
                         <th scope="col">Fecha Termino</th>
                     </tr>
@@ -50,10 +51,11 @@
                     @foreach(var unidad in unidades)
                     {
                     <tr>
-                        <th scope="row">@unidad.id_unidad</th>
+                        <td>@unidad.id_unidad</td>
                         <td>@unidad.nombre_unidad</td>
                         <td>@unidad.proceso.nombre_proceso</td>
                         <td>@unidad.estado.nombre_estado</td>
+                        <td>@unidad.empresa.nombre_empresa</td>
                         <td>@unidad.fecha_inicio</td>
                         <td>@unidad.fecha_termino</td>
                     </tr>
@@ -73,6 +75,7 @@
                 <button type="button" class="btn btn-success">Editar Unidad</button>
                 <button type="button" class="btn btn-info">Info?</button>
                 <button type="button" class="btn btn-danger float-end">Eliminar</button>
+                <label>@TempData["mensaje"]</label>
             </div>
         </div>
     </div>

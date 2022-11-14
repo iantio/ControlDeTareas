@@ -12,49 +12,36 @@
     <div>
         <div id="contenedor">
             <div class="column">
-                @Html.LabelFor(p => p.id_rut)
-                
+                @Html.LabelFor(p => p.id_rut, "RUT")
                 <br />
-                @Html.LabelFor(p => p.id_empresa_emp)
-                
+                @Html.LabelFor(p => p.id_empresa_emp, "Empresa")
                 <br />
-                @Html.LabelFor(p => p.id_rol_emp)
-                
+                @Html.LabelFor(p => p.id_rol_emp, "Rol")
                 <br />
-                @Html.LabelFor(p => p.fecha_ingreso)
-                
+                @Html.LabelFor(p => p.fecha_ingreso, "Fecha Ingreso")
                 <br />
-                @Html.LabelFor(p => p.usuario)
-                
+                @Html.LabelFor(p => p.nombre_emp, "Nombre Empleado")
                 <br />
-                @Html.LabelFor(p => p.clave)
-               
+                @Html.LabelFor(p => p.usuario, "Usuario")
                 <br />
-                @Html.LabelFor(p => p.empresa)
-                
-                <br />
-                @Html.LabelFor(p => p.rol)
-               
+                @Html.LabelFor(p => p.clave, "Clave")
                 <br />
             </div>
             <div class="column">
                 @Html.TextBoxFor(p => p.id_rut)
                 <br />
-                @Html.TextBoxFor(p => p.id_empresa_emp)
+                @Html.DropDownListFor(p => p.id_empresa_emp, new SelectList(ViewBag.empresa, "id_empresa", "nombre_empresa"))
                 <br />
-                @Html.TextBoxFor(p => p.id_rol_emp)
+                @Html.DropDownListFor(p => p.id_rol_emp, new SelectList(ViewBag.rol, "id_rol", "nombre_rol"))
                 <br />
                 @Html.TextBoxFor(p => p.fecha_ingreso)
+                <br />
+                @Html.TextBoxFor(p => p.nombre_emp)
                 <br />
                 @Html.TextBoxFor(p => p.usuario)
                 <br />
                 @Html.TextBoxFor(p => p.clave)
                 <br />
-                @Html.TextBoxFor(p => p.empresa)
-                <br />
-                @Html.TextBoxFor(p => p.rol)
-                <br />
-
                 <button>Guardar</button>
             </div>
         </div>

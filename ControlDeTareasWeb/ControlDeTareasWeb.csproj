@@ -143,12 +143,6 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Acceso\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Empleado\" />
-    <Folder Include="Views\Estado\" />
-    <Folder Include="Views\Proceso\" />
-    <Folder Include="Views\Rol\" />
-    <Folder Include="Views\Tarea\" />
-    <Folder Include="Views\Unidad\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControlDeTareasWeb.DAL\ControlDeTareasWeb.DAL.csproj">

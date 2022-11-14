@@ -56,26 +56,20 @@ namespace ControlDeTareasWeb.Controllers
         {
             EnviarEstado();
             EnviarCategorias();
+            EnviarEmpresa();
             return View();
         }
 
-        private void EnviarCategorias()
-        {
-            ViewBag.procesos = new Proceso().ReadAll();
-        }
-        private void EnviarEstado()
-        {
-            ViewBag.estado = new Negocio.Estado().ReadAll();
-        }
 
         [HttpPost]
-        public ActionResult CreateUnidad([Bind(Include = "id_unidad ,id_proceso_uni ,id_estado_uni,id_empresa_uni,nombre_unidad,fecha_inicio,clave,fecha_termino,proceso,estado,empresa")] Empleado empleado)
+        public ActionResult CreateUnidad([Bind(Include = "id_unidad, nombre_unidad, id_proceso_uni, id_estado_uni, ID_EMPRESA_UNI, fecha_inicio, fecha_termino")] Unidad unidad)
         {
             try
             {
                 // TODO: Add insert logic here
-                empleado.Create();
+                unidad.Create();
                 TempData["mensaje"] = "Guardado correctamente";
+                
                 return RedirectToAction("AdministracionUnidades", "Empresa");
             }
             catch
@@ -94,11 +88,13 @@ namespace ControlDeTareasWeb.Controllers
 
         public ActionResult CreateEmpleado()
         {
+            EnviarEmpresa();
+            EnviarRol();
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateEmpleado([Bind(Include = "id_rut ,id_empresa_emp,id_rol_emp,fecha_ingreso,nombre_emp,usuario,clave,empresa,rol")] Empleado empleado)
+        public ActionResult CreateEmpleado([Bind(Include = "ID_RUT ,ID_EMPRESA_EMP, ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE,")] Empleado empleado)
         {
             try
             {
@@ -124,11 +120,13 @@ namespace ControlDeTareasWeb.Controllers
 
         public ActionResult CreateProceso()
         {
+            EnviarEstado();
+            EnviarEmpresa();
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateProceso([Bind(Include = "id_proceso,id_estado_pro,id_empresa_pro,nombre_proceso,fecha_inicio,fecha_termino")]Proceso proceso)
+        public ActionResult CreateProceso([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, ID_EMPRESA_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")]Proceso proceso)
         {
             try
             {
@@ -142,7 +140,55 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
+
+        // GET: Empresa/Delete/5
+        public ActionResult DeleteProceso(int id)
+        {
+
+            if (new Proceso().Delete(id))
+            {
+                TempData["mensaje"] = "Eliminado Correctamente";
+                return RedirectToAction("AdministracionProcesos");
+            }
+
+            TempData["mensaje"] = "Una unidad esta utilizando este proceso!";
+            return RedirectToAction("AdministracionProcesos");
+        }
         // FIN CRUD
+
+        private void EnviarCategorias()
+        {
+            ViewBag.procesos = new Proceso().ReadAll();
+        }
+        private void EnviarEstado()
+        {
+            ViewBag.estado = new Negocio.Estado().ReadAll();
+        }
+
+        private void EnviarEmpresa()
+        {
+            ViewBag.empresa = new Negocio.Empresa().ReadAll();
+        }
+
+        private void EnviarRol()
+        {
+            ViewBag.rol = new Negocio.Rol().ReadAll();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // GET: Empresa/Details/5
@@ -179,11 +225,7 @@ namespace ControlDeTareasWeb.Controllers
             }
         }
 
-        // GET: Empresa/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        
 
         // POST: Empresa/Delete/5
         [HttpPost]

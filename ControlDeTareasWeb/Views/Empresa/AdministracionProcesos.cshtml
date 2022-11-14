@@ -44,19 +44,21 @@
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha Inicio</th>
                         <th scope="col">Fecha Termino</th>
+                        <th scope="col">Eliminar?</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach (var proceso in procesos)
                     {
-                        <tr>
-                            <td>@proceso.id_proceso</td>
-                            <td>@proceso.nombre_proceso</td>
-                            <td>@proceso.estado.nombre_estado</td>
-                            <td>@proceso.fecha_inicio</td>
-                            <td>@proceso.fecha_termino</td>
-                        </tr>
+                    <tr>
+                        <td>@proceso.id_proceso</td>
+                        <td>@proceso.nombre_proceso</td>
+                        <td>@proceso.estado.nombre_estado</td>
+                        <td>@proceso.fecha_inicio</td>
+                        <td>@proceso.fecha_termino</td>
+                        <td>@Html.ActionLink("Eliminar", "DeleteProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-danger w-100"})</td>
+                    </tr>
                     }
 
                 </tbody>
@@ -73,7 +75,9 @@
                 <a type="button" class="btn btn-success" href="/Empresa/CreateProceso">Crear Proceso</a>
                 <button type="button" class="btn btn-success">Editar Proceso</button>
                 <button type="button" class="btn btn-info">Info?</button>
-                <button type="button" class="btn btn-danger float-end">Eliminar</button>
+                <label>@TempData["mensaje"]</label>
+
+
             </div>
         </div>
     </div>

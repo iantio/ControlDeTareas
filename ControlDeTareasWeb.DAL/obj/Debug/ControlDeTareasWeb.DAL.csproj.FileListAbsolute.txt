@@ -17,3 +17,13 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTarea
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.CopyComplete
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.dll
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.dll.config
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.dll
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\bin\Debug\ControlDeTareasWeb.DAL.pdb
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\bin\Debug\EntityFramework.dll
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\bin\Debug\EntityFramework.xml
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.AssemblyReference.cache
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.CoreCompileInputs.cache
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.csproj.CopyComplete
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.dll
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasWeb.DAL\obj\Debug\ControlDeTareasWeb.DAL.pdb

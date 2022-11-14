@@ -5,27 +5,42 @@
     Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
 }
 
-<h2>CreateUnidad</h2>
+<h2>Crear Unidad</h2>
 
 @using (Html.BeginForm())
 {
-
-    @Html.LabelFor(p => p.nombre_unidad)
-    @Html.TextBoxFor(p => p.nombre_unidad)
-    <br />
-    @Html.LabelFor(p => p.proceso)
-    @Html.DropDownListFor(p => p.proceso, new SelectList(ViewBag.procesos, "id_proceso", "nombre_proceso"))
-    <br />
-    @Html.LabelFor(p => p.estado)
-    @Html.DropDownListFor(p => p.estado, new SelectList(ViewBag.estado,"id_estado","nombre_estado"))
-    <br />
-    @Html.LabelFor(p => p.fecha_inicio)
-    @Html.TextBoxFor(p => p.fecha_inicio)
-    <br />
-    @Html.LabelFor(p => p.fecha_termino)
-    @Html.TextBoxFor(p => p.fecha_termino)
-    <br />
-
-    <button>Guardar</button>
+<div id="contenedor">
+    <div class="column">
+        @Html.LabelFor(p => p.id_unidad, "ID Unidad")
+        <br />
+        @Html.LabelFor(p => p.nombre_unidad, "Nombre Unidad")
+        <br />
+        @Html.LabelFor(p => p.proceso, "Proceso")
+        <br />
+        @Html.LabelFor(p => p.estado, "Estado")
+        <br />
+        @Html.LabelFor(p => p.estado, "Empresa")
+        <br />
+        @Html.LabelFor(p => p.fecha_inicio, "Fecha Inicio")
+        <br />
+        @Html.LabelFor(p => p.fecha_termino, "Fecha Termino")
+    </div>
+    <div class="column">
+        @Html.TextBoxFor(p => p.id_unidad)
+        <br />
+        @Html.TextBoxFor(p => p.nombre_unidad)
+        <br />
+        @Html.DropDownListFor(p => p.id_proceso_uni, new SelectList(ViewBag.procesos, "id_proceso", "nombre_proceso"))
+        <br />
+        @Html.DropDownListFor(p => p.id_estado_uni, new SelectList(ViewBag.estado, "id_estado", "nombre_estado"))
+        <br />
+        @Html.DropDownListFor(p => p.id_empresa_uni, new SelectList(ViewBag.empresa, "id_empresa", "nombre_empresa"))
+        <br />
+        @Html.TextBoxFor(p => p.fecha_inicio)
+        <br />
+        @Html.TextBoxFor(p => p.fecha_termino)
+        <br />
+        <button>Guardar</button>
+    </div>
+</div>
 }
-@TempData["mensaje"]
