@@ -42,7 +42,7 @@ namespace ControlDeTareasWeb.Controllers
             }
         }
 
-        // ADMINISTRACION UNIDADES CRUD
+        ////// ADMINISTRACION UNIDADES CRUD //////
         public ActionResult AdministracionUnidades()
         {
             ViewBag.unidad = new Negocio.Unidad().ReadAll();
@@ -77,9 +77,9 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
-        //FIN CRUD
+        ////// FIN CRUD //////
 
-        // ADMINISTRACION USUARIOS CRUD
+        ////// ADMINISTRACION USUARIOS CRUD //////
         public ActionResult AdministracionUsuarios()
         {
             ViewBag.empleados = new Negocio.Empleado().ReadAll();
@@ -108,10 +108,23 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
-        //FIN CRUD
+
+        public ActionResult DeleteEmpleado(int id)
+        {
+
+            if (new Empleado().Delete(id))
+            {
+                TempData["mensaje"] = "Eliminado Correctamente";
+                return RedirectToAction("AdministracionUsuarios");
+            }
+
+            TempData["mensaje"] = "No se a podido eliminar Empleado";
+            return RedirectToAction("AdministracionProcesos");
+        }
+        ////// FIN CRUD //////
 
 
-        // ADMINISTRACION PROCESOS CRUD
+        ////// ADMINISTRACION PROCESOS CRUD //////
         public ActionResult AdministracionProcesos()
         {
             ViewBag.procesos = new Negocio.Proceso().ReadAll();
@@ -141,7 +154,6 @@ namespace ControlDeTareasWeb.Controllers
             }
         }
 
-        // GET: Empresa/Delete/5
         public ActionResult DeleteProceso(int id)
         {
 
@@ -154,8 +166,9 @@ namespace ControlDeTareasWeb.Controllers
             TempData["mensaje"] = "Una unidad esta utilizando este proceso!";
             return RedirectToAction("AdministracionProcesos");
         }
-        // FIN CRUD
+        ////// FIN CRUD //////
 
+        ////// VARIABLES GLOGABLES //////
         private void EnviarCategorias()
         {
             ViewBag.procesos = new Proceso().ReadAll();
@@ -175,7 +188,7 @@ namespace ControlDeTareasWeb.Controllers
             ViewBag.rol = new Negocio.Rol().ReadAll();
         }
 
-
+        ////// //////
 
 
 

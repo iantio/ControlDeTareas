@@ -46,6 +46,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Clave</th>
+                        <th scope="col">Eliminar?</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,7 @@
                         <td>@empleado.nombre_emp</td>
                         <td>@empleado.usuario</td>
                         <td>@empleado.clave</td>
+                        <td>@Html.ActionLink("Eliminar", "DeleteEmpleado", new { id = empleado.id_rut }, new { @class = "btn btn-danger w-100" })</td>
                     </tr>
                     }
                 </tbody>
