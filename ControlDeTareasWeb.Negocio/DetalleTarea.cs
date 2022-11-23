@@ -80,6 +80,7 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        //FILTROS
         public List<DetalleTarea> FindByEmpleado(decimal id_rut)
         {
             List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
@@ -112,6 +113,46 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea(id_tarea);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
+        }
+        public Boolean FindByEmpleadoTarea(decimal id_rut, decimal id_tarea)
+        {
+            try
+            {
+                var dbDetalle = db.DETALLE_TAREA.First(x => x.ID_TAREA_DETALLE == id_tarea && x.ID_RUT_DETALLE == id_rut);
+
+                id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                empleado = new Empleado();
+                empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                tarea = new Tarea();
+                tarea.LoadTarea(id_tarea);
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al cargar detalle");
+                return false;
+            }
+        }
+        public List<DetalleTarea> FindByEmpresa(decimal id_empresa)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.EMPLEADO.ID_EMPRESA_EMP == id_empresa);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;

@@ -99,3 +99,7 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTest.b
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinLista.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinLista.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlListarFlujo.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlListarFlujo.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearFlujo.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearFlujo.baml

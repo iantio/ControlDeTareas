@@ -32,6 +32,8 @@ namespace ControlDeTareasDesk
             Estado estado = new Estado();
             cmbProceso.ItemsSource = proceso.Read(empleadoAux.id_empresa_emp);
             cmbEstado.ItemsSource = estado.ReadAll();
+            dtpFechaInicio.SelectedDate = System.DateTime.Now;
+            dtpFechaTermino.SelectedDate = System.DateTime.Now;
             if (editar)
             {
                 this.tareaTemp = tareaTemp;

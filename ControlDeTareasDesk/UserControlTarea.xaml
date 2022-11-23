@@ -43,7 +43,7 @@
                 </TextBlock.Style>
             </TextBlock>
             <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnBuscar_Click"/>
-            <DataGrid x:Name="dgTareas" HorizontalAlignment="Stretch" VerticalAlignment="Top" MinHeight="340" MinWidth="500" Margin="0,6,0,0" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid x:Name="dgTareas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,6,0,0" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding id_tarea}" ClipboardContentBinding="{x:Null}" Header="Id Tarea"/>
                     <DataGridTextColumn Binding="{Binding nombre_tarea}" ClipboardContentBinding="{x:Null}" Header="Nombre Tarea"/>

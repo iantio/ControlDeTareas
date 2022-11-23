@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="ControlDeTareasDesk.UserControlListarFlujo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ControlDeTareasDesk"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Margin="5" Grid.Column="0" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
+        <Border Margin="5" Grid.Column="1" Background="Green" VerticalAlignment="Stretch" CornerRadius="12">
+            <Label x:Name="lblTitle" Content="Control de fujos" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
+        </Border>
+        <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="4,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32*"/>
+                <RowDefinition Height="341*"/>
+                <RowDefinition Height="36*"/>
+            </Grid.RowDefinitions>
+            <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch" MinHeight="340" Grid.Row="1">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                        <Setter Property="IsExpanded" Value="False"></Setter>
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type local:TreeViewItemMenu}" ItemsSource="{Binding Items}" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
+                            <TextBlock HorizontalAlignment="Stretch" Text="{Binding Titulo}"/>
+                            <ProgressBar HorizontalAlignment="Right" Height="10" Width="100" Margin="50,0,0,0" Minimum="0" Maximum="1" Value="{Binding Porcentaje}" materialDesign:TransitionAssist.DisableTransitions="True"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,5,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
+                <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
+            </Button>
+            <Button x:Name="btnEliminar" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Eliminar" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminar_Click"/>
+            <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="btnEditar_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

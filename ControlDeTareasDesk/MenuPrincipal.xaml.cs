@@ -42,6 +42,8 @@ namespace ControlDeTareasDesk
 
             var menuDiseño = new List<SubItem>();
             menuDiseño.Add(new SubItem("Diseñar flujo", new UserControlCrearFlujo(empleadoAux)));
+            menuDiseño.Add(new SubItem("Control de fujos", new UserControlListarFlujo(empleadoAux)));
+
             var item2 = new ItemMenu("Diseño", menuDiseño, PackIconKind.DeveloperBoard);
 
             var item = new ItemMenu("Dashboad", new UserControlInicio(empleadoAux), PackIconKind.ViewDashboard);
