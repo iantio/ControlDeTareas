@@ -15,7 +15,7 @@ namespace ControlDeTareasWeb.Controllers
     public class HomeController : Controller
     {        
         Empleado sesion { get; set; }
-        // GET: Home
+        ////// GET: Home //////
         public ActionResult Index()
         {
             return View();

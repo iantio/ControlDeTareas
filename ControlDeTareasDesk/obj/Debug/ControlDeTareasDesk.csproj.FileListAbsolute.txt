@@ -99,3 +99,25 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTest.b
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinLista.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinLista.baml
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.csproj.AssemblyReference.cache
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\MainWindow.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\MenuPrincipal.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlCrearFlujo.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlInicio.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlMenuItem.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlProcesos.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTarea.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlTest.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlUnidad.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlUsuarios.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearProceso.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearTarea.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUnidad.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearUsuario.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinLista.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\App.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk_MarkupCompile.cache
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk_MarkupCompile.lref
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.exe
+C:\Users\ElTioBoB - Dasp\Documents\ControlDeTareas\ControlDeTareasDesk\obj\Debug\ControlDeTareasDesk.pdb

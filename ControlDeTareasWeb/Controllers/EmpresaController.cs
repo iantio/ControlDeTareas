@@ -15,6 +15,7 @@ namespace ControlDeTareasWeb.Controllers
         {
             if (Session["UserID"] != null)
             {
+               
                 return View();
             }
             else
@@ -127,6 +128,7 @@ namespace ControlDeTareasWeb.Controllers
         ////// ADMINISTRACION PROCESOS CRUD //////
         public ActionResult AdministracionProcesos()
         {
+            Console.WriteLine(User.Identity.Name);
             ViewBag.procesos = new Negocio.Proceso().ReadAll();
             return View();
         }
@@ -186,6 +188,11 @@ namespace ControlDeTareasWeb.Controllers
         private void EnviarRol()
         {
             ViewBag.rol = new Negocio.Rol().ReadAll();
+        }
+
+        private void EnviarEmpleado()
+        {
+            ViewBag.procesos = new Empleado().ReadAll();
         }
 
         ////// //////
