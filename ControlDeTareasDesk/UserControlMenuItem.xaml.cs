@@ -30,7 +30,6 @@ namespace ControlDeTareasDesk
 
             ExpanderMenu.Visibility = itemMenu.SubItems == null ? Visibility.Collapsed : Visibility.Visible;
             ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
-
             this.DataContext = itemMenu;
         }
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e) 

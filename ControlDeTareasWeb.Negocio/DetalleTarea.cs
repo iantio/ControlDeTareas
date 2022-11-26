@@ -30,6 +30,7 @@ namespace ControlDeTareasWeb.Negocio
                 db.DETALLE_TAREA.Add(dbDetalleTarea);
                 db.SaveChanges();
 
+                this.id_detalle = dbDetalleTarea.ID_DETALLE;
                 return true;
             }
             catch
@@ -156,6 +157,46 @@ namespace ControlDeTareasWeb.Negocio
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
+        }
+        public List<DetalleTarea> FindByProceso(decimal id_Proceso)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.TAREA.UNIDAD.PROCESO.ID_PROCESO == id_Proceso);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
+        }
+        public Boolean LoadDetalle(decimal id_detalle)
+        {
+            try
+            {
+                var dbDetalle = db.DETALLE_TAREA.First(x => x.ID_DETALLE == id_detalle);
+
+                this.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                empleado = new Empleado();
+                empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                tarea = new Tarea();
+                tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al cargar detalle");
+                return false;
+            }
         }
     }
 }

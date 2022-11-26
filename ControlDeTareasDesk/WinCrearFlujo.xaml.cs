@@ -24,8 +24,11 @@ namespace ControlDeTareasDesk
         List<Empleado> listEmpleado = new List<Empleado>();
 
         TreeViewItemMenu itemProceso { get; set; }
+        TreeViewItemMenu itemProcesoGuardado { get; set; }
         TreeViewItemMenu itemUnidad { get; set; } = new TreeViewItemMenu();
+        TreeViewItemMenu itemUnidadGuardada { get; set; } = new TreeViewItemMenu();
         TreeViewItemMenu itemTarea { get; set; }
+        TreeViewItemMenu itemTareaGuardada { get; set; }
         public WinCrearFlujo(Empleado empleadoAux, TreeViewItemMenu itemEditable, Boolean editar)
         {
             this.editar = editar;
@@ -67,13 +70,12 @@ namespace ControlDeTareasDesk
                 itemProceso.Items.Add(itemUnidad);
             }
             tvwFlujo.Items.Add(itemProceso);
+            //tvwFlujoGuardado.Items.Add(itemEditable);
             if (editar)
             {
-                foreach(TreeViewItemMenu unidadEncontrada in itemEditable.Items)
-                {
-                    tvwFlujo.Items.Add(unidadEncontrada);
-                }
+                itemProcesoGuardado = itemEditable;
             }
+            tvwFlujoGuardado.Items.Add(itemProcesoGuardado);
         }
 
         private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -177,20 +179,29 @@ namespace ControlDeTareasDesk
             {
                 foreach (Tarea t in lstTareas.Items)
                 {
-                    itemTarea = new TreeViewItemMenu() { Titulo = t.nombre_tarea, tarea = t };
-                    
-                    if (itemUnidad.Items.Find(x => x.Titulo.Equals(itemTarea.Titulo)) != null)
+                    if (itemUnidad.Items.Find(x => x.Titulo.Equals(t.nombre_tarea)) != null)
                     {
-                        MessageBox.Show("Tarea ya existe");
+                        if (MessageBox.Show("La tarea "+t.nombre_tarea+" ya existe en el flujo, ¿desea actualizarla?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            (itemUnidad.Items.Find(x => x.Titulo.Equals(t.nombre_tarea))).Items.Clear();
+                            foreach (Empleado emp in lstUsuarios.Items)
+                            {
+                                TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = emp.nombre_emp, empleado = emp };
+                                (itemUnidad.Items.Find(x => x.Titulo.Equals(t.nombre_tarea))).Items.Add(itemEmpleado);
+                            };
+                        }
+                        tvwFlujo.Items.Refresh();
                     }
                     else
                     {
+                        TreeViewItemMenu itemTareaTemp = new TreeViewItemMenu() { Titulo = t.nombre_tarea, tarea = t };
                         foreach (Empleado emp in lstUsuarios.Items)
                         {
-                            TreeViewItemMenu itemUsuario = new TreeViewItemMenu() { Titulo = emp.nombre_emp, empleado = emp };
-                            itemTarea.Items.Add(itemUsuario);
+                            TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = emp.nombre_emp, empleado = emp };
+                            itemTareaTemp.Items.Add(itemEmpleado);
                         };
-                        itemUnidad.Items.Add(itemTarea);
+                        itemTarea = itemTareaTemp;
+                        itemUnidad.Items.Add(itemTareaTemp);
                         tvwFlujo.Items.Refresh();
                     }
                 };
@@ -203,9 +214,15 @@ namespace ControlDeTareasDesk
             {
                 if (itemUnidad.Items != null && itemUnidad.Items.Count != 0)
                 {
-                    if (itemProceso.Items.Find(x => x.Titulo.Equals(itemUnidad.Titulo)) != null)
+                    if (itemProcesoGuardado.Items.Find(x => x.Titulo.Equals(itemUnidad.Titulo)) != null)
                     {
-                        MessageBox.Show("Unidad ya existe");
+                        TreeViewItemMenu unidadEncontrada = itemProcesoGuardado.Items.Find(x => x.Titulo.Equals(itemUnidad.Titulo));
+                        if (MessageBox.Show("La Unidad " + unidadEncontrada.Titulo.ToUpper() + " ya existe en el flujo, ¿desea actualizar los cambios?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            itemProcesoGuardado.Items.Remove(unidadEncontrada);
+                            btnGuardarUnidad_Click(null,null);
+                        }
+                        tvwFlujoGuardado.Items.Refresh();
                     }
                     else
                     {
@@ -223,8 +240,9 @@ namespace ControlDeTareasDesk
                                 itemUnidadTemp.Items.Add(itemTareaTemp);
                             }
                         }
-                        itemProceso.Items.Add(itemUnidadTemp);
+                        itemProcesoGuardado.Items.Add(itemUnidadTemp);
                         tvwFlujo.Items.Refresh();
+                        tvwFlujoGuardado.Items.Refresh();
                     }
                 }
                 else
@@ -237,44 +255,73 @@ namespace ControlDeTareasDesk
 
         private void btnGuardarFlujo_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 Boolean creacionExitosa = false;
-                if (itemProceso.Items.Count > 1)
+                List<decimal> listDetallesEdits = new List<decimal>();
+                List<decimal> listDetallesAntiguos = new List<decimal>();
+                 if (itemProcesoGuardado.Items.Count != 0 || itemProcesoGuardado != null)
                 {
-                    //AQUI crear iterador que salte la pimera unidad
-                    int ciclos = 0;
-                    foreach (TreeViewItemMenu unidadEncontrada in itemProceso.Items)
+                    //BUSCAR CADA UNIDAD ALMACENADA EN EL TREEVIEW tvwFlujoGuardado
+                    foreach (TreeViewItemMenu unidadEncontrada in itemProcesoGuardado.Items)
                     {
-                        if (ciclos == 0)
+                        if (unidadEncontrada.Items != null || unidadEncontrada.Items.Count != 0)
                         {
-                            ciclos += 1;
-                            Console.WriteLine(unidadEncontrada.Titulo);
-                        }
-                        else if (unidadEncontrada.Items != null || unidadEncontrada.Items.Count != 0)
-                        {
+                            //BUSCAR CADA TAREA ALAMACENADA EN LA UNIDAD
                             foreach (TreeViewItemMenu tareaEncontrada in unidadEncontrada.Items)
                             {
                                 if (tareaEncontrada.Items != null || tareaEncontrada.Items.Count != 0)
                                 {
+                                    //BUSCAR CADA EMPLEADO ALMACENADO EN LA TAREA
                                     foreach (TreeViewItemMenu empleadoEncontrado in tareaEncontrada.Items)
                                     {
-                                        DetalleTarea detalleTarea = new DetalleTarea()
+                                        //CREAR DETALLE TAREA
+                                        if (editar)
                                         {
-                                            id_detalle = 0,
-                                            id_rut_detalle = empleadoEncontrado.empleado.id_rut,
-                                            id_tarea_detalle = tareaEncontrada.tarea.id_tarea
-                                        };
-                                        if (detalleTarea.Create())
-                                        {
-                                            Console.WriteLine("Detalle creado exitosamente");
-                                            creacionExitosa = true;
+                                            DetalleTarea detalleTarea = new DetalleTarea();
+                                            //AÑADIR LOS DETALLES ANTIGUOS A UNA LISTA
+                                            if (listDetallesAntiguos.Count() == 0 || listDetallesAntiguos == null)
+                                            {
+                                                foreach (DetalleTarea detalle in detalleTarea.FindByProceso(itemProcesoGuardado.proceso.id_proceso))
+                                                {
+                                                    listDetallesAntiguos.Add(detalle.id_detalle);
+                                                }
+                                            }
+                                            //DEJAR INTACTO A LOS DETALLES QUE NO FUERON EDITADOS
+                                            if (detalleTarea.FindByEmpleadoTarea(empleadoEncontrado.empleado.id_rut, tareaEncontrada.tarea.id_tarea))
+                                            {
+                                                DetalleTarea detalleTareaTemp = new DetalleTarea();
+                                                detalleTareaTemp.FindByEmpleadoTarea(empleadoEncontrado.empleado.id_rut, tareaEncontrada.tarea.id_tarea);
+                                                listDetallesEdits.Add(detalleTareaTemp.id_detalle);
+                                            }
+                                            //AGREGAR LOS NUEVOS DETALLES
+                                            else
+                                            {
+                                                detalleTarea.id_detalle = 0;
+                                                detalleTarea.id_rut_detalle = empleadoEncontrado.empleado.id_rut;
+                                                detalleTarea.id_tarea_detalle = tareaEncontrada.tarea.id_tarea;
+                                                detalleTarea.Create();
+                                                listDetallesEdits.Add(detalleTarea.id_detalle);
+                                            }
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Error al crear detalle");
-                                            creacionExitosa = false;
+                                            DetalleTarea detalleTarea = new DetalleTarea()
+                                            {
+                                                id_detalle = 0,
+                                                id_rut_detalle = empleadoEncontrado.empleado.id_rut,
+                                                id_tarea_detalle = tareaEncontrada.tarea.id_tarea
+                                            };
+                                            if (detalleTarea.Create())
+                                            {
+                                                Console.WriteLine("Detalle creado exitosamente");
+                                                creacionExitosa = true;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Error al crear detalle");
+                                                creacionExitosa = false;
+                                            }
                                         }
                                     }
                                 }
@@ -297,45 +344,125 @@ namespace ControlDeTareasDesk
                     MessageBox.Show("Para guardar el flujo debe agregar al menos una unidad");
                     creacionExitosa = false;
                 }
-                if (creacionExitosa == true)
+                if (creacionExitosa)
                 {
                     MessageBox.Show("flujo creado de manera exitosa");
+                }
+                //ELIMINAR LOS DETALLES QUE NO ESTAN EN EL NUEVO FLUJO
+                if (editar)
+                {
+                    List<decimal> detallesDiferencia = listDetallesAntiguos.Except(listDetallesEdits).ToList();
+                    foreach (decimal detalleEcontrado in detallesDiferencia)
+                    {
+                        DetalleTarea detalleTemp = new DetalleTarea();
+                        detalleTemp.LoadDetalle(detalleEcontrado);
+                        Console.WriteLine(detalleTemp.id_detalle.ToString()+ detalleTemp.id_rut_detalle+ detalleTemp.id_tarea_detalle);
+                        detalleTemp.Delete();
+                    }
                 }
             }
             catch
             {
+                MessageBox.Show("Error al guardar el flujo");
             }
         }
 
         private void btnEliminarGrilla_Click(object sender, RoutedEventArgs e)
         {
-            if (tvwFlujo.SelectedItem == null)
+            if (tvwFlujo.SelectedItem == null && tvwFlujoGuardado.SelectedItem == null)
             {
                 MessageBox.Show("Seleccione un elemento para eliminar del flujo");
             }
-            else
+            else if (tvwFlujo.SelectedItem != null && tvwFlujoGuardado.SelectedItem != null)
+            {
+                MessageBox.Show("Solo se puede eliminar un elemento a la vez");
+            }
+            else if (tvwFlujo.SelectedItem != null)
             {
                 if (((TreeViewItemMenu)tvwFlujo.SelectedItem).proceso != null)
                 {
-                    tvwFlujo.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
-                    tvwFlujo.Items.Refresh();
+                    MessageBox.Show("No puede elimnar el proceso del flujo de edicion");
                 }
                 else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).unidad != null)
                 {
-                    itemProceso.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
-                    tvwFlujo.Items.Refresh();
+                    MessageBox.Show("No puede elimnar la unidad del flujo de edicion");
                 }
                 else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea != null)
                 {
                     itemUnidad.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
                     tvwFlujo.Items.Refresh();
                 }
-                else if (((TreeViewItemMenu)tvwFlujo.SelectedItem).empleado != null)
+                else
                 {
                     itemTarea.Items.Remove((TreeViewItemMenu)tvwFlujo.SelectedItem);
                     tvwFlujo.Items.Refresh();
                 }
             }
+            else if (tvwFlujoGuardado.SelectedItem != null)
+            {
+                if (((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).proceso != null)
+                {
+                    MessageBox.Show("No puede elimnar el proceso del flujo");
+                }
+                else if (((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).unidad != null)
+                {
+                    itemProcesoGuardado.Items.Remove((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem);
+                    tvwFlujoGuardado.Items.Refresh();
+                }
+                else if (((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).tarea != null && ((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).empleado == null)
+                {
+                    (itemProcesoGuardado.Items.Find(x => x.unidad.id_unidad == ((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).tarea.id_unidad_tarea)).Items.Remove((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem);
+                    tvwFlujoGuardado.Items.Refresh();
+                }
+                else if (((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).empleado != null)
+                {
+                    foreach (TreeViewItemMenu unidadEncontrada in itemProcesoGuardado.Items)
+                    {
+                        foreach (TreeViewItemMenu tareaEncontrada in unidadEncontrada.Items)
+                        {
+                            foreach (TreeViewItemMenu empleadoEcontrado in tareaEncontrada.Items)
+                            {
+                                if (empleadoEcontrado == (TreeViewItemMenu)tvwFlujoGuardado.SelectedItem)
+                                {
+                                    tareaEncontrada.Items.Remove(empleadoEcontrado);
+                                    tvwFlujoGuardado.Items.Refresh();
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //LIMPIAR SELECCION TREEVIEW
+        public static void ClearTreeViewSelection(TreeView tv)
+        {
+            if (tv != null)
+                ClearTreeViewItemsControlSelection(tv.Items, tv.ItemContainerGenerator);
+        }
+        private static void ClearTreeViewItemsControlSelection(ItemCollection ic, ItemContainerGenerator icg)
+        {
+            if ((ic != null) && (icg != null))
+            {
+                for (int i = 0; i < ic.Count; i++)
+                {
+                    TreeViewItem tvi = icg.ContainerFromIndex(i) as TreeViewItem;
+                    if (tvi != null)
+                    {
+                        ClearTreeViewItemsControlSelection(tvi.Items, tvi.ItemContainerGenerator);
+                        tvi.IsSelected = false;
+                    }
+                }
+            }
+        }
+        private void tvwFlujo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClearTreeViewSelection(tvwFlujoGuardado);
+        }
+
+        private void tvwFlujoGuardado_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClearTreeViewSelection(tvwFlujo);
         }
     }
 }

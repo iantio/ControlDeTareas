@@ -45,19 +45,27 @@ namespace ControlDeTareasDesk
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
-            tree.Items.Clear();
-            tree.ReadDetalle(empleadoAux);
-            tvwFlujo.Items.Clear();
-            foreach (TreeViewItemMenu unidadEncontrada in ((TreeViewItemMenu)tree.Items[1]).Items)
+            try
             {
-                tvwFlujo.Items.Add(unidadEncontrada);
+                tree.Items.Clear();
+                tree.ReadDetalle(empleadoAux);
+                tvwFlujo.Items.Clear();
+                foreach (TreeViewItemMenu unidadEncontrada in ((TreeViewItemMenu)tree.Items[1]).Items)
+                {
+                    tvwFlujo.Items.Add(unidadEncontrada);
+                }
+                lblTitle.Content = ("PROCESO: " + ((TreeViewItemMenu)tree.Items[1]).proceso.nombre_proceso + " [" + (1 + 1) + "/" + totalProcesos + "]");
+                tvwFlujo.Items.Refresh();
+                //tvwFlujo.Items.Add(tree);
+                Console.WriteLine(tree.Items.Count);
+                Console.WriteLine((TreeViewItemMenu)tree.Items[1]);
+                tvwFlujo.Items.Refresh();
             }
-            lblTitle.Content = ("PROCESO: " + ((TreeViewItemMenu)tree.Items[1]).proceso.nombre_proceso + " [" + (1 + 1) + "/" + totalProcesos + "]");
-            tvwFlujo.Items.Refresh();
-            //tvwFlujo.Items.Add(tree);
-            Console.WriteLine(tree.Items.Count);
-            Console.WriteLine((TreeViewItemMenu)tree.Items[1]);
-            tvwFlujo.Items.Refresh();
+            catch
+            {
+                lblTitle.Content = "Sin procesos asignados";
+                Console.WriteLine("procesos no encontrados");
+            }
         }
     }
 }

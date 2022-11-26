@@ -26,8 +26,11 @@ namespace ControlDeTareasDesk
         List<Empleado> listEmpleado = new List<Empleado>();
 
         TreeViewItemMenu itemProceso { get; set; }
+        TreeViewItemMenu itemProcesoGuardado { get; set; }
         TreeViewItemMenu itemUnidad { get; set; } = new TreeViewItemMenu();
+        TreeViewItemMenu itemUnidadGuardada { get; set; } = new TreeViewItemMenu();
         TreeViewItemMenu itemTarea { get; set; }
+        TreeViewItemMenu itemTareaGuardada { get; set; }
         public UserControlCrearFlujo(Empleado empleadoAux)
         {
             this.empleadoAux = empleadoAux;
@@ -45,6 +48,7 @@ namespace ControlDeTareasDesk
             EmpleadoCollection listaEmpleado = new EmpleadoCollection();
             //TREEVIEW
             itemProceso = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso, proceso = (Proceso)cmbProceso.SelectedItem};
+            itemProcesoGuardado = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso, proceso = (Proceso)cmbProceso.SelectedItem };
             if (cmbUnidad.Items.Count != 0)
             {
                 itemUnidad.Titulo = ((Unidad)cmbUnidad.SelectedItem).nombre_unidad;
@@ -57,6 +61,7 @@ namespace ControlDeTareasDesk
                 itemProceso.Items.Add(itemUnidad);
             }
             tvwFlujo.Items.Add(itemProceso);
+            tvwFlujoGuardado.Items.Add(itemProcesoGuardado);
         }
 
         private void cmbProceso_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,6 +69,7 @@ namespace ControlDeTareasDesk
             if (itemProceso != null)
             {
                 itemProceso.Items.Clear();
+                itemProcesoGuardado.Items.Clear();
                 itemProceso.Items.Add(itemUnidad);
                 Unidad unidad = new Unidad();
                 cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
@@ -73,7 +79,10 @@ namespace ControlDeTareasDesk
                 lstUsuarios.ItemsSource = null;
                 itemProceso.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
                 itemProceso.proceso = (Proceso)cmbProceso.SelectedItem;
+                itemProcesoGuardado.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
+                itemProcesoGuardado.proceso = (Proceso)cmbProceso.SelectedItem;
                 tvwFlujo.Items.Refresh();
+                tvwFlujoGuardado.Items.Refresh();
             }
         }
 
@@ -194,8 +203,9 @@ namespace ControlDeTareasDesk
                             itemUnidadTemp.Items.Add(itemTareaTemp);
                         }
                     }
-                    itemProceso.Items.Add(itemUnidadTemp);
+                    itemProcesoGuardado.Items.Add(itemUnidadTemp);
                     tvwFlujo.Items.Refresh();
+                    tvwFlujoGuardado.Items.Refresh();
                 }
                 else
                 {
@@ -211,18 +221,12 @@ namespace ControlDeTareasDesk
             try
             {
                 Boolean creacionExitosa = false;
-                if (itemProceso.Items.Count > 1)
+                if (itemProcesoGuardado.Items.Count > 0)
                 {
                     //AQUI crear iterador que salte la pimera unidad
-                    int ciclos = 0;
-                    foreach (TreeViewItemMenu unidadEncontrada in itemProceso.Items)
+                    foreach (TreeViewItemMenu unidadEncontrada in itemProcesoGuardado.Items)
                     {
-                        if (ciclos == 0)
-                        {
-                            ciclos += 1;
-                            Console.WriteLine(unidadEncontrada.Titulo);
-                        }
-                        else if (unidadEncontrada.Items != null || unidadEncontrada.Items.Count != 0)
+                        if (unidadEncontrada.Items != null || unidadEncontrada.Items.Count != 0)
                         {
                             foreach (TreeViewItemMenu tareaEncontrada in unidadEncontrada.Items)
                             {
@@ -279,11 +283,15 @@ namespace ControlDeTareasDesk
 
         private void btnEliminarGrilla_Click(object sender, RoutedEventArgs e)
         {
-            if (tvwFlujo.SelectedItem == null)
+            if (tvwFlujo.SelectedItem == null && tvwFlujoGuardado.SelectedItem == null)
             {
                 MessageBox.Show("Seleccione un elemento para eliminar del flujo");
             }
-            else
+            else if (tvwFlujo.SelectedItem != null && tvwFlujoGuardado.SelectedItem != null)
+            {
+                MessageBox.Show("Solo se puede eliminar un elemento a la vez");
+            }
+            else if (tvwFlujo.SelectedItem != null)
             {
                 if (((TreeViewItemMenu)tvwFlujo.SelectedItem).proceso != null)
                 {
@@ -306,6 +314,44 @@ namespace ControlDeTareasDesk
                     tvwFlujo.Items.Refresh();
                 }
             }
+            else if (tvwFlujoGuardado.SelectedItem != null)
+            {
+                if (((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem).unidad != null)
+                {
+                    itemProcesoGuardado.Items.Remove((TreeViewItemMenu)tvwFlujoGuardado.SelectedItem);
+                    tvwFlujoGuardado.Items.Refresh();
+                }
+            }
+        }
+        //LIMPIAR SELECCION TREEVIEW
+        public static void ClearTreeViewSelection(TreeView tv)
+        {
+            if (tv != null)
+                ClearTreeViewItemsControlSelection(tv.Items, tv.ItemContainerGenerator);
+        }
+        private static void ClearTreeViewItemsControlSelection(ItemCollection ic, ItemContainerGenerator icg)
+        {
+            if ((ic != null) && (icg != null))
+            {
+                for (int i = 0; i < ic.Count; i++)
+                {
+                    TreeViewItem tvi = icg.ContainerFromIndex(i) as TreeViewItem;
+                    if (tvi != null)
+                    {
+                        ClearTreeViewItemsControlSelection(tvi.Items, tvi.ItemContainerGenerator);
+                        tvi.IsSelected = false;
+                    }
+                }
+            }
+        }
+        private void tvwFlujo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClearTreeViewSelection(tvwFlujoGuardado);
+        }
+
+        private void tvwFlujoGuardado_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClearTreeViewSelection(tvwFlujo);
         }
     }
 }

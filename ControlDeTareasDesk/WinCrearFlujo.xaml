@@ -67,7 +67,19 @@
             </Grid>
             <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="10,10,10,3">
                 <StackPanel  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF323232">
-                    <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch">
+                    <TreeView x:Name="tvwFlujo" HorizontalAlignment="Stretch" Background="#FF00A697" GotFocus="tvwFlujo_GotFocus">
+                        <TreeView.Resources>
+                            <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                                <Setter Property="IsExpanded" Value="True"></Setter>
+                            </Style>
+                        </TreeView.Resources>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type local:TreeViewItemMenu}" ItemsSource="{Binding Items}" >
+                                <TextBlock Text="{Binding Titulo}" />
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                    <TreeView x:Name="tvwFlujoGuardado" HorizontalAlignment="Stretch" Background="#FF00A000" GotFocus="tvwFlujoGuardado_GotFocus">
                         <TreeView.Resources>
                             <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
                                 <Setter Property="IsExpanded" Value="True"></Setter>
