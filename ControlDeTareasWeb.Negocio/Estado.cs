@@ -21,5 +21,13 @@ namespace ControlDeTareasWeb.Negocio
                 nombre_estado = p.NOMBRE_ESTADO
             }).ToList();
         }
+        public Estado LoadEstado(decimal id_estado)
+        {
+            ESTADO dbEstado = new ESTADO();
+            dbEstado = db.ESTADO.First(x => x.ID_ESTADO == id_estado);
+            this.id_estado = dbEstado.ID_ESTADO;
+            nombre_estado = dbEstado.NOMBRE_ESTADO;
+            return this;
+        }
     }
 }

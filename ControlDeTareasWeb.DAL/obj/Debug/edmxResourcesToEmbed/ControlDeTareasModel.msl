@@ -4,6 +4,7 @@
     <EntitySetMapping Name="DETALLE_TAREA">
       <EntityTypeMapping TypeName="Model.DETALLE_TAREA">
         <MappingFragment StoreEntitySet="DETALLE_TAREA">
+          <ScalarProperty Name="ID_ESTADO_DETALLE" ColumnName="ID_ESTADO_DETALLE" />
           <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
           <ScalarProperty Name="ID_RUT_DETALLE" ColumnName="ID_RUT_DETALLE" />
           <ScalarProperty Name="ID_TAREA_DETALLE" ColumnName="ID_TAREA_DETALLE" />

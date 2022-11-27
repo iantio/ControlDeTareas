@@ -191,7 +191,7 @@ on unidad.id_unidad = tarea.id_unidad_tarea
 join proceso
 on proceso.id_proceso = unidad.id_proceso_uni;
 
-select * from estado;
+select * from detalle_tarea;
 
 --NUEVO------------------------------------------------
 ALTER TABLE detalle_tarea 
@@ -205,4 +205,6 @@ update estado set nombre_estado = 'RECHAZADO' where id_estado = 2;
 update estado set nombre_estado = 'EN PROCESO' where id_estado = 3;
 update estado set nombre_estado = 'ATRASADO' where id_estado = 4;
 update estado set nombre_estado = 'TERMINADO' where id_estado = 5;
+
+update DETALLE_TAREA set id_estado_detalle = 1;
 commit;

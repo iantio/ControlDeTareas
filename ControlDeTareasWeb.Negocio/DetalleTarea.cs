@@ -12,9 +12,11 @@ namespace ControlDeTareasWeb.Negocio
         public decimal id_detalle { get; set; }
         public decimal id_rut_detalle { get; set; }
         public decimal id_tarea_detalle { get; set; }
+        public decimal id_estado_detalle { get; set; }
 
         public Empleado empleado { get; set; }
         public Tarea tarea { get; set; }
+        public Estado estado { get; set; }
 
         ControlDeTareasEntities db = new ControlDeTareasEntities();
 
@@ -26,6 +28,7 @@ namespace ControlDeTareasWeb.Negocio
                 dbDetalleTarea.ID_DETALLE = db.DETALLE_TAREA.Max(x => x.ID_DETALLE) + 1;
                 dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
                 dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
+                dbDetalleTarea.ID_ESTADO_DETALLE = 1;
 
                 db.DETALLE_TAREA.Add(dbDetalleTarea);
                 db.SaveChanges();
@@ -52,10 +55,13 @@ namespace ControlDeTareasWeb.Negocio
                     id_detalle = (decimal)x.ID_DETALLE;
                     id_rut_detalle = (decimal)x.ID_RUT_DETALLE;
                     id_tarea_detalle = (decimal)x.ID_TAREA_DETALLE;
+                    id_estado_detalle = (decimal)x.ID_ESTADO_DETALLE;
                     empleado = new Empleado();
                     empleado.LoadEmpleado((decimal)x.ID_RUT_DETALLE);
                     tarea = new Tarea();
                     tarea.LoadTarea(id_tarea_detalle);
+                    estado = new Estado();
+                    estado.LoadEstado((decimal)x.ID_ESTADO_DETALLE);
                     listDetalle.Add(this);
                 }
             }
@@ -64,6 +70,24 @@ namespace ControlDeTareasWeb.Negocio
                 Console.WriteLine("Error al leer datos");
             }
             return listDetalle;
+        }
+        public Boolean Update()
+        {
+            try
+            {
+                DETALLE_TAREA dbDetalleTarea = db.DETALLE_TAREA.First(x => x.ID_DETALLE == id_detalle);
+                dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
+                dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
+                dbDetalleTarea.ID_ESTADO_DETALLE = (short)id_estado_detalle;
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al actualizar el Detalle Tarea");
+                return false;
+            }
         }
         public Boolean Delete()
         {
@@ -92,10 +116,13 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado(id_rut);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
@@ -110,10 +137,13 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea(id_tarea);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
@@ -127,10 +157,13 @@ namespace ControlDeTareasWeb.Negocio
                 id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 empleado = new Empleado();
                 empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 tarea = new Tarea();
                 tarea.LoadTarea(id_tarea);
+                estado = new Estado();
+                estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
 
                 return true;
             }
@@ -150,10 +183,13 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
@@ -168,10 +204,13 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
@@ -185,10 +224,13 @@ namespace ControlDeTareasWeb.Negocio
                 this.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
                 empleado = new Empleado();
                 empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 tarea = new Tarea();
                 tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                estado = new Estado();
+                estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
 
                 return true;
             }

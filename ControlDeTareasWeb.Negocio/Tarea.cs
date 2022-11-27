@@ -122,7 +122,7 @@ namespace ControlDeTareasWeb.Negocio
                 return listaTareas;
             }
         }
-        public Boolean Update() 
+        public Boolean Update()
         {
             try
             {

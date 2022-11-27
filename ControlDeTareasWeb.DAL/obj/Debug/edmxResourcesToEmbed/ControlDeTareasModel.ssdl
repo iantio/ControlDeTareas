@@ -7,6 +7,7 @@
     <Property Name="ID_DETALLE" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="ID_RUT_DETALLE" Type="number" Precision="10" Scale="0" />
     <Property Name="ID_TAREA_DETALLE" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_ESTADO_DETALLE" Type="number" Precision="2" Scale="0" />
   </EntityType>
   <EntityType Name="EMPLEADO">
     <Key>
@@ -265,6 +266,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="SYS_C008534">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+    <End Role="DETALLE_TAREA" Type="Self.DETALLE_TAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Principal>
+      <Dependent Role="DETALLE_TAREA">
+        <PropertyRef Name="ID_ESTADO_DETALLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="DETALLE_TAREA" EntityType="Self.DETALLE_TAREA" Schema="JEFE" store:Type="Tables" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="JEFE" store:Type="Tables" />
@@ -334,6 +347,10 @@
     <AssociationSet Name="SYS_C008533" Association="Self.SYS_C008533">
       <End Role="TAREA" EntitySet="TAREA" />
       <End Role="FLUJO" EntitySet="FLUJO" />
+    </AssociationSet>
+    <AssociationSet Name="SYS_C008534" Association="Self.SYS_C008534">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
