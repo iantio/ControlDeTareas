@@ -29,6 +29,7 @@
         <AssociationConnector Association="Model.SYS_C008533" ManuallyRouted="false" />
         <AssociationConnector Association="Model.SYS_C008524" ManuallyRouted="false" />
         <AssociationConnector Association="Model.SYS_C008527" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C008534" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

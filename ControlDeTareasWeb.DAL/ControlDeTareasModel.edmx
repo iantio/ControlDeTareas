@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DETALLE_TAREA">
           <Key>
             <PropertyRef Name="ID_DETALLE" />
@@ -12,6 +12,7 @@
           <Property Name="ID_DETALLE" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="ID_RUT_DETALLE" Type="number" Precision="10" Scale="0" />
           <Property Name="ID_TAREA_DETALLE" Type="number" Precision="10" Scale="0" />
+          <Property Name="ID_ESTADO_DETALLE" Type="number" Precision="2" Scale="0" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -270,6 +271,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="SYS_C008534">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="DETALLE_TAREA" Type="Self.DETALLE_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="DETALLE_TAREA">
+              <PropertyRef Name="ID_ESTADO_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="DETALLE_TAREA" EntityType="Self.DETALLE_TAREA" Schema="JEFE" store:Type="Tables" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="JEFE" store:Type="Tables" />
@@ -340,9 +353,12 @@
             <End Role="TAREA" EntitySet="TAREA" />
             <End Role="FLUJO" EntitySet="FLUJO" />
           </AssociationSet>
+          <AssociationSet Name="SYS_C008534" Association="Self.SYS_C008534">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -355,6 +371,8 @@
           <Property Name="ID_TAREA_DETALLE" Type="Int32" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.SYS_C008530" FromRole="DETALLE_TAREA" ToRole="EMPLEADO" />
           <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008531" FromRole="DETALLE_TAREA" ToRole="TAREA" />
+          <Property Name="ID_ESTADO_DETALLE" Type="Int16" />
+          <NavigationProperty Name="ESTADO" Relationship="Model.SYS_C008534" FromRole="DETALLE_TAREA" ToRole="ESTADO" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -392,6 +410,7 @@
           <NavigationProperty Name="PROCESO" Relationship="Self.SYS_C008522" FromRole="ESTADO" ToRole="PROCESO" />
           <NavigationProperty Name="UNIDAD" Relationship="Self.SYS_C008525" FromRole="ESTADO" ToRole="UNIDAD" />
           <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008529" FromRole="ESTADO" ToRole="TAREA" />
+          <NavigationProperty Name="DETALLE_TAREA" Relationship="Model.SYS_C008534" FromRole="ESTADO" ToRole="DETALLE_TAREA" />
         </EntityType>
         <EntityType Name="FLUJO">
           <Key>
@@ -711,7 +730,23 @@
             <End Role="UNIDAD" EntitySet="UNIDAD" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
+          <AssociationSet Name="SYS_C008534" Association="Model.SYS_C008534">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="SYS_C008534">
+          <End Type="Model.ESTADO" Role="ESTADO" Multiplicity="0..1" />
+          <End Type="Model.DETALLE_TAREA" Role="DETALLE_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="DETALLE_TAREA">
+              <PropertyRef Name="ID_ESTADO_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -721,6 +756,7 @@
           <EntitySetMapping Name="DETALLE_TAREA">
             <EntityTypeMapping TypeName="Model.DETALLE_TAREA">
               <MappingFragment StoreEntitySet="DETALLE_TAREA">
+                <ScalarProperty Name="ID_ESTADO_DETALLE" ColumnName="ID_ESTADO_DETALLE" />
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="ID_RUT_DETALLE" ColumnName="ID_RUT_DETALLE" />
                 <ScalarProperty Name="ID_TAREA_DETALLE" ColumnName="ID_TAREA_DETALLE" />

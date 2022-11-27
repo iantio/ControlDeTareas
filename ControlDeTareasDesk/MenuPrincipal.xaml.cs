@@ -21,10 +21,18 @@ namespace ControlDeTareasDesk
     /// </summary>
     public partial class MenuPrincipal : Window
     {
+        int contadorNotificaciones = 0;
         Empleado empleadoAux;
         public MenuPrincipal(Empleado empleadoAux)
         {
+            //Inicializar componentes
             InitializeComponent();
+            //Verificador notificaciones
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5); //seleccion tiempo de actualizacion formato = (h,m,s)
+            dispatcherTimer.Start();
+
             this.empleadoAux = empleadoAux;
             lblBienvenida.Content = "¡Bienvenido " + this.empleadoAux.nombre_emp.ToUpper()+"!";
             lblRol.Content = this.empleadoAux.rol.nombre_rol;
@@ -82,6 +90,12 @@ namespace ControlDeTareasDesk
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        //funcion de la variable que se actualizara con el temporizador
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            contadorNotificaciones += 1;
+            btnNotificacion.Badge = contadorNotificaciones;
         }
     }
 }

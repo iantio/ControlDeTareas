@@ -67,7 +67,9 @@ fecha_termino date
 create table DETALLE_TAREA(
 id_detalle number(10) not null primary key,
 id_rut_detalle number(10),
-id_tarea_detalle number(10));
+id_tarea_detalle number(10),
+id_estado_detalle number(2)
+);
 
 create table FLUJO(
 id_flujo number(10)not null primary key,
@@ -106,6 +108,8 @@ alter table DETALLE_TAREA
     add foreign key (id_rut_detalle) references EMPLEADO (id_rut);
 alter table DETALLE_TAREA
     add foreign key (id_tarea_detalle) references TAREA (id_tarea);
+alter table DETALLE_TAREA
+    add foreign key (id_estado_detalle) references ESTADO (id_estado);
 
 alter table FLUJO
     add foreign key (id_unidad_flujo) references UNIDAD (id_unidad);
@@ -140,13 +144,15 @@ INSERT INTO UNIDAD VALUES(2,2,2,2,'UNIDAD 1 INACAP',SYSDATE,'15/12/2022');
 INSERT INTO TAREA VALUES(1,1,5,1,'TAREA 1 DUOC',SYSDATE,'15/12/2022');
 INSERT INTO TAREA VALUES(2,2,4,2,'TAREA 1 INACAP',SYSDATE,'15/12/2022');
 
-INSERT INTO DETALLE_TAREA VALUES(1,205533990,1);
-INSERT INTO DETALLE_TAREA VALUES(2,205533991,1);
-INSERT INTO DETALLE_TAREA VALUES(3,205533992,2);
+INSERT INTO DETALLE_TAREA VALUES(1,205533990,1,1);
+INSERT INTO DETALLE_TAREA VALUES(2,205533991,1,1);
+INSERT INTO DETALLE_TAREA VALUES(3,205533992,2,1);
 
 commit;
 
 --SELECT-------------------------------------------------------
+ALTER TABLE detalle_tarea 
+ADD id_estado_detalle number(2);
 
 SELECT substr(to_char(id_rut,'99G999G9999'),1,11) ||'-'||substr(id_rut,-1) as rut ,nombre_emp,nombre_empresa,nombre_rol
 from empleado
@@ -184,3 +190,19 @@ join unidad
 on unidad.id_unidad = tarea.id_unidad_tarea
 join proceso
 on proceso.id_proceso = unidad.id_proceso_uni;
+
+select * from estado;
+
+--NUEVO------------------------------------------------
+ALTER TABLE detalle_tarea 
+ADD id_estado_detalle number(2);
+
+alter table DETALLE_TAREA
+    add foreign key (id_estado_detalle) references ESTADO (id_estado);
+    
+update estado set nombre_estado = 'NOTIFICADO' where id_estado = 1;
+update estado set nombre_estado = 'RECHAZADO' where id_estado = 2;
+update estado set nombre_estado = 'EN PROCESO' where id_estado = 3;
+update estado set nombre_estado = 'ATRASADO' where id_estado = 4;
+update estado set nombre_estado = 'TERMINADO' where id_estado = 5;
+commit;

@@ -198,5 +198,17 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        public Boolean verificarProceso(decimal id_Proceso)
+        {
+            try
+            {
+                Boolean dbDetalles = db.DETALLE_TAREA.Any(x => x.TAREA.UNIDAD.PROCESO.ID_PROCESO == id_Proceso);
+                return dbDetalles;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace ControlDeTareasWeb.DAL
             this.PROCESO = new HashSet<PROCESO>();
             this.UNIDAD = new HashSet<UNIDAD>();
             this.TAREA = new HashSet<TAREA>();
+            this.DETALLE_TAREA = new HashSet<DETALLE_TAREA>();
         }
     
         public short ID_ESTADO { get; set; }
@@ -27,5 +28,6 @@ namespace ControlDeTareasWeb.DAL
         public virtual ICollection<PROCESO> PROCESO { get; set; }
         public virtual ICollection<UNIDAD> UNIDAD { get; set; }
         public virtual ICollection<TAREA> TAREA { get; set; }
+        public virtual ICollection<DETALLE_TAREA> DETALLE_TAREA { get; set; }
     }
 }

@@ -45,11 +45,13 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-            <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,5,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
+            <Button x:Name="btnCrear" Content="Crear" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="btnCrear_Click"/>
+            <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="80,5,0,0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="btnEditar_Click"/>
+            <Button x:Name="btnRefrescar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,5,0,0"  Width="46" BorderBrush="#FF0096DC" Background="#FF0096DC" Click="btnRefrescar_Click">
                 <materialDesign:PackIcon x:Name="iconRefrescar" Kind="Refresh" HorizontalAlignment="Center" Width="16" Height="16" Foreground="White"/>
             </Button>
             <Button x:Name="btnEliminar" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Eliminar" Background="#FFC7504A" BorderBrush="#FFC7504A" Click="btnEliminar_Click"/>
-            <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="btnEditar_Click"/>
+            
         </Grid>
     </Grid>
 </UserControl>

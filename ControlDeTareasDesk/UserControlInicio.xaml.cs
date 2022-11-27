@@ -40,7 +40,7 @@ namespace ControlDeTareasDesk
                 }
                 tvwFlujo.Items.Refresh();
             }
-            catch { }
+            catch{ }
         }
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
@@ -50,21 +50,32 @@ namespace ControlDeTareasDesk
                 tree.Items.Clear();
                 tree.ReadDetalle(empleadoAux);
                 tvwFlujo.Items.Clear();
-                foreach (TreeViewItemMenu unidadEncontrada in ((TreeViewItemMenu)tree.Items[1]).Items)
+                foreach (TreeViewItemMenu unidadEncontrada in ((TreeViewItemMenu)tree.Items[index]).Items)
                 {
                     tvwFlujo.Items.Add(unidadEncontrada);
                 }
-                lblTitle.Content = ("PROCESO: " + ((TreeViewItemMenu)tree.Items[1]).proceso.nombre_proceso + " [" + (1 + 1) + "/" + totalProcesos + "]");
-                tvwFlujo.Items.Refresh();
-                //tvwFlujo.Items.Add(tree);
-                Console.WriteLine(tree.Items.Count);
-                Console.WriteLine((TreeViewItemMenu)tree.Items[1]);
+                totalProcesos = tree.Items.Count;
+                lblTitle.Content = ("PROCESO: " + ((TreeViewItemMenu)tree.Items[index]).proceso.nombre_proceso + " [" + (index + 1) + "/" + totalProcesos + "]");
                 tvwFlujo.Items.Refresh();
             }
             catch
             {
                 lblTitle.Content = "Sin procesos asignados";
                 Console.WriteLine("procesos no encontrados");
+            }
+        }
+
+        private void btnTerminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (tvwFlujo.SelectedItem == null || ((TreeViewItemMenu)tvwFlujo.SelectedItem).proceso != null || ((TreeViewItemMenu)tvwFlujo.SelectedItem).unidad != null)
+            {
+                MessageBox.Show("Debe seleccionar una tarea para marcarla como terminada");
+            }
+            else if (MessageBox.Show("Desea marcar la tarea " + ((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea.nombre_tarea + " como terminada", "d", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                DetalleTarea detalleTerminado = new DetalleTarea();
+                detalleTerminado.FindByEmpleadoTarea(empleadoAux.id_rut, ((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea.id_tarea);
+                Console.WriteLine(detalleTerminado.id_detalle);
             }
         }
     }

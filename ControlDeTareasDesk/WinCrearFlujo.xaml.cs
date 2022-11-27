@@ -26,9 +26,7 @@ namespace ControlDeTareasDesk
         TreeViewItemMenu itemProceso { get; set; }
         TreeViewItemMenu itemProcesoGuardado { get; set; }
         TreeViewItemMenu itemUnidad { get; set; } = new TreeViewItemMenu();
-        TreeViewItemMenu itemUnidadGuardada { get; set; } = new TreeViewItemMenu();
         TreeViewItemMenu itemTarea { get; set; }
-        TreeViewItemMenu itemTareaGuardada { get; set; }
         public WinCrearFlujo(Empleado empleadoAux, TreeViewItemMenu itemEditable, Boolean editar)
         {
             this.editar = editar;
@@ -75,6 +73,10 @@ namespace ControlDeTareasDesk
             {
                 itemProcesoGuardado = itemEditable;
             }
+            else
+            {
+                itemProcesoGuardado = new TreeViewItemMenu() { Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso, proceso = (Proceso)cmbProceso.SelectedItem };
+            }
             tvwFlujoGuardado.Items.Add(itemProcesoGuardado);
         }
 
@@ -93,6 +95,13 @@ namespace ControlDeTareasDesk
                 itemProceso.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
                 itemProceso.proceso = (Proceso)cmbProceso.SelectedItem;
                 tvwFlujo.Items.Refresh();
+                if (!editar)
+                {
+                    itemProcesoGuardado.Items.Clear();
+                    itemProcesoGuardado.Titulo = ((Proceso)cmbProceso.SelectedItem).nombre_proceso;
+                    itemProcesoGuardado.proceso = (Proceso)cmbProceso.SelectedItem;
+                    tvwFlujoGuardado.Items.Refresh();
+                }
             }
         }
         private void cmbUnidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -262,6 +271,13 @@ namespace ControlDeTareasDesk
                 List<decimal> listDetallesAntiguos = new List<decimal>();
                  if (itemProcesoGuardado.Items.Count != 0 || itemProcesoGuardado != null)
                 {
+                    //VERIFICAR SI EL PROCESO EXISTE
+                    DetalleTarea vp = new DetalleTarea();
+                    if (vp.verificarProceso(itemProcesoGuardado.proceso.id_proceso) && editar == false)
+                    {
+                        MessageBox.Show("Proceso ya existe");
+                        return;
+                    }
                     //BUSCAR CADA UNIDAD ALMACENADA EN EL TREEVIEW tvwFlujoGuardado
                     foreach (TreeViewItemMenu unidadEncontrada in itemProcesoGuardado.Items)
                     {

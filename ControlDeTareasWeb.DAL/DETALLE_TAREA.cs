@@ -17,8 +17,10 @@ namespace ControlDeTareasWeb.DAL
         public int ID_DETALLE { get; set; }
         public Nullable<int> ID_RUT_DETALLE { get; set; }
         public Nullable<int> ID_TAREA_DETALLE { get; set; }
+        public Nullable<short> ID_ESTADO_DETALLE { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual TAREA TAREA { get; set; }
+        public virtual ESTADO ESTADO { get; set; }
     }
 }

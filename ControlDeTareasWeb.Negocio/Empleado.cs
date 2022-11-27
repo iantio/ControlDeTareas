@@ -23,8 +23,17 @@ namespace ControlDeTareasWeb.Negocio
 
         ControlDeTareasEntities db = new ControlDeTareasEntities();
         //Metodos
+        public bool Autenticar()
+        {
+            return db.EMPLEADO
+                .Where(e => e.EMPRESA.NOMBRE_EMPRESA == this.empresa.nombre_empresa
+                && e.USUARIO == this.usuario
+                && e.CLAVE == this.clave)
+                .FirstOrDefault() != null;
+        }
         public List<Empleado> ReadAll()
         {
+
             return this.db.EMPLEADO.Select(p => new Empleado()
             {
                 id_rut = (decimal)p.ID_RUT,

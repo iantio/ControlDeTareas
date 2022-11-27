@@ -125,5 +125,11 @@ namespace ControlDeTareasDesk
                 winEditar.ShowDialog();
             }
         }
+
+        private void btnCrear_Click(object sender, RoutedEventArgs e)
+        {
+            WinCrearFlujo winCrear = new WinCrearFlujo(empleadoAux, null, false);
+            winCrear.ShowDialog();
+        }
     }
 }
