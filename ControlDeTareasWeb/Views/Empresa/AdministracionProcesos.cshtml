@@ -45,7 +45,6 @@
                         <th scope="col">Fecha Inicio</th>
                         <th scope="col">Fecha Termino</th>
                         <th scope="col">Eliminar?</th>
-                        <th scope="col">checkbox</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +58,6 @@
                         <td>@proceso.fecha_inicio</td>
                         <td>@proceso.fecha_termino</td>
                         <td>@Html.ActionLink("Eliminar", "DeleteProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-danger w-100" })</td>
-                        <td><center><input type="checkbox" class="form-check-input" /></center></td>
                     </tr>
                     }
 
@@ -78,8 +76,6 @@
                 <button type="button" class="btn btn-success">Editar Proceso</button>
                 <button type="button" class="btn btn-info">Info?</button>
                 <label>@TempData["mensaje"]</label>
-
-
             </div>
         </div>
     </div>

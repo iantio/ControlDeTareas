@@ -8,27 +8,13 @@ using ControlDeTareasWeb.Negocio;
 
 namespace ControlDeTareasWeb.Controllers
 {
+    [Authorize]
     public class EmpresaController : Controller
     {
         // GET: Empresa
         public ActionResult Index()
         {
-            if (Session["UserID"] != null)
-            {
-               
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        public ActionResult LogOff()
-        {
-            FormsAuthentication.SignOut();
-
-            return RedirectToAction("Login", "Home");
+            return View();
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

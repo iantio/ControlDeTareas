@@ -1,0 +1,49 @@
+﻿@model ControlDeTareasWeb.Negocio.Empleado
+
+@{
+    ViewBag.Title = "Login";
+}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/EstiloControlTareas.css" />
+</head>
+<h2>Ingresa tus credenciales</h2>
+
+@using (Html.BeginForm())
+{
+<div class="container m-2">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col bg-light rounded">
+            <form>
+                <div class="form-group m-1">
+                    <label>Empresa</label>
+                    @Html.TextBoxFor(e => e.empresa.nombre_empresa, new { @class = "form-control m-1)", placeholder = "Ingresa tu Empresa..." })
+                </div>
+                <div class="form-group m-1">
+                    <label>Usuario</label>
+                    @Html.TextBoxFor(e => e.usuario, new { @class = "form-control m-1)", placeholder = "Ingresa tu Usuario..." })
+                </div>
+                <div class="form-group m-1">
+                    <label>Contraseña</label>
+                    @Html.TextBoxFor(e => e.clave, new { @class = "form-control m-1)", placeholder = "Ingresa tu Contraseña...", type = "password" })
+                </div>
+                <div class="row form-group m-1">
+                    <div class="col">
+                        <button class="btn btn-primary m-2 w-100">Ingresar</button>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-primary m-2 w-100" href="/Home/OlvContrasena" role="button">Olvide Contraseña</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>
+}
+<br />
+@TempData["mensaje"]

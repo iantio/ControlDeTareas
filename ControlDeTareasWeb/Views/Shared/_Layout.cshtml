@@ -22,7 +22,15 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <a class="btn btn-outline-success btn-sm m-1 text-nowrap" href="/Home/Login" role="button">Iniciar Sesion</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-outline-success btn-sm m-1 text-nowrap" href="/Auth/LogOut" role="button">Cerrar Sesion</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-success btn-sm m-1 text-nowrap" href="/Auth/Login" role="button">Iniciar Sesion</a>
+                    }
+
                     <a class="btn btn-outline-success btn-sm m-1 text-nowrap" href="/Home/Registrarse" role="button">Registrarse</a>
                 </form>
             </div>
