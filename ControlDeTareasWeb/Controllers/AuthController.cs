@@ -10,7 +10,6 @@ namespace ControlDeTareasWeb.Controllers
 {
     public class AuthController : Controller
     {
-        
         public ActionResult Login()
         {
             return View();
@@ -25,8 +24,18 @@ namespace ControlDeTareasWeb.Controllers
 
                 if(ReturnUrl != null)
                 {
+                    
                     return Redirect(ReturnUrl);
                 }
+
+
+                empleado = new Empleado().Find(empleado.usuario);
+
+                Session["id_rut"] = empleado.id_rut;
+                Session["id_empresa_emp"] = empleado.id_empresa_emp;
+                Session["id_rol_emp"] = empleado.id_rol_emp;
+                Session["fecha_ingreso"] = empleado.fecha_ingreso;
+                Session["nombre_emp"] = empleado.nombre_emp;
 
                 return RedirectToAction("Index", "Empresa");
             }
@@ -37,12 +46,14 @@ namespace ControlDeTareasWeb.Controllers
 
         private bool IsValid(Empleado empleado)
         {
-            return empleado.Autenticar();
+            
+            return empleado.Autenticar(); 
         }
 
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("Index", "Home");
         }
     }

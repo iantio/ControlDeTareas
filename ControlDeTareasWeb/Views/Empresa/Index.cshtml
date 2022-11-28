@@ -3,13 +3,9 @@
     Layout = "~/Views/Shared/_EmpresaLayout.cshtml"; }
 @{List<Empresa> empresas = (List<Empresa>)ViewBag.empresas;}
 
-<fieldset>
-
-    @if (Session["UserName"] != null)
-    {<text>
-            Welcome @Session["UserName"].ToString()
-    </text>
-    }
-</fieldset>
-
+@Session["id_rut"]
+@Session["id_empresa_emp"]
+@Session["id_rol_emp"]
+@Session["fecha_ingreso"]
+@Session["nombre_emp"]
 

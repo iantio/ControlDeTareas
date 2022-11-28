@@ -150,7 +150,7 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
-        public Boolean Delete(int id_rut)
+        public Boolean Delete()
         {
             try
             {

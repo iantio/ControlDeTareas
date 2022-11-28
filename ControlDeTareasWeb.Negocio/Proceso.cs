@@ -119,7 +119,7 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
-        public Boolean Delete(int id_proceso)
+        public Boolean Delete()
         {
             try
             {

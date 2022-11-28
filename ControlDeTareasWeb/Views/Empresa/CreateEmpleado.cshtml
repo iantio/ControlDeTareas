@@ -9,44 +9,43 @@
 
 @using (Html.BeginForm())
 {
-    <div>
-        <div id="contenedor">
-            <div class="column">
-                @Html.LabelFor(p => p.id_rut, "RUT")
-                <br />
-                @Html.LabelFor(p => p.id_empresa_emp, "Empresa")
-                <br />
-                @Html.LabelFor(p => p.id_rol_emp, "Rol")
-                <br />
-                @Html.LabelFor(p => p.fecha_ingreso, "Fecha Ingreso")
-                <br />
-                @Html.LabelFor(p => p.nombre_emp, "Nombre Empleado")
-                <br />
-                @Html.LabelFor(p => p.usuario, "Usuario")
-                <br />
-                @Html.LabelFor(p => p.clave, "Clave")
-                <br />
+    <div class="container m-2">
+        <div class="row">
+            <div class="col-2">
             </div>
-            <div class="column">
-                @Html.TextBoxFor(p => p.id_rut)
-                <br />
-                @Html.DropDownListFor(p => p.id_empresa_emp, new SelectList(ViewBag.empresa, "id_empresa", "nombre_empresa"))
-                <br />
-                @Html.DropDownListFor(p => p.id_rol_emp, new SelectList(ViewBag.rol, "id_rol", "nombre_rol"))
-                <br />
-                @Html.TextBoxFor(p => p.fecha_ingreso)
-                <br />
-                @Html.TextBoxFor(p => p.nombre_emp)
-                <br />
-                @Html.TextBoxFor(p => p.usuario)
-                <br />
-                @Html.TextBoxFor(p => p.clave)
-                <br />
-                <button>Guardar</button>
+            <div class="col bg-light rounded">
+                <form>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.id_rut, "RUT")
+                        @Html.TextBoxFor(p => p.id_rut)
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.id_rol_emp, "Rol")
+                        @Html.DropDownListFor(p => p.id_rol_emp, new SelectList(ViewBag.rol, "id_rol", "nombre_rol"), new { @class = "form-control m-1" })
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.fecha_ingreso, "Fecha Ingreso", new { @class = "form-control m-1" })
+                        @Html.TextBoxFor(p => p.fecha_ingreso)
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.nombre_emp, "Nombre Empleado")
+                        @Html.TextBoxFor(p => p.nombre_emp)
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.usuario, "Usuario")
+                        @Html.TextBoxFor(p => p.usuario)
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.clave, "Clave")
+                        @Html.TextBoxFor(p => p.clave)
+                    </div>
+                    <button class="btn btn-primary m-2 w-100">Guardar</button>
+                </form>
+            </div>
+            <div class="col-2">
             </div>
         </div>
     </div>
-    
 
     
 }

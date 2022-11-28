@@ -1,4 +1,5 @@
-﻿    <!DOCTYPE html>
+﻿@using ControlDeTareasWeb.Negocio    
+<!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8" />
@@ -19,11 +20,16 @@
 
             <aside class="sidebar">
                 <h3>
-                    
+
                     <text>
-                        Bienvenido! @User.Identity.Name
+                        Bienvenido @User.Identity.Name !
                     </text>
-                    
+                    <text>
+                        @Session["empleadoId"]
+                    </text>
+                    @ViewBag.empleado
+                    @ViewBag.Test
+
                 </h3>
 
                 <nav class="menu">

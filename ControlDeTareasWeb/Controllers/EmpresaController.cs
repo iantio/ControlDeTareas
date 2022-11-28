@@ -32,7 +32,7 @@ namespace ControlDeTareasWeb.Controllers
         ////// ADMINISTRACION UNIDADES CRUD //////
         public ActionResult AdministracionUnidades()
         {
-            ViewBag.unidad = new Negocio.Unidad().ReadAll();
+            ViewBag.unidad = new Negocio.Unidad().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
             
             return View();
         }
@@ -42,18 +42,19 @@ namespace ControlDeTareasWeb.Controllers
         public ActionResult CreateUnidad()
         {
             EnviarEstado();
-            EnviarCategorias();
+            EnviarProcesos();
             EnviarEmpresa();
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult CreateUnidad([Bind(Include = "id_unidad, nombre_unidad, id_proceso_uni, id_estado_uni, ID_EMPRESA_UNI, fecha_inicio, fecha_termino")] Unidad unidad)
+        public ActionResult CreateUnidad([Bind(Include = "nombre_unidad, id_proceso_uni, id_estado_uni, fecha_inicio, fecha_termino")] Unidad unidad)
         {
             try
             {
-                // TODO: Add insert logic here
+                
+                unidad.id_empresa_uni = int.Parse(Session["id_empresa_emp"].ToString());
                 unidad.Create();
                 TempData["mensaje"] = "Guardado correctamente";
                 
@@ -69,7 +70,7 @@ namespace ControlDeTareasWeb.Controllers
         ////// ADMINISTRACION USUARIOS CRUD //////
         public ActionResult AdministracionUsuarios()
         {
-            ViewBag.empleados = new Negocio.Empleado().ReadAll();
+            ViewBag.empleados = new Negocio.EmpleadoCollection().ReadByEmpresa(Decimal.Parse(Session["id_empresa_emp"].ToString()));
             return View();
         }
 
@@ -81,11 +82,11 @@ namespace ControlDeTareasWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateEmpleado([Bind(Include = "ID_RUT ,ID_EMPRESA_EMP, ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE,")] Empleado empleado)
+        public ActionResult CreateEmpleado([Bind(Include = "ID_RUT , ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE,")] Empleado empleado)
         {
             try
             {
-                // TODO: Add insert logic here
+                empleado.id_empresa_emp = int.Parse(Session["id_empresa_emp"].ToString());
                 empleado.Create();
                 TempData["mensaje"] = "Guardado correctamente";
                 return RedirectToAction("AdministracionUsuarios", "Empresa");
@@ -98,15 +99,15 @@ namespace ControlDeTareasWeb.Controllers
 
         public ActionResult DeleteEmpleado(int id)
         {
-
-            if (new Empleado().Delete(id))
+            Empleado empleadoeliminar = new Empleado() { id_rut = id };
+            if (empleadoeliminar.Delete())
             {
                 TempData["mensaje"] = "Eliminado Correctamente";
                 return RedirectToAction("AdministracionUsuarios");
             }
 
             TempData["mensaje"] = "No se a podido eliminar Empleado";
-            return RedirectToAction("AdministracionProcesos");
+            return RedirectToAction("AdministracionUsuarios");
         }
         ////// FIN CRUD //////
 
@@ -115,7 +116,7 @@ namespace ControlDeTareasWeb.Controllers
         public ActionResult AdministracionProcesos()
         {
             Console.WriteLine(User.Identity.Name);
-            ViewBag.procesos = new Negocio.Proceso().ReadAll();
+            ViewBag.procesos = new Negocio.Proceso().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
             return View();
         }
 
@@ -127,11 +128,12 @@ namespace ControlDeTareasWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateProceso([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, ID_EMPRESA_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")]Proceso proceso)
+        public ActionResult CreateProceso([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")]Proceso proceso)
         {
             try
             {
                 // TODO: Add insert logic here
+                proceso.id_empresa_pro = int.Parse(Session["id_empresa_emp"].ToString());
                 proceso.Create();
                 TempData["mensaje"] = "Guardado correctamente";
                 return RedirectToAction("AdministracionProcesos","Empresa");
@@ -144,8 +146,8 @@ namespace ControlDeTareasWeb.Controllers
 
         public ActionResult DeleteProceso(int id)
         {
-
-            if (new Proceso().Delete(id))
+            Proceso procesoeliminar = new Proceso() { id_proceso = id };
+            if (procesoeliminar.Delete())
             {
                 TempData["mensaje"] = "Eliminado Correctamente";
                 return RedirectToAction("AdministracionProcesos");
@@ -157,9 +159,16 @@ namespace ControlDeTareasWeb.Controllers
         ////// FIN CRUD //////
 
         ////// VARIABLES GLOGABLES //////
-        private void EnviarCategorias()
+        private void EnviarProcesos()
         {
-            ViewBag.procesos = new Proceso().ReadAll();
+            try
+            {
+                ViewBag.procesos = new Proceso().Read(int.Parse(Session["id_empresa_emp"].ToString()));
+            }
+            catch (Exception)
+            {
+            }
+          
         }
         private void EnviarEstado()
         {

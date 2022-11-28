@@ -23,5 +23,13 @@ namespace ControlDeTareasWeb.Negocio
                 nombre_empresa = p.NOMBRE_EMPRESA
             }).ToList();
         }
+        public Empresa Read(int id_empresa_emp)
+        {
+            return this.db.EMPRESA.Select(p => new Empresa()
+            {
+                id_empresa = p.ID_EMPRESA,
+                nombre_empresa = p.NOMBRE_EMPRESA
+            }).Where(p => p.id_empresa == id_empresa_emp).FirstOrDefault();
+        }
     }
 }
