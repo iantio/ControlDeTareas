@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using ControlDeTareasWeb.Negocio;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ControlDeTareasWeb.Controllers
 {
@@ -36,8 +38,15 @@ namespace ControlDeTareasWeb.Controllers
             
             return View();
         }
-
         
+        [HttpPost]
+        public ActionResult BuscarUsuario(int id)
+        {
+
+            
+            return View();
+        }
+
 
         public ActionResult CreateUnidad()
         {
@@ -63,6 +72,46 @@ namespace ControlDeTareasWeb.Controllers
             catch
             {
                 return View();
+            }         
+        }
+        public ActionResult DeleteUnidad(int id)
+        {
+            Unidad unidadEliminar = new Unidad() { id_unidad = id };
+            if (unidadEliminar.Delete())
+            {
+                TempData["mensaje"] = "Eliminado Correctamente";
+                return RedirectToAction("AdministracionUnidades");
+            }
+
+            TempData["mensaje"] = "No se a podido eliminar Unidad";
+            return RedirectToAction("AdministracionUnidades");
+        }
+        public ActionResult EditarUnidad(int id)
+        {
+            Unidad unidad = new Unidad().LoadUnidad(id);
+
+            if(unidad == null)
+            {
+                return RedirectToAction("AdministracionUnidades");
+            }
+            EnviarEstado();
+            EnviarProcesos();
+            EnviarEmpresa();
+            return View(unidad);
+        }
+
+        [HttpPost]
+        public ActionResult EditarUnidad([Bind(Include = "id_unidad, id_proceso_uni, id_estado_uni, id_empresa_uni, nombre_unidad, fecha_inicio, fecha_termino")] Unidad unidad)
+        {
+            try
+            {
+                unidad.Update();
+                TempData["mensaje"] = "Modificado Correctamente";
+                return RedirectToAction("AdministracionUnidades");
+            }
+            catch
+            {
+                return View();
             }
         }
         ////// FIN CRUD //////
@@ -82,7 +131,7 @@ namespace ControlDeTareasWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateEmpleado([Bind(Include = "ID_RUT , ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE,")] Empleado empleado)
+        public ActionResult CreateEmpleado([Bind(Include = "ID_RUT, ID_EMPRESA_EMP, ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE")] Empleado empleado)
         {
             try
             {
@@ -108,6 +157,35 @@ namespace ControlDeTareasWeb.Controllers
 
             TempData["mensaje"] = "No se a podido eliminar Empleado";
             return RedirectToAction("AdministracionUsuarios");
+        }
+
+        public ActionResult EditarEmpleado(string id)
+        {
+            Empleado empleado = new Empleado().Read(int.Parse(id));
+
+            if (empleado.id_rut == int.Parse(id))
+            {
+                EnviarEmpresa();
+                EnviarRol();
+                return View(empleado);
+                
+            }
+            return RedirectToAction("AdministracionUsuarios");
+        }
+
+        [HttpPost]
+        public ActionResult EditarEmpleado([Bind(Include = "ID_RUT, ID_EMPRESA_EMP, ID_ROL_EMP, FECHA_INGRESO, NOMBRE_EMP, USUARIO, CLAVE")] Empleado empleado)
+        {
+            try
+            {
+                empleado.Update();
+                TempData["mensaje"] = "Modificado Correctamente";
+                return RedirectToAction("AdministracionUsuarios");
+            }
+            catch
+            {
+                return View();
+            }
         }
         ////// FIN CRUD //////
 
@@ -155,6 +233,33 @@ namespace ControlDeTareasWeb.Controllers
 
             TempData["mensaje"] = "Una unidad esta utilizando este proceso!";
             return RedirectToAction("AdministracionProcesos");
+        }
+        public ActionResult EditarProceso(int id)
+        {
+            Proceso proceso = new Proceso().LoadProceso(id);
+
+            if (proceso == null)
+            {
+                return RedirectToAction("AdministracionProcesos");
+            }
+            EnviarEstado();
+            EnviarEmpresa();
+            return View(proceso);
+        }
+
+        [HttpPost]
+        public ActionResult EditarProceso([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")] Proceso proceso)
+        {
+            try
+            {
+                proceso.Update();
+                TempData["mensaje"] = "Modificado Correctamente";
+                return RedirectToAction("AdministracionProcesos");
+            }
+            catch
+            {
+                return View();
+            }
         }
         ////// FIN CRUD //////
 

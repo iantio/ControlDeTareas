@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/EstiloControlTareas.css" />
 </head>
-
+@{ List<Unidad> unidades = (List<Unidad>)ViewBag.unidad; }
 <body>
     <div class="container">
         <div class="row">
@@ -21,19 +21,20 @@
                 <a class="btn btn-outline-light btn-sm m-2 p-2 text-nowrap float-end" href="/Empresa/" role="button">Menu</a>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+        @using (Html.BeginForm("BuscarUsuario", "Empresa", FormMethod.Post)) {
+            <div class="row">
+                <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
+                    <form class="d-flex" role="search">
+                        <input id="buscar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        @Html.TextBox(p => p, new { @class = "form-control m-1" })
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
-
+        }
         <div class="row d-none d-sm-block">
 
-            @{ List<Unidad> unidades = (List<Unidad>)ViewBag.unidad; }
+
             <table class="table table-striped bg-light rounded">
                 <thead>
                     <tr>
@@ -43,22 +44,26 @@
                         <th scope="col">Estado Unidad</th>
                         <th scope="col">Fecha Inicio</th>
                         <th scope="col">Fecha Termino</th>
+                        <th scope="col">¿Eliminar?</th>
+                        <th scope="col">¿Editar?</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach(var unidad in unidades)
+                    @foreach (var unidad in unidades)
                     {
-                    <tr>
-                        <td>@unidad.id_unidad</td>
-                        <td>@unidad.nombre_unidad</td>
-                        <td>@unidad.proceso.nombre_proceso</td>
-                        <td>@unidad.estado.nombre_estado</td>
-                        <td>@unidad.fecha_inicio</td>
-                        <td>@unidad.fecha_termino</td>
-                    </tr>
+                        <tr>
+                            <td>@unidad.id_unidad</td>
+                            <td>@unidad.nombre_unidad</td>
+                            <td>@unidad.proceso.nombre_proceso</td>
+                            <td>@unidad.estado.nombre_estado</td>
+                            <td>@unidad.fecha_inicio</td>
+                            <td>@unidad.fecha_termino</td>
+                            <td>@Html.ActionLink("Eliminar", "DeleteUnidad", new { id = unidad.id_unidad }, new { @class = "btn btn-danger w-100" })</td>
+                            <td>@Html.ActionLink("Editar", "EditarUnidad", new { id = unidad.id_unidad }, new { @class = "btn btn-info w-100" })</td>
+                        </tr>
                     }
-                    
+
                 </tbody>
             </table>
         </div>
@@ -70,9 +75,6 @@
         <div class="row bg-light rounded d-none d-sm-block">
             <div class="col m-2 p-2 text-white text-nowrap rounded">
                 <a type="button" class="btn btn-success" href="/Empresa/CreateUnidad">Crear Unidad</a>
-                <button type="button" class="btn btn-success">Editar Unidad</button>
-                <button type="button" class="btn btn-info">Info?</button>
-                <button type="button" class="btn btn-danger float-end">Eliminar</button>
                 <label>@TempData["mensaje"]</label>
             </div>
         </div>

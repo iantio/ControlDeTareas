@@ -1,0 +1,41 @@
+﻿@model ControlDeTareasWeb.Negocio.Proceso
+
+@{
+    ViewBag.Title = "CreateProceso";
+    Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
+}
+<h2>CreateProceso</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="container m-2">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col bg-light rounded">
+                <form>
+                    <div class="form-group m-1">
+                        @Html.HiddenFor(p => p.id_proceso)
+                        <label>Estado</label>
+                        @Html.DropDownListFor(p => p.id_estado_pro, new SelectList(ViewBag.estado, "id_estado", "nombre_estado"), new { @class = "form-control m-1" })
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.nombre_proceso, "Nombre Proceso")
+                        @Html.TextBoxFor(p => p.nombre_proceso, new { @class = "form-control m-1", required = "required" })
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.fecha_inicio, "Fecha Inicio")
+                        @Html.TextBoxFor(p => p.fecha_inicio, new { @class = "form-control m-1", required = "required" })
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.fecha_termino, "Fecha Termino")
+                        @Html.TextBoxFor(p => p.fecha_termino, new { @class = "form-control m-1", required = "required" })
+                    </div>
+                    <button class="btn btn-primary m-2 w-100">Guardar</button>
+                </form>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+}

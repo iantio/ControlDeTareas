@@ -1,0 +1,51 @@
+﻿@model ControlDeTareasWeb.Negocio.Unidad
+
+@{
+    ViewBag.Title = "Modificar Unidad";
+    Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
+}
+
+<h2>Editar Unidad</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="container m-2">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col bg-light rounded">
+                <form>
+                    <div class="form-group m-1">
+                        @Html.HiddenFor(p => p.id_unidad)
+                        @Html.HiddenFor(p => p.id_empresa_uni)
+                        @Html.LabelFor(p => p.nombre_unidad, "Nombre Unidad")
+                        @Html.TextBoxFor(p => p.nombre_unidad, new { @class = "form-control m-1", required = "required" })
+
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.proceso, "Proceso")
+                        @Html.DropDownListFor(p => p.id_proceso_uni, new SelectList(ViewBag.procesos, "id_proceso", "nombre_proceso"), new { @class = "form-control m-1" })
+
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.estado, "Estado")
+                        @Html.DropDownListFor(p => p.id_estado_uni, new SelectList(ViewBag.estado, "id_estado", "nombre_estado"), new { @class = "form-control m-1" })
+
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.fecha_inicio, "Fecha Inicio")
+                        @Html.TextBoxFor(p => p.fecha_inicio, new { @class = "form-control m-1", required = "required" })
+
+                    </div>
+                    <div class="form-group m-1">
+                        @Html.LabelFor(p => p.fecha_termino, "Fecha Inicio")
+                        @Html.TextBoxFor(p => p.fecha_termino, new { @class = "form-control m-1", required = "required" })
+                    </div>
+                    <button class="btn btn-primary m-2 w-100">Modificar</button>
+                </form>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+}

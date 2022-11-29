@@ -44,7 +44,8 @@
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha Inicio</th>
                         <th scope="col">Fecha Termino</th>
-                        <th scope="col">Eliminar?</th>
+                        <th scope="col">¿Eliminar?</th>
+                        <th scope="col">¿Editar?</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,7 @@
                         <td>@proceso.fecha_inicio</td>
                         <td>@proceso.fecha_termino</td>
                         <td>@Html.ActionLink("Eliminar", "DeleteProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-danger w-100" })</td>
+                        <td>@Html.ActionLink("Editar", "EditarProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-info w-100" })</td>
                     </tr>
                     }
 
@@ -73,8 +75,6 @@
         <div class="row bg-light rounded d-none d-sm-block">
             <div class="col m-2 p-2 text-white text-nowrap rounded">
                 <a type="button" class="btn btn-success" href="/Empresa/CreateProceso">Crear Proceso</a>
-                <button type="button" class="btn btn-success">Editar Proceso</button>
-                <button type="button" class="btn btn-info">Info?</button>
                 <label>@TempData["mensaje"]</label>
             </div>
         </div>
