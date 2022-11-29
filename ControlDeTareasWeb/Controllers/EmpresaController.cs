@@ -16,6 +16,8 @@ namespace ControlDeTareasWeb.Controllers
         // GET: Empresa
         public ActionResult Index()
         {
+
+            EnviarDetalleTarea();
             return View();
         }
 
@@ -405,6 +407,40 @@ namespace ControlDeTareasWeb.Controllers
         ////// FIN CRUD //////
         //////////////////////
 
+        //////////////////////////////////////////
+        ////////////// FLUJO CRUD ////////////////
+        //////////////////////////////////////////
+
+        public ActionResult MostrarFlujo()
+        {
+            EnviarProcesos();
+            EnviarUnidad();
+            EnviarTarea();
+            EnviarDetalleTarea();
+            EnviarEmpleado();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MostrarFlujo(DetalleTarea detalletarea)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                detalletarea.Create();
+                TempData["mensaje"] = "Guardado correctamente";
+                return RedirectToAction("Index", "Empresa");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //////////////////////
+        ////// FIN CRUD //////
+        //////////////////////
+
         /////////////////////////////////
         ////// VARIABLES GLOGABLES //////
         /////////////////////////////////
@@ -422,26 +458,82 @@ namespace ControlDeTareasWeb.Controllers
 
         private void EnviarUnidad()
         {
-            ViewBag.unidad = new Unidad().Read(int.Parse(Session["id_empresa_emp"].ToString()));
+            try
+            {
+                ViewBag.unidad = new Unidad().Read(int.Parse(Session["id_empresa_emp"].ToString()));
+            }
+            catch (Exception)
+            {
+            }
+            
         }
         private void EnviarEstado()
         {
-            ViewBag.estado = new Negocio.Estado().ReadAll();
+            
+            try
+            {
+                ViewBag.estado = new Negocio.Estado().ReadAll();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void EnviarEmpresa()
         {
-            ViewBag.empresa = new Negocio.Empresa().ReadAll();
+            try
+            {
+                ViewBag.empresa = new Negocio.Empresa().ReadAll(); ViewBag.estado = new Negocio.Estado().ReadAll();
+            }
+            catch (Exception)
+            {
+            }
+           
         }
 
         private void EnviarRol()
         {
-            ViewBag.rol = new Negocio.Rol().ReadAll();
+            try
+            {
+                ViewBag.rol = new Negocio.Rol().ReadAll();
+            }
+            catch (Exception)
+            {
+            }
+            
         }
 
         private void EnviarEmpleado()
+        {        
+            try
+            {
+                ViewBag.empleados = new Negocio.EmpleadoCollection().ReadByEmpresa(Decimal.Parse(Session["id_empresa_emp"].ToString()));
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void EnviarTarea()
         {
-            ViewBag.procesos = new Empleado().ReadAll();
+            try
+            {
+                ViewBag.tareas = new Tarea().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void EnviarDetalleTarea()
+        {
+            try
+            {
+                ViewBag.detalletareas = new DetalleTarea().FindByEmpleado(Decimal.Parse(Session["id_rut"].ToString()));
+            }
+            catch (Exception)
+            {
+            }
         }
 
         ////// //////

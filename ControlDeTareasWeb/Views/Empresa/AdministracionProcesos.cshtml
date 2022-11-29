@@ -12,9 +12,9 @@
     <title>@ViewBag.Title - Control de Tareas WEB</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/EstiloControlTareas.css" />
-    
-</head>
 
+</head>
+@{ List<Proceso> procesos = (List<Proceso>)ViewBag.procesos; }
 <body>
     <div class="container">
         <div class="row">
@@ -41,7 +41,7 @@
 
         <div class="row d-none d-sm-block">
 
-            @{ List<Proceso> procesos = (List<Proceso>)ViewBag.procesos; }
+
 
             <table class="table table-striped bg-light rounded">
                 <thead>

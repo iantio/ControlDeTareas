@@ -1,11 +1,48 @@
 ﻿@using ControlDeTareasWeb.Negocio;
 @{ ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EmpresaLayout.cshtml"; }
-@{List<Empresa> empresas = (List<Empresa>)ViewBag.empresas;}
 
-@Session["id_rut"]
-@Session["id_empresa_emp"]
-@Session["id_rol_emp"]
-@Session["fecha_ingreso"]
-@Session["nombre_emp"]
+@{ List<DetalleTarea> tareas = (List<DetalleTarea>)ViewBag.detalletareas; }
+<div class="container m-2 p-2">
+    <div class="row">
+        <div class="row">
+            <div class="col rounded m-2 p-2 text-white d-none d-sm-block">
+                <label>Bienvenido</label> @Session["nombre_emp"]<label>! Estas son tus tareas:</label>
+            </div>
+        </div>
+        <div class="col-auto w-100">
+            
+            <table class="table table-striped bg-light rounded">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Tarea</th>
+                        <th scope="col">Rut de empleado</th>
+                        <th scope="col">Nombre de empleado</th>
+                        <th scope="col">Proceso</th>
+                        <th scope="col">Unidad</th>
+                        <th scope="col">Tarea</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Termino</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    @foreach (var tarea in tareas)
+                    {
+                    <tr>
+                        <td>@tarea.id_detalle</td>
+                        <td>@tarea.id_rut_detalle</td>
+                        <td>@tarea.empleado.nombre_emp</td>
+                        <td>@tarea.tarea.unidad.proceso.nombre_proceso</td>
+                        <td>@tarea.tarea.unidad.nombre_unidad</td>
+                        <td>@tarea.tarea.nombre_tarea</td>
+                        <td>@tarea.tarea.fecha_inicio</td>
+                        <td>@tarea.tarea.fecha_termino</td>
+                        <td>@Html.ActionLink("Eliminar", "DeleteFlujo", new { id = tarea.id_detalle }, new { @class = "btn btn-danger w-100" })</td>
+                    </tr>
+                    }
+                </tbody>
+        </div>
+    </div>
+</div>

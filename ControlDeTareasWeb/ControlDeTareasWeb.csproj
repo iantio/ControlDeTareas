@@ -173,6 +173,7 @@
     <Content Include="Views\Empresa\AdministracionTareas.cshtml" />
     <Content Include="Views\Empresa\CreateTarea.cshtml" />
     <Content Include="Views\Empresa\EditarTarea.cshtml" />
+    <Content Include="Views\Empresa\MostrarFlujo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
