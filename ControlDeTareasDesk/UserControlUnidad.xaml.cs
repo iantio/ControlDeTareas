@@ -89,7 +89,7 @@ namespace ControlDeTareasDesk
             {
                 MessageBox.Show("Debe seleccionar una unidad para eliminar");
             }
-            else if (tareaTemp.FindByUnidad(unidadTemp.id_unidad, unidadTemp.id_empresa_uni) != null)
+            else if ((tareaTemp.FindByUnidad(unidadTemp.id_unidad, unidadTemp.id_empresa_uni)).Count() != 0)
             {
                 foreach(Tarea tareaEncontrada in tareaTemp.FindByUnidad(unidadTemp.id_unidad, unidadTemp.id_empresa_uni))
                 {
@@ -114,7 +114,14 @@ namespace ControlDeTareasDesk
             }
             else
             {
-                unidadTemp.Delete();
+                if (unidadTemp.Delete())
+                {
+                    MessageBox.Show("unidad eliminada");
+                }
+                else
+                {
+                    MessageBox.Show("error al eliminar");
+                }
                 btnRefrescar_Click(null, null);
             }
         }

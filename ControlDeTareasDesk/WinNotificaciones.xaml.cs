@@ -27,12 +27,17 @@ namespace ControlDeTareasDesk
             DetalleTarea detalleNotificacion = new DetalleTarea();
             InitializeComponent();
             itemsNotificacion.ItemsSource = detalleNotificacion.ListarNotificacion(empleadoAux.id_rut);
+            if (itemsNotificacion == null || itemsNotificacion.Items.Count == 0)
+            {
+                lblSinNotificaciones.Visibility = Visibility.Visible ;
+            }
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             DetalleTarea detalle = (DetalleTarea)(((Button)sender).DataContext);
             detalle.id_estado_detalle= 3;
+            detalle.justificacion = null;
             detalle.Update();
             Console.WriteLine(detalle.id_estado_detalle);
             refrescar();
@@ -42,16 +47,21 @@ namespace ControlDeTareasDesk
             DetalleTarea detalleNotificacion = new DetalleTarea();
             itemsNotificacion.ItemsSource = detalleNotificacion.ListarNotificacion(empleadoAux.id_rut);
             itemsNotificacion.Items.Refresh();
+            if (itemsNotificacion == null || itemsNotificacion.Items.Count == 0)
+            {
+                lblSinNotificaciones.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnRechazar_Click(object sender, RoutedEventArgs e)
         {
-            WinDialogNotificacion dialogNotificacion = new WinDialogNotificacion();
+            WinDialogNotificacion dialogNotificacion = new WinDialogNotificacion(null);
             dialogNotificacion.ShowDialog();
             if (dialogNotificacion.Resultado)
             {
                 DetalleTarea detalle = (DetalleTarea)(((Button)sender).DataContext);
                 detalle.id_estado_detalle = 2;
+                detalle.justificacion = dialogNotificacion.Text;
                 detalle.Update();
                 refrescar();
                 Console.WriteLine(dialogNotificacion.Text);

@@ -17,19 +17,22 @@
             <RowDefinition Height="41"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Margin="5" Grid.Column="0" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
+        <Button x:Name="btnAnterior" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="btnAnterior_Click">
+            <materialDesign:PackIcon Kind="ArrowLeftBoldCircle" Height="24" Width="24"/>
+        </Button>
         <Border Margin="5" Grid.Column="1" Background="Green" VerticalAlignment="Stretch" CornerRadius="12">
             <Label x:Name="lblTitle" Content="Sin procesos asignados" FontSize="18" Foreground="#DDFFFFFF" BorderBrush="Black" Margin="3,-2,-3,-3" FontWeight="Bold"/>
         </Border>
-        <Border Margin="5" Grid.Column="2" Background="Green" VerticalAlignment="Stretch" CornerRadius="12"/>
-
+        <Button x:Name="btnSiguiente" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="btnSiguiente_Click">
+            <materialDesign:PackIcon Kind="ArrowRightBoldCircle" Height="24" Width="24"/>
+        </Button>
         <Grid Grid.Column="1" Grid.Row="1" Margin="4,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="32*"/>
                 <RowDefinition Height="341*"/>
                 <RowDefinition Height="36*"/>
             </Grid.RowDefinitions>
-            <ProgressBar x:Name="pbProgreso" Grid.Row="0" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Minimum="0" Maximum="1" Value="0.50" BorderBrush="#FF383838" Margin="0,6" materialDesign:TransitionAssist.DisableTransitions="True"/>
+            <ProgressBar x:Name="pbProgreso" Grid.Row="0" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Minimum="0" Maximum="1" Value="0" BorderBrush="#FF383838" Margin="0,6" materialDesign:TransitionAssist.DisableTransitions="True"/>
             <TextBlock x:Name="tbProgreso" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=pbProgreso, Path=Value, StringFormat={}{0:0%}}" Foreground="White" FontWeight="Bold"/>
             <TreeView x:Name="tvwFlujo" Grid.Row="1" HorizontalAlignment="Stretch" MinHeight="340">
                 <TreeView.Resources>

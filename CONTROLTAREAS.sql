@@ -149,6 +149,8 @@ INSERT INTO DETALLE_TAREA VALUES(2,205533991,1,1);
 INSERT INTO DETALLE_TAREA VALUES(3,205533992,2,1);
 
 commit;
+--TRIGGER------------------------------------------------------
+
 
 --SELECT-------------------------------------------------------
 ALTER TABLE detalle_tarea 

@@ -13,6 +13,7 @@ namespace ControlDeTareasWeb.Negocio
         public decimal id_rut_detalle { get; set; }
         public decimal id_tarea_detalle { get; set; }
         public decimal id_estado_detalle { get; set; }
+        public String justificacion { get; set; }
 
         public Empleado empleado { get; set; }
         public Tarea tarea { get; set; }
@@ -29,6 +30,7 @@ namespace ControlDeTareasWeb.Negocio
                 dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
                 dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
                 dbDetalleTarea.ID_ESTADO_DETALLE = 1;
+                dbDetalleTarea.JUSTIFICACION = justificacion;
 
                 db.DETALLE_TAREA.Add(dbDetalleTarea);
                 db.SaveChanges();
@@ -56,6 +58,7 @@ namespace ControlDeTareasWeb.Negocio
                     id_rut_detalle = (decimal)x.ID_RUT_DETALLE;
                     id_tarea_detalle = (decimal)x.ID_TAREA_DETALLE;
                     id_estado_detalle = (decimal)x.ID_ESTADO_DETALLE;
+                    justificacion = x.JUSTIFICACION;
                     empleado = new Empleado();
                     empleado.LoadEmpleado((decimal)x.ID_RUT_DETALLE);
                     tarea = new Tarea();
@@ -79,6 +82,7 @@ namespace ControlDeTareasWeb.Negocio
                 dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
                 dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
                 dbDetalleTarea.ID_ESTADO_DETALLE = (short)id_estado_detalle;
+                dbDetalleTarea.JUSTIFICACION = justificacion;
                 db.SaveChanges();
 
                 return true;
@@ -117,6 +121,7 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado(id_rut);
                 detalle.tarea = new Tarea();
@@ -138,6 +143,7 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
@@ -158,6 +164,7 @@ namespace ControlDeTareasWeb.Negocio
                 id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                justificacion = dbDetalle.JUSTIFICACION;
                 empleado = new Empleado();
                 empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 tarea = new Tarea();
@@ -184,6 +191,7 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
@@ -205,6 +213,7 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
@@ -225,6 +234,7 @@ namespace ControlDeTareasWeb.Negocio
                 id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
                 id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                justificacion = dbDetalle.JUSTIFICACION;
                 empleado = new Empleado();
                 empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 tarea = new Tarea();
@@ -274,6 +284,7 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_rut_detalle = (decimal)detalleEcontrado.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)detalleEcontrado.ID_TAREA_DETALLE;
                 detalle.id_estado_detalle = (decimal)detalleEcontrado.ID_ESTADO_DETALLE;
+                detalle.justificacion = detalleEcontrado.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)detalleEcontrado.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();

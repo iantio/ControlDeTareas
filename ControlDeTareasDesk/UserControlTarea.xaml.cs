@@ -86,7 +86,7 @@ namespace ControlDeTareasDesk
             {
                 MessageBox.Show("Debe seleccionar una tarea para eliminar");
             }
-            else if (detalle.FindByTarea(tareaTemp.id_tarea) != null)
+            else if ((detalle.FindByTarea(tareaTemp.id_tarea)).Count != 0)
             {
                 if (MessageBox.Show("Este tarea esta asignada a un flujo, ¿esta seguro de eliminarla?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
@@ -100,7 +100,14 @@ namespace ControlDeTareasDesk
             else
             {
                 Tarea tarea = tareaTemp;
-                tarea.Delete();
+                if (tarea.Delete())
+                {
+                    MessageBox.Show("tarea eliminada");
+                }
+                else
+                {
+                    MessageBox.Show("error al eliminar tarea");
+                }
             }
             btnRefrescar_Click(null, null);
         }

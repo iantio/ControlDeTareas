@@ -29,6 +29,7 @@ namespace ControlDeTareasDesk
             this.editar = editar;
             InitializeComponent();
             Proceso proceso = new Proceso();
+            Unidad unidad = new Unidad();
             Estado estado = new Estado();
             cmbProceso.ItemsSource = proceso.Read(empleadoAux.id_empresa_emp);
             cmbEstado.ItemsSource = estado.ReadAll();
@@ -41,6 +42,7 @@ namespace ControlDeTareasDesk
                 dtpFechaInicio.SelectedDate = tareaTemp.fecha_inicio;
                 dtpFechaTermino.SelectedDate = tareaTemp.fecha_termino;
                 cmbProceso.SelectedValue = tareaTemp.unidad.proceso.id_proceso;
+                cmbUnidad.ItemsSource = unidad.FindByProceso((decimal)cmbProceso.SelectedValue, empleadoAux.id_empresa_emp);
                 cmbUnidad.SelectedValue = tareaTemp.unidad.id_unidad;
                 cmbEstado.SelectedValue = tareaTemp.estado.id_estado;
             }

@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="Justificacion" Height="292.5" Width="438.125" Background="#FF232323" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
-        <Label Content="Ingrese su justificacion:" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTitulo" Content="Ingrese su justificacion:" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
         <StackPanel Margin="16,36,10,47">
-            <TextBox x:Name="txtJustifiacion" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" VerticalAlignment="Stretch" Height="156" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+            <TextBox x:Name="txtJustificacion" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" VerticalAlignment="Stretch" Height="156" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
                 Foreground="White" Margin="10" Background="#FF3E3E3E"/>
         </StackPanel>
         <Button x:Name="btnEnviar" Content="Enviar" HorizontalAlignment="Left" Margin="227,217,0,0" VerticalAlignment="Top" Width="94" BorderBrush="Transparent" Click="btnEnviar_Click"/>

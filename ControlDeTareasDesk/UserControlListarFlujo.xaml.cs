@@ -52,7 +52,7 @@ namespace ControlDeTareasDesk
             }
             tvwFlujo.Items.Refresh();
         }
-
+        
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             List<DetalleTarea> listaDetalles = new List<DetalleTarea>();
@@ -130,6 +130,12 @@ namespace ControlDeTareasDesk
         {
             WinCrearFlujo winCrear = new WinCrearFlujo(empleadoAux, null, false);
             winCrear.ShowDialog();
+        }
+
+        private void btnVerJustificacion_Click(object sender, RoutedEventArgs e)
+        {
+            WinDialogNotificacion dialogNotificacion = new WinDialogNotificacion(((TreeViewItemMenu)((Button)sender).DataContext).detalleTarea);
+            dialogNotificacion.ShowDialog();
         }
     }
 }

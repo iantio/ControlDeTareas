@@ -26,6 +26,7 @@ namespace ControlDeTareasDesk
         public double Porcentaje { get; set; }
         public List<TreeViewItemMenu> Items { get; set; }
         public DetalleTarea detalleTarea { get; set; }
+        public String justificacion { get; set; }
 
         public TreeViewItemMenu ReadDetalle(Empleado empleadoAux)
         {
@@ -37,32 +38,53 @@ namespace ControlDeTareasDesk
                 List<DetalleTarea> listaDetalles = detalle.FindByEmpleado(empleadoAux.id_rut);
 
                 listaDetalles = detalle.FindByEmpleado(empleadoAux.id_rut);
-                List<String> listaProcesos = (from x in listaDetalles
-                                              select x.tarea.unidad.proceso.nombre_proceso).Distinct().ToList();
-                foreach (String nombreProceso in listaProcesos)
+                List<decimal> listaProcesos = (from x in listaDetalles
+                                              select x.tarea.unidad.proceso.id_proceso).Distinct().ToList();
+                foreach (decimal idProceso in listaProcesos)
                 {
                     Proceso proceso = new Proceso();
-                    TreeViewItemMenu itemProceso = new TreeViewItemMenu() {Titulo=nombreProceso, Porcentaje= 0.1};
-                    List<String> listaUnidades = (from x in listaDetalles
-                                                  where x.tarea.unidad.proceso.nombre_proceso == nombreProceso
-                                                  select x.tarea.unidad.nombre_unidad).Distinct().ToList();
-                    Console.WriteLine(nombreProceso);
-                    foreach (String nombreUnidad in listaUnidades)
+                    proceso.LoadProceso(idProceso);
+                    TreeViewItemMenu itemProceso = new TreeViewItemMenu() {Titulo = proceso.nombre_proceso, proceso = proceso, Porcentaje = 0};
+
+                    List<decimal> listaUnidades = (from x in listaDetalles
+                                                  where x.tarea.unidad.proceso.id_proceso == idProceso
+                                                  select x.tarea.unidad.id_unidad).Distinct().ToList();
+                    //CALCULO PORCENTAJE PROCESO
+                    double porcentajeProceso = (from x in listaDetalles
+                                                where x.id_estado_detalle == 5 && x.tarea.unidad.proceso.id_proceso == idProceso
+                                                select x).Count();
+                    double porcentajeProcesoTotal = listaDetalles.Count(x => x.tarea.unidad.proceso.id_proceso == idProceso);
+
+                    itemProceso.Porcentaje = (porcentajeProceso / porcentajeProcesoTotal);
+                    Console.WriteLine(proceso.nombre_proceso);
+                    foreach (decimal idUnidad in listaUnidades)
                     {
                         Unidad unidad = new Unidad();
-                        TreeViewItemMenu itemUnidad = new TreeViewItemMenu() { Titulo = nombreUnidad, Porcentaje = 0.5 };
+                        unidad.LoadUnidad(idUnidad);
+                        TreeViewItemMenu itemUnidad = new TreeViewItemMenu() { Titulo = unidad.nombre_unidad, unidad = unidad,Porcentaje = 0 };
                         List<decimal> listaTareas = (from x in listaDetalles
-                                                    where x.tarea.unidad.proceso.nombre_proceso == nombreProceso && x.tarea.unidad.nombre_unidad == nombreUnidad
+                                                    where x.tarea.unidad.proceso.id_proceso == idProceso && x.tarea.unidad.id_unidad == idUnidad
                                                     select x.tarea.id_tarea).Distinct().ToList();
-                        Console.WriteLine("|_"+nombreUnidad);
+                        //CALCULO PORCENTAJE UNIDADES
+                        double porcentajeUnidad = (from x in listaDetalles
+                                                   where x.id_estado_detalle == 5 && x.tarea.unidad.id_unidad == idUnidad
+                                                   select x).Count();
+                        double porcentajeUnidadTotal = listaDetalles.Count(x => x.tarea.unidad.id_unidad == idUnidad);
+                        itemUnidad.Porcentaje = porcentajeUnidad / porcentajeUnidadTotal;
+                        Console.WriteLine("|_"+unidad.nombre_unidad);
                         foreach (decimal idTarea in listaTareas)
                         {
                             if (idTarea != 0)
                             {
                                 Tarea tarea = new Tarea();
                                 tarea.LoadTarea(idTarea);
-
-                                TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0.9, tarea = tarea };
+                                //CALCULO PORCENTAJE TAREA
+                                TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0, tarea = tarea };
+                                double porcentajeTarea = (from x in listaDetalles
+                                                          where x.id_estado_detalle == 5 && x.tarea.id_tarea == idTarea
+                                                          select x).Count();
+                                double porcentajeTareaTotal = listaDetalles.Count(x => x.tarea.id_tarea == idTarea);
+                                itemTarea.Porcentaje = porcentajeTarea / porcentajeTareaTotal;
 
                                 itemUnidad.unidad = tarea.unidad;
                                 itemProceso.proceso = tarea.unidad.proceso;
@@ -98,38 +120,71 @@ namespace ControlDeTareasDesk
                 idItemEmpleado = 0;
                 foreach (decimal idProceso in listaProcesos)
                 {
+                    //BUSCAR PROCESOS
                     Proceso proceso = new Proceso();
                     proceso.LoadProceso(idProceso);
-                    TreeViewItemMenu itemProceso = new TreeViewItemMenu() { Titulo = proceso.nombre_proceso, Porcentaje = 0.1, proceso = proceso , idItemProceso = this.idItemProceso};
+                    TreeViewItemMenu itemProceso = new TreeViewItemMenu() { Titulo = proceso.nombre_proceso, Porcentaje = 0, proceso = proceso , idItemProceso = this.idItemProceso};
                     List<decimal> listaUnidades = (from x in listaDetalles
                                                   where x.tarea.unidad.proceso.id_proceso == idProceso
                                                   select x.tarea.unidad.id_unidad).Distinct().ToList();
+                    //CALCULO PROCENTAJE PROCESO
+                    double porcentajeProceso = (from x in listaDetalles
+                                                 where x.id_estado_detalle == 5 && x.tarea.unidad.proceso.id_proceso == idProceso
+                                                 select x).Count();
+                    double porcentajeProcesoTotal = listaDetalles.Count(x => x.tarea.unidad.proceso.id_proceso == idProceso);
+
+                    itemProceso.Porcentaje = (porcentajeProceso / porcentajeProcesoTotal);
+
                     Console.WriteLine(proceso.nombre_proceso);
+                    //ENCONTRAR UNIDADES
                     foreach (decimal idUnidad in listaUnidades)
                     {
                         Unidad unidad = new Unidad();
                         unidad.LoadUnidad(idUnidad);
-                        TreeViewItemMenu itemUnidad = new TreeViewItemMenu() { Titulo = unidad.nombre_unidad, Porcentaje = 0.5, unidad = unidad, idItemProceso = this.idItemProceso };
+                        TreeViewItemMenu itemUnidad = new TreeViewItemMenu() { Titulo = unidad.nombre_unidad, Porcentaje = 0, unidad = unidad, idItemProceso = this.idItemProceso };
                         List<decimal> listaTareas = (from x in listaDetalles
                                                      where x.tarea.unidad.proceso.id_proceso == idProceso && x.tarea.unidad.id_unidad == idUnidad
                                                      select x.tarea.id_tarea).Distinct().ToList();
+                        //CALCULO PORCETNAJE UNIDADES
+                        double porcentajeUnidad = (from x in listaDetalles
+                                                    where x.id_estado_detalle == 5 && x.tarea.unidad.id_unidad == idUnidad
+                                                    select x).Count();
+                        double porcentajeUnidadTotal = listaDetalles.Count(x => x.tarea.unidad.id_unidad == idUnidad);
+                        itemUnidad.Porcentaje = porcentajeUnidad / porcentajeUnidadTotal;
                         Console.WriteLine("|_" + unidad.nombre_unidad);
+                        //ENCONTRAR TAREAS
                         foreach (decimal id_tarea in listaTareas)
                         {
                             Tarea tarea = new Tarea();
                             tarea.LoadTarea(id_tarea);
-                            TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0.5, tarea = tarea, idItemProceso = this.idItemProceso, idItemTarea = this.idItemTarea };
+                            TreeViewItemMenu itemTarea = new TreeViewItemMenu() { Titulo = tarea.nombre_tarea, Porcentaje = 0, tarea = tarea, idItemProceso = this.idItemProceso, idItemTarea = this.idItemTarea };
                             List<decimal> listaEmpleados = (from x in listaDetalles
                                                             where x.tarea.unidad.proceso.id_proceso == idProceso && x.tarea.id_tarea == id_tarea
                                                             select x.empleado.id_rut).Distinct().ToList();
+                            //CALCULO PORCENTAJE TAREA
+                            double porcentajeTarea = (from x in listaDetalles
+                                                      where x.id_estado_detalle == 5 && x.tarea.id_tarea == id_tarea
+                                                      select x).Count();
+                            double porcentajeTareaTotal = listaDetalles.Count(x => x.tarea.id_tarea == id_tarea);
+                            itemTarea.Porcentaje = porcentajeTarea / porcentajeTareaTotal;
                             Console.WriteLine(" |_" + tarea.nombre_tarea);
+                            //ENCONTRAR EMPLEADOS
                             foreach (decimal idEmpleado in listaEmpleados)
                             {
                                 Empleado empleado = new Empleado();
                                 empleado.LoadEmpleado(idEmpleado);
                                 DetalleTarea detalleTareaTemp = new DetalleTarea();
                                 detalleTareaTemp.FindByEmpleadoTarea(idEmpleado,id_tarea);
-                                TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = empleado.nombre_emp, Porcentaje = 0.1, empleado = empleado, tarea = tarea, idItemTarea = idItemTarea, idItemEmpleado = idItemEmpleado, detalleTarea = detalleTareaTemp};
+                                double porcentajeTemp;
+                                if (detalleTareaTemp.id_estado_detalle == 5)
+                                {
+                                    porcentajeTemp = 1;
+                                }
+                                else
+                                {
+                                    porcentajeTemp = 0;
+                                }
+                                TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = empleado.nombre_emp, Porcentaje = porcentajeTemp, empleado = empleado, tarea = tarea, idItemTarea = idItemTarea, idItemEmpleado = idItemEmpleado, detalleTarea = detalleTareaTemp, justificacion=detalleTareaTemp.justificacion };
 
                                 Console.WriteLine("  |_" + empleado.nombre_emp);
                                 itemTarea.Items.Add(itemEmpleado);
