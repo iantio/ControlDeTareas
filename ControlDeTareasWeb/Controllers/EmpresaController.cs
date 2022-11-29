@@ -333,27 +333,68 @@ namespace ControlDeTareasWeb.Controllers
 
             List<Tarea> buscadotarea = listatarea.Where(x => x.nombre_tarea.Contains(buscar) || x.id_tarea.ToString() == (buscar)).ToList();
 
-            ViewBag.procesos = buscadotarea;
+            ViewBag.tareas = buscadotarea;
             return View();
         }
 
         public ActionResult CreateTarea()
         {
+            EnviarUnidad();
             EnviarEstado();
-            EnviarEmpresa();
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateTarea([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")] Proceso proceso)
+        public ActionResult CreateTarea([Bind(Include = "ID_TAREA, ID_UNIDAD_TAREA, ID_ESTADO_TAREA, ID_EMPRESA_TAREA, NOMBRE_TAREA, FECHA_INICIO, FECHA_TERMINO")] Tarea tarea)
         {
             try
             {
                 // TODO: Add insert logic here
-                proceso.id_empresa_pro = int.Parse(Session["id_empresa_emp"].ToString());
-                proceso.Create();
+                tarea.id_empresa_tarea = int.Parse(Session["id_empresa_emp"].ToString());
+                tarea.Create();
                 TempData["mensaje"] = "Guardado correctamente";
-                return RedirectToAction("AdministracionProcesos", "Empresa");
+                return RedirectToAction("AdministracionTareas", "Empresa");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteTarea(int id)
+        {
+            Tarea tareaeliminar = new Tarea() { id_tarea = id };
+            if (tareaeliminar.Delete())
+            {
+                TempData["mensaje"] = "Eliminado Correctamente";
+                return RedirectToAction("AdministracionTareas");
+            }
+
+            TempData["mensaje"] = "Una unidad esta utilizando este proceso!";
+            return RedirectToAction("AdministracionTareas");
+        }
+
+        public ActionResult EditarTarea(int id)
+        {
+            Tarea tarea = new Tarea().LoadTarea(id);
+
+            if (tarea == null)
+            {
+                return RedirectToAction("AdministracionTareas");
+            }
+            EnviarUnidad();
+            EnviarEstado();
+            return View(tarea);
+        }
+
+        [HttpPost]
+        public ActionResult EditarTarea([Bind(Include = "ID_TAREA, ID_UNIDAD_TAREA, ID_ESTADO_TAREA, ID_EMPRESA_TAREA, NOMBRE_TAREA, FECHA_INICIO, FECHA_TERMINO, UNIDAD, ESTADO, EMPRESA")] Tarea tarea)
+        {
+            try
+            {
+                tarea.Update();
+                TempData["mensaje"] = "Modificado Correctamente";
+                return RedirectToAction("AdministracionTareas");
             }
             catch
             {
@@ -377,6 +418,11 @@ namespace ControlDeTareasWeb.Controllers
             {
             }
           
+        }
+
+        private void EnviarUnidad()
+        {
+            ViewBag.unidad = new Unidad().Read(int.Parse(Session["id_empresa_emp"].ToString()));
         }
         private void EnviarEstado()
         {

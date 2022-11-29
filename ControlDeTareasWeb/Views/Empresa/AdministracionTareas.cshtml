@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/Content/EstiloControlTareas.css" />
 
 </head>
-
+@{ List<Tarea> tareas = (List<Tarea>)ViewBag.tareas; }
 <body>
     <div class="container">
         <div class="row">
@@ -41,7 +41,7 @@
 
         <div class="row d-none d-sm-block">
 
-            @{ List<Tarea> tareas = (List<Tarea>)ViewBag.tareas; }
+
 
             <table class="table table-striped bg-light rounded">
                 <thead>
@@ -60,16 +60,16 @@
 
                     @foreach (var tarea in tareas)
                     {
-                    <tr>
-                        <td>@tarea.id_tarea</td>
-                        <td>@tarea.nombre_tarea</td>
-                        <td>@tarea.estado.nombre_estado</td>
-                        <td>@tarea.unidad.nombre_unidad</td>
-                        <td>@tarea.fecha_inicio</td>
-                        <td>@tarea.fecha_termino</td>
-                        <td>@Html.ActionLink("Eliminar", "DeleteTarea", new { id = tarea.id_tarea }, new { @class = "btn btn-danger w-100" })</td>
-                        <td>@Html.ActionLink("Editar", "EditarTarea", new { id = tarea.id_tarea }, new { @class = "btn btn-info w-100" })</td>
-                    </tr>
+                        <tr>
+                            <td>@tarea.id_tarea</td>
+                            <td>@tarea.nombre_tarea</td>
+                            <td>@tarea.estado.nombre_estado</td>
+                            <td>@tarea.unidad.nombre_unidad</td>
+                            <td>@tarea.fecha_inicio</td>
+                            <td>@tarea.fecha_termino</td>
+                            <td>@Html.ActionLink("Eliminar", "DeleteTarea", new { id = tarea.id_tarea }, new { @class = "btn btn-danger w-100" })</td>
+                            <td>@Html.ActionLink("Editar", "EditarTarea", new { id = tarea.id_tarea }, new { @class = "btn btn-info w-100" })</td>
+                        </tr>
                     }
 
                 </tbody>
@@ -83,7 +83,7 @@
 
         <div class="row bg-light rounded d-none d-sm-block">
             <div class="col m-2 p-2 text-white text-nowrap rounded">
-                <a type="button" class="btn btn-success" href="/Empresa/CreateProceso">Crear Proceso</a>
+                <a type="button" class="btn btn-success" href="/Empresa/CreateTarea">Crear Tarea</a>
                 <label>@TempData["mensaje"]</label>
             </div>
         </div>
