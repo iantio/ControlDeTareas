@@ -48,7 +48,7 @@ namespace ControlDeTareasDesk
         {
             Proceso proceso = new Proceso();
             Console.WriteLine();
-            proceso.id_estado_pro = 2;
+            proceso.id_estado_pro = 3;
             proceso.id_empresa_pro = empleadoAux.id_empresa_emp;
             proceso.nombre_proceso = txtNombreProceso.Text;
             proceso.fecha_inicio = dtpFechaInicio.SelectedDate.Value;

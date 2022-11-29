@@ -129,11 +129,11 @@ insert into EMPLEADO VALUES(205533990,1,1,SYSDATE,'ISAIAS ANTIO','is.antio','123
 insert into EMPLEADO VALUES(205533991,1,2,SYSDATE,'DIEGO FLORES','die.flores','1234');
 insert into EMPLEADO VALUES(205533992,2,3,SYSDATE,'SEBASTIAN SANDOVAL','se.sandoval','1234');
 
-insert into ESTADO VALUES(1,'FINALIZADO');
-insert into ESTADO VALUES(2,'EN ESPERA');
-insert into ESTADO VALUES(3,'POSTERGADO');
-insert into ESTADO VALUES(4,'EN PROCESO');
-insert into ESTADO VALUES(5,'DECLINADO');
+insert into ESTADO VALUES(1,'NOTIFICADO');
+insert into ESTADO VALUES(2,'RECHAZADO');
+insert into ESTADO VALUES(3,'EN PROCESO');
+insert into ESTADO VALUES(4,'ATRASADO');
+insert into ESTADO VALUES(5,'TERMINADO');
 
 INSERT INTO PROCESO VALUES(1,4,1,'VENTA DUOC',SYSDATE,'20/12/2022');
 INSERT INTO PROCESO VALUES(2,4,2,'VENTA INACAP',SYSDATE,'20/12/2022');
@@ -195,16 +195,6 @@ select * from detalle_tarea;
 
 --NUEVO------------------------------------------------
 ALTER TABLE detalle_tarea 
-ADD id_estado_detalle number(2);
+ADD justificacion VARCHAR2(300);
 
-alter table DETALLE_TAREA
-    add foreign key (id_estado_detalle) references ESTADO (id_estado);
-    
-update estado set nombre_estado = 'NOTIFICADO' where id_estado = 1;
-update estado set nombre_estado = 'RECHAZADO' where id_estado = 2;
-update estado set nombre_estado = 'EN PROCESO' where id_estado = 3;
-update estado set nombre_estado = 'ATRASADO' where id_estado = 4;
-update estado set nombre_estado = 'TERMINADO' where id_estado = 5;
-
-update DETALLE_TAREA set id_estado_detalle = 1;
 commit;

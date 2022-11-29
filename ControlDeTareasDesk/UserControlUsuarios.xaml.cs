@@ -84,11 +84,11 @@ namespace ControlDeTareasDesk
         //PENDIENTE DE OPTIMIZACION
         private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
-            empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
             if (dgUsuarios.SelectedItem != null)
             {
                 DetalleTarea detalle = new DetalleTarea();
-                if (detalle.FindByEmpleado(empleadoTemp.id_rut) != null)
+                empleadoTemp = (Empleado)dgUsuarios.SelectedItem;
+                if ((detalle.FindByEmpleado(empleadoTemp.id_rut)).Count() != 0)
                 {
                     if (MessageBox.Show("Este empleado tiene tareas asignadas, ¿esta seguro de eliminarlo?", "Seleccione una opcion", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {

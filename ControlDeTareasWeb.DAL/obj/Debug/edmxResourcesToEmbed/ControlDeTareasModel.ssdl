@@ -8,6 +8,7 @@
     <Property Name="ID_RUT_DETALLE" Type="number" Precision="10" Scale="0" />
     <Property Name="ID_TAREA_DETALLE" Type="number" Precision="10" Scale="0" />
     <Property Name="ID_ESTADO_DETALLE" Type="number" Precision="2" Scale="0" />
+    <Property Name="JUSTIFICACION" Type="varchar2" MaxLength="300" />
   </EntityType>
   <EntityType Name="EMPLEADO">
     <Key>
