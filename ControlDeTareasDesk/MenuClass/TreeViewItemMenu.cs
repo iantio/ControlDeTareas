@@ -25,6 +25,7 @@ namespace ControlDeTareasDesk
         public Empleado empleado { get; set; }
         public double Porcentaje { get; set; }
         public List<TreeViewItemMenu> Items { get; set; }
+        public DetalleTarea detalleTarea { get; set; }
 
         public TreeViewItemMenu ReadDetalle(Empleado empleadoAux)
         {
@@ -126,8 +127,9 @@ namespace ControlDeTareasDesk
                             {
                                 Empleado empleado = new Empleado();
                                 empleado.LoadEmpleado(idEmpleado);
-
-                                TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = empleado.nombre_emp, Porcentaje = 0.1, empleado = empleado, tarea = tarea, idItemTarea = idItemTarea, idItemEmpleado = idItemEmpleado};
+                                DetalleTarea detalleTareaTemp = new DetalleTarea();
+                                detalleTareaTemp.FindByEmpleadoTarea(idEmpleado,id_tarea);
+                                TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = empleado.nombre_emp, Porcentaje = 0.1, empleado = empleado, tarea = tarea, idItemTarea = idItemTarea, idItemEmpleado = idItemEmpleado, detalleTarea = detalleTareaTemp};
 
                                 Console.WriteLine("  |_" + empleado.nombre_emp);
                                 itemTarea.Items.Add(itemEmpleado);

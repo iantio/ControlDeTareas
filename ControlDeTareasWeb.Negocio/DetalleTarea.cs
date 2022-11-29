@@ -252,5 +252,37 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        public int verificarNotificacion(Empleado empleadoAux)
+        {
+            try
+            {
+                int cantidad = db.DETALLE_TAREA.Count(x => x.ID_ESTADO_DETALLE == 1 && x.ID_RUT_DETALLE == empleadoAux.id_rut);
+                return cantidad;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public List<DetalleTarea> ListarNotificacion(decimal id_rut)
+        {
+            List<DetalleTarea> listaDetalles = new List<DetalleTarea>();
+            foreach (DETALLE_TAREA detalleEcontrado in db.DETALLE_TAREA.Where(x => x.ID_RUT_DETALLE == id_rut && x.ID_ESTADO_DETALLE == 1).ToList())
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)detalleEcontrado.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)detalleEcontrado.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)detalleEcontrado.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)detalleEcontrado.ID_ESTADO_DETALLE;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)detalleEcontrado.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)detalleEcontrado.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)detalleEcontrado.ID_ESTADO_DETALLE);
+                listaDetalles.Add(detalle);
+            }
+            return listaDetalles;
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace ControlDeTareasDesk
     public partial class MenuPrincipal : Window
     {
         int contadorNotificaciones = 0;
+        DetalleTarea detalleNotificacion { get; set; } = new DetalleTarea();
         Empleado empleadoAux;
         public MenuPrincipal(Empleado empleadoAux)
         {
@@ -94,8 +95,20 @@ namespace ControlDeTareasDesk
         //funcion de la variable que se actualizara con el temporizador
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            contadorNotificaciones += 1;
-            btnNotificacion.Badge = contadorNotificaciones;
+            contadorNotificaciones = detalleNotificacion.verificarNotificacion(empleadoAux);
+            if (contadorNotificaciones == 0)
+            {
+                countNotificacion.Badge = null;
+            }
+            else
+            {
+                countNotificacion.Badge = contadorNotificaciones;
+            }
+        }
+        private void btnNotificacion_Click(object sender, RoutedEventArgs e)
+        {
+            WinNotificaciones winNotificacion = new WinNotificaciones(empleadoAux);
+            winNotificacion.ShowDialog();
         }
     }
 }

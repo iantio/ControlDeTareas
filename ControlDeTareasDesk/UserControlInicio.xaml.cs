@@ -71,10 +71,12 @@ namespace ControlDeTareasDesk
             {
                 MessageBox.Show("Debe seleccionar una tarea para marcarla como terminada");
             }
-            else if (MessageBox.Show("Desea marcar la tarea " + ((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea.nombre_tarea + " como terminada", "d", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            else if (MessageBox.Show("Desea marcar la tarea " + ((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea.nombre_tarea + " como terminada", "Terminar tarea", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 DetalleTarea detalleTerminado = new DetalleTarea();
                 detalleTerminado.FindByEmpleadoTarea(empleadoAux.id_rut, ((TreeViewItemMenu)tvwFlujo.SelectedItem).tarea.id_tarea);
+                detalleTerminado.id_estado_detalle = 5;
+                detalleTerminado.Update();
                 Console.WriteLine(detalleTerminado.id_detalle);
             }
         }

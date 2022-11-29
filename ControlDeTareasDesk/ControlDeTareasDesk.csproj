@@ -110,8 +110,14 @@
     <Compile Include="WinCrearUsuario.xaml.cs">
       <DependentUpon>WinCrearUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinDialogNotificacion.xaml.cs">
+      <DependentUpon>WinDialogNotificacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLista.xaml.cs">
       <DependentUpon>WinLista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinNotificaciones.xaml.cs">
+      <DependentUpon>WinNotificaciones.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -186,7 +192,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WinDialogNotificacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinLista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinNotificaciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

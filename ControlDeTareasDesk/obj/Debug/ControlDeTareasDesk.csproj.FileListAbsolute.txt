@@ -103,3 +103,7 @@ C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlListar
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\UserControlListarFlujo.baml
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearFlujo.g.cs
 C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinCrearFlujo.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinNotificaciones.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinNotificaciones.baml
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinDialogNotificacion.g.cs
+C:\Z-Repositorio\ControlDeTareas\ControlDeTareasDesk\obj\Debug\WinDialogNotificacion.baml
