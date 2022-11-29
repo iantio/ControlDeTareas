@@ -12,9 +12,12 @@ namespace ControlDeTareasWeb.Negocio
         public decimal id_detalle { get; set; }
         public decimal id_rut_detalle { get; set; }
         public decimal id_tarea_detalle { get; set; }
+        public decimal id_estado_detalle { get; set; }
+        public String justificacion { get; set; }
 
         public Empleado empleado { get; set; }
         public Tarea tarea { get; set; }
+        public Estado estado { get; set; }
 
         ControlDeTareasEntities db = new ControlDeTareasEntities();
 
@@ -26,10 +29,13 @@ namespace ControlDeTareasWeb.Negocio
                 dbDetalleTarea.ID_DETALLE = db.DETALLE_TAREA.Max(x => x.ID_DETALLE) + 1;
                 dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
                 dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
+                dbDetalleTarea.ID_ESTADO_DETALLE = 1;
+                dbDetalleTarea.JUSTIFICACION = justificacion;
 
                 db.DETALLE_TAREA.Add(dbDetalleTarea);
                 db.SaveChanges();
 
+                this.id_detalle = dbDetalleTarea.ID_DETALLE;
                 return true;
             }
             catch
@@ -51,10 +57,14 @@ namespace ControlDeTareasWeb.Negocio
                     id_detalle = (decimal)x.ID_DETALLE;
                     id_rut_detalle = (decimal)x.ID_RUT_DETALLE;
                     id_tarea_detalle = (decimal)x.ID_TAREA_DETALLE;
+                    id_estado_detalle = (decimal)x.ID_ESTADO_DETALLE;
+                    justificacion = x.JUSTIFICACION;
                     empleado = new Empleado();
                     empleado.LoadEmpleado((decimal)x.ID_RUT_DETALLE);
                     tarea = new Tarea();
                     tarea.LoadTarea(id_tarea_detalle);
+                    estado = new Estado();
+                    estado.LoadEstado((decimal)x.ID_ESTADO_DETALLE);
                     listDetalle.Add(this);
                 }
             }
@@ -63,6 +73,25 @@ namespace ControlDeTareasWeb.Negocio
                 Console.WriteLine("Error al leer datos");
             }
             return listDetalle;
+        }
+        public Boolean Update()
+        {
+            try
+            {
+                DETALLE_TAREA dbDetalleTarea = db.DETALLE_TAREA.First(x => x.ID_DETALLE == id_detalle);
+                dbDetalleTarea.ID_RUT_DETALLE = (int)id_rut_detalle;
+                dbDetalleTarea.ID_TAREA_DETALLE = (int)id_tarea_detalle;
+                dbDetalleTarea.ID_ESTADO_DETALLE = (short)id_estado_detalle;
+                dbDetalleTarea.JUSTIFICACION = justificacion;
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al actualizar el Detalle Tarea");
+                return false;
+            }
         }
         public Boolean Delete()
         {
@@ -80,6 +109,7 @@ namespace ControlDeTareasWeb.Negocio
                 return false;
             }
         }
+        //FILTROS
         public List<DetalleTarea> FindByEmpleado(decimal id_rut)
         {
             List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
@@ -90,10 +120,14 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado(id_rut);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
@@ -108,13 +142,158 @@ namespace ControlDeTareasWeb.Negocio
                 detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
                 detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
                 detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
                 detalle.empleado = new Empleado();
                 detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
                 detalle.tarea = new Tarea();
                 detalle.tarea.LoadTarea(id_tarea);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
                 listaDetalle.Add(detalle);
             }
             return listaDetalle;
+        }
+        public Boolean FindByEmpleadoTarea(decimal id_rut, decimal id_tarea)
+        {
+            try
+            {
+                var dbDetalle = db.DETALLE_TAREA.First(x => x.ID_TAREA_DETALLE == id_tarea && x.ID_RUT_DETALLE == id_rut);
+
+                id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                justificacion = dbDetalle.JUSTIFICACION;
+                empleado = new Empleado();
+                empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                tarea = new Tarea();
+                tarea.LoadTarea(id_tarea);
+                estado = new Estado();
+                estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al cargar detalle");
+                return false;
+            }
+        }
+        public List<DetalleTarea> FindByEmpresa(decimal id_empresa)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.EMPLEADO.ID_EMPRESA_EMP == id_empresa);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
+        }
+        public List<DetalleTarea> FindByProceso(decimal id_Proceso)
+        {
+            List<DetalleTarea> listaDetalle = new List<DetalleTarea>();
+            var dbDetalles = db.DETALLE_TAREA.Where(x => x.TAREA.UNIDAD.PROCESO.ID_PROCESO == id_Proceso);
+            foreach (DETALLE_TAREA dbDetalle in dbDetalles)
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                detalle.justificacion = dbDetalle.JUSTIFICACION;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
+                listaDetalle.Add(detalle);
+            }
+            return listaDetalle;
+        }
+        public Boolean LoadDetalle(decimal id_detalle)
+        {
+            try
+            {
+                var dbDetalle = db.DETALLE_TAREA.First(x => x.ID_DETALLE == id_detalle);
+
+                this.id_detalle = (decimal)dbDetalle.ID_DETALLE;
+                id_rut_detalle = (decimal)dbDetalle.ID_RUT_DETALLE;
+                id_tarea_detalle = (decimal)dbDetalle.ID_TAREA_DETALLE;
+                id_estado_detalle = (decimal)dbDetalle.ID_ESTADO_DETALLE;
+                justificacion = dbDetalle.JUSTIFICACION;
+                empleado = new Empleado();
+                empleado.LoadEmpleado((decimal)dbDetalle.ID_RUT_DETALLE);
+                tarea = new Tarea();
+                tarea.LoadTarea((decimal)dbDetalle.ID_TAREA_DETALLE);
+                estado = new Estado();
+                estado.LoadEstado((decimal)dbDetalle.ID_ESTADO_DETALLE);
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Error al cargar detalle");
+                return false;
+            }
+        }
+        public Boolean verificarProceso(decimal id_Proceso)
+        {
+            try
+            {
+                Boolean dbDetalles = db.DETALLE_TAREA.Any(x => x.TAREA.UNIDAD.PROCESO.ID_PROCESO == id_Proceso);
+                return dbDetalles;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public int verificarNotificacion(Empleado empleadoAux)
+        {
+            try
+            {
+                int cantidad = db.DETALLE_TAREA.Count(x => x.ID_ESTADO_DETALLE == 1 && x.ID_RUT_DETALLE == empleadoAux.id_rut);
+                return cantidad;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public List<DetalleTarea> ListarNotificacion(decimal id_rut)
+        {
+            List<DetalleTarea> listaDetalles = new List<DetalleTarea>();
+            foreach (DETALLE_TAREA detalleEcontrado in db.DETALLE_TAREA.Where(x => x.ID_RUT_DETALLE == id_rut && x.ID_ESTADO_DETALLE == 1).ToList())
+            {
+                DetalleTarea detalle = new DetalleTarea();
+                detalle.id_detalle = (decimal)detalleEcontrado.ID_DETALLE;
+                detalle.id_rut_detalle = (decimal)detalleEcontrado.ID_RUT_DETALLE;
+                detalle.id_tarea_detalle = (decimal)detalleEcontrado.ID_TAREA_DETALLE;
+                detalle.id_estado_detalle = (decimal)detalleEcontrado.ID_ESTADO_DETALLE;
+                detalle.justificacion = detalleEcontrado.JUSTIFICACION;
+                detalle.empleado = new Empleado();
+                detalle.empleado.LoadEmpleado((decimal)detalleEcontrado.ID_RUT_DETALLE);
+                detalle.tarea = new Tarea();
+                detalle.tarea.LoadTarea((decimal)detalleEcontrado.ID_TAREA_DETALLE);
+                detalle.estado = new Estado();
+                detalle.estado.LoadEstado((decimal)detalleEcontrado.ID_ESTADO_DETALLE);
+                listaDetalles.Add(detalle);
+            }
+            return listaDetalles;
         }
     }
 }

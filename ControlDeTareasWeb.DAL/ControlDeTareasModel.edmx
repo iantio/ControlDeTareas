@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DETALLE_TAREA">
           <Key>
             <PropertyRef Name="ID_DETALLE" />
@@ -12,6 +12,8 @@
           <Property Name="ID_DETALLE" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="ID_RUT_DETALLE" Type="number" Precision="10" Scale="0" />
           <Property Name="ID_TAREA_DETALLE" Type="number" Precision="10" Scale="0" />
+          <Property Name="ID_ESTADO_DETALLE" Type="number" Precision="2" Scale="0" />
+          <Property Name="JUSTIFICACION" Type="varchar2" MaxLength="300" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -90,43 +92,7 @@
           <Property Name="FECHA_INICIO" Type="date" />
           <Property Name="FECHA_TERMINO" Type="date" />
         </EntityType>
-        <Association Name="SYS_C008519">
-          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
-          <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPRESA">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Principal>
-            <Dependent Role="ROL">
-              <PropertyRef Name="ID_EMPRESA_ROL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SYS_C008520">
-          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPRESA">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Principal>
-            <Dependent Role="EMPLEADO">
-              <PropertyRef Name="ID_EMPRESA_EMP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SYS_C008521">
-          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROL">
-              <PropertyRef Name="ID_ROL" />
-            </Principal>
-            <Dependent Role="EMPLEADO">
-              <PropertyRef Name="ID_ROL_EMP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SYS_C008522">
+        <Association Name="SYS_C008276">
           <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
           <End Role="PROCESO" Type="Self.PROCESO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +104,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008523">
+        <Association Name="SYS_C008277">
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
           <End Role="PROCESO" Type="Self.PROCESO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +116,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008524">
+        <Association Name="SYS_C008278">
           <End Role="PROCESO" Type="Self.PROCESO" Multiplicity="0..1" />
           <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008525">
+        <Association Name="SYS_C008279">
           <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
           <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="*" />
           <ReferentialConstraint>
@@ -174,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008526">
+        <Association Name="SYS_C008280">
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
           <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,7 +152,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008527">
+        <Association Name="SYS_C008319">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="ROL">
+              <PropertyRef Name="ID_EMPRESA_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C008320">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="ID_EMPRESA_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C008321">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="ID_ROL_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C008322">
           <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="0..1" />
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -198,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008528">
+        <Association Name="SYS_C008323">
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008529">
+        <Association Name="SYS_C008324">
           <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008530">
+        <Association Name="SYS_C008325">
           <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
           <End Role="DETALLE_TAREA" Type="Self.DETALLE_TAREA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008531">
+        <Association Name="SYS_C008326">
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="0..1" />
           <End Role="DETALLE_TAREA" Type="Self.DETALLE_TAREA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,7 +248,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008532">
+        <Association Name="SYS_C008327">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="DETALLE_TAREA" Type="Self.DETALLE_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="DETALLE_TAREA">
+              <PropertyRef Name="ID_ESTADO_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C008328">
           <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="0..1" />
           <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -258,7 +272,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SYS_C008533">
+        <Association Name="SYS_C008329">
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="0..1" />
           <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -270,6 +284,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CT_CREATE_PROCESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="JEFE">
+          <Parameter Name="ID_PROCESO" Type="number" Mode="In" />
+          <Parameter Name="ID_ESTADO_PRO" Type="number" Mode="In" />
+          <Parameter Name="ID_EMPRESA_PRO" Type="number" Mode="In" />
+          <Parameter Name="NOMBRE_PROCESO" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHA_INICIO" Type="date" Mode="In" />
+          <Parameter Name="FECHA_TERMINO" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="DETALLE_TAREA" EntityType="Self.DETALLE_TAREA" Schema="JEFE" store:Type="Tables" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="JEFE" store:Type="Tables" />
@@ -280,69 +302,72 @@
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="JEFE" store:Type="Tables" />
           <EntitySet Name="TAREA" EntityType="Self.TAREA" Schema="JEFE" store:Type="Tables" />
           <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" Schema="JEFE" store:Type="Tables" />
-          <AssociationSet Name="SYS_C008519" Association="Self.SYS_C008519">
+          <AssociationSet Name="SYS_C008276" Association="Self.SYS_C008276">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="PROCESO" EntitySet="PROCESO" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008277" Association="Self.SYS_C008277">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PROCESO" EntitySet="PROCESO" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008278" Association="Self.SYS_C008278">
+            <End Role="PROCESO" EntitySet="PROCESO" />
+            <End Role="UNIDAD" EntitySet="UNIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008279" Association="Self.SYS_C008279">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="UNIDAD" EntitySet="UNIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008280" Association="Self.SYS_C008280">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="UNIDAD" EntitySet="UNIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008319" Association="Self.SYS_C008319">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="ROL" EntitySet="ROL" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008520" Association="Self.SYS_C008520">
+          <AssociationSet Name="SYS_C008320" Association="Self.SYS_C008320">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008521" Association="Self.SYS_C008521">
+          <AssociationSet Name="SYS_C008321" Association="Self.SYS_C008321">
             <End Role="ROL" EntitySet="ROL" />
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008522" Association="Self.SYS_C008522">
-            <End Role="ESTADO" EntitySet="ESTADO" />
-            <End Role="PROCESO" EntitySet="PROCESO" />
-          </AssociationSet>
-          <AssociationSet Name="SYS_C008523" Association="Self.SYS_C008523">
-            <End Role="EMPRESA" EntitySet="EMPRESA" />
-            <End Role="PROCESO" EntitySet="PROCESO" />
-          </AssociationSet>
-          <AssociationSet Name="SYS_C008524" Association="Self.SYS_C008524">
-            <End Role="PROCESO" EntitySet="PROCESO" />
-            <End Role="UNIDAD" EntitySet="UNIDAD" />
-          </AssociationSet>
-          <AssociationSet Name="SYS_C008525" Association="Self.SYS_C008525">
-            <End Role="ESTADO" EntitySet="ESTADO" />
-            <End Role="UNIDAD" EntitySet="UNIDAD" />
-          </AssociationSet>
-          <AssociationSet Name="SYS_C008526" Association="Self.SYS_C008526">
-            <End Role="EMPRESA" EntitySet="EMPRESA" />
-            <End Role="UNIDAD" EntitySet="UNIDAD" />
-          </AssociationSet>
-          <AssociationSet Name="SYS_C008527" Association="Self.SYS_C008527">
+          <AssociationSet Name="SYS_C008322" Association="Self.SYS_C008322">
             <End Role="UNIDAD" EntitySet="UNIDAD" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008528" Association="Self.SYS_C008528">
+          <AssociationSet Name="SYS_C008323" Association="Self.SYS_C008323">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008529" Association="Self.SYS_C008529">
+          <AssociationSet Name="SYS_C008324" Association="Self.SYS_C008324">
             <End Role="ESTADO" EntitySet="ESTADO" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008530" Association="Self.SYS_C008530">
+          <AssociationSet Name="SYS_C008325" Association="Self.SYS_C008325">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008531" Association="Self.SYS_C008531">
+          <AssociationSet Name="SYS_C008326" Association="Self.SYS_C008326">
             <End Role="TAREA" EntitySet="TAREA" />
             <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008532" Association="Self.SYS_C008532">
+          <AssociationSet Name="SYS_C008327" Association="Self.SYS_C008327">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C008328" Association="Self.SYS_C008328">
             <End Role="UNIDAD" EntitySet="UNIDAD" />
             <End Role="FLUJO" EntitySet="FLUJO" />
           </AssociationSet>
-          <AssociationSet Name="SYS_C008533" Association="Self.SYS_C008533">
+          <AssociationSet Name="SYS_C008329" Association="Self.SYS_C008329">
             <End Role="TAREA" EntitySet="TAREA" />
             <End Role="FLUJO" EntitySet="FLUJO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -355,6 +380,9 @@
           <Property Name="ID_TAREA_DETALLE" Type="Int32" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.SYS_C008530" FromRole="DETALLE_TAREA" ToRole="EMPLEADO" />
           <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008531" FromRole="DETALLE_TAREA" ToRole="TAREA" />
+          <Property Name="ID_ESTADO_DETALLE" Type="Int16" />
+          <Property Name="JUSTIFICACION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ESTADO" Relationship="Model.SYS_C008327" FromRole="DETALLE_TAREA" ToRole="ESTADO" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -392,6 +420,7 @@
           <NavigationProperty Name="PROCESO" Relationship="Self.SYS_C008522" FromRole="ESTADO" ToRole="PROCESO" />
           <NavigationProperty Name="UNIDAD" Relationship="Self.SYS_C008525" FromRole="ESTADO" ToRole="UNIDAD" />
           <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008529" FromRole="ESTADO" ToRole="TAREA" />
+          <NavigationProperty Name="DETALLE_TAREA" Relationship="Model.SYS_C008327" FromRole="ESTADO" ToRole="DETALLE_TAREA" />
         </EntityType>
         <EntityType Name="FLUJO">
           <Key>
@@ -711,7 +740,31 @@
             <End Role="UNIDAD" EntitySet="UNIDAD" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
+          <AssociationSet Name="SYS_C008327" Association="Model.SYS_C008327">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
+          </AssociationSet>
+          <FunctionImport Name="CT_CREATE_PROCESO">
+            <Parameter Name="ID_PROCESO" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_ESTADO_PRO" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_EMPRESA_PRO" Mode="In" Type="Decimal" />
+            <Parameter Name="NOMBRE_PROCESO" Mode="In" Type="String" />
+            <Parameter Name="FECHA_INICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="FECHA_TERMINO" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
+        <Association Name="SYS_C008327">
+          <End Type="Model.ESTADO" Role="ESTADO" Multiplicity="0..1" />
+          <End Type="Model.DETALLE_TAREA" Role="DETALLE_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="DETALLE_TAREA">
+              <PropertyRef Name="ID_ESTADO_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -721,6 +774,8 @@
           <EntitySetMapping Name="DETALLE_TAREA">
             <EntityTypeMapping TypeName="Model.DETALLE_TAREA">
               <MappingFragment StoreEntitySet="DETALLE_TAREA">
+                <ScalarProperty Name="JUSTIFICACION" ColumnName="JUSTIFICACION" />
+                <ScalarProperty Name="ID_ESTADO_DETALLE" ColumnName="ID_ESTADO_DETALLE" />
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="ID_RUT_DETALLE" ColumnName="ID_RUT_DETALLE" />
                 <ScalarProperty Name="ID_TAREA_DETALLE" ColumnName="ID_TAREA_DETALLE" />
@@ -812,6 +867,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CT_CREATE_PROCESO" FunctionName="Model.Store.CT_CREATE_PROCESO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

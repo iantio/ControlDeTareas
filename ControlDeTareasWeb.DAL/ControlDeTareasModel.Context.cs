@@ -12,6 +12,9 @@ namespace ControlDeTareasWeb.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class ControlDeTareasEntities : DbContext
     {
@@ -34,5 +37,34 @@ namespace ControlDeTareasWeb.DAL
         public DbSet<ROL> ROL { get; set; }
         public DbSet<TAREA> TAREA { get; set; }
         public DbSet<UNIDAD> UNIDAD { get; set; }
+    
+        public virtual int CT_CREATE_PROCESO(Nullable<decimal> iD_PROCESO, Nullable<decimal> iD_ESTADO_PRO, Nullable<decimal> iD_EMPRESA_PRO, string nOMBRE_PROCESO, Nullable<System.DateTime> fECHA_INICIO, Nullable<System.DateTime> fECHA_TERMINO)
+        {
+            var iD_PROCESOParameter = iD_PROCESO.HasValue ?
+                new ObjectParameter("ID_PROCESO", iD_PROCESO) :
+                new ObjectParameter("ID_PROCESO", typeof(decimal));
+    
+            var iD_ESTADO_PROParameter = iD_ESTADO_PRO.HasValue ?
+                new ObjectParameter("ID_ESTADO_PRO", iD_ESTADO_PRO) :
+                new ObjectParameter("ID_ESTADO_PRO", typeof(decimal));
+    
+            var iD_EMPRESA_PROParameter = iD_EMPRESA_PRO.HasValue ?
+                new ObjectParameter("ID_EMPRESA_PRO", iD_EMPRESA_PRO) :
+                new ObjectParameter("ID_EMPRESA_PRO", typeof(decimal));
+    
+            var nOMBRE_PROCESOParameter = nOMBRE_PROCESO != null ?
+                new ObjectParameter("NOMBRE_PROCESO", nOMBRE_PROCESO) :
+                new ObjectParameter("NOMBRE_PROCESO", typeof(string));
+    
+            var fECHA_INICIOParameter = fECHA_INICIO.HasValue ?
+                new ObjectParameter("FECHA_INICIO", fECHA_INICIO) :
+                new ObjectParameter("FECHA_INICIO", typeof(System.DateTime));
+    
+            var fECHA_TERMINOParameter = fECHA_TERMINO.HasValue ?
+                new ObjectParameter("FECHA_TERMINO", fECHA_TERMINO) :
+                new ObjectParameter("FECHA_TERMINO", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CT_CREATE_PROCESO", iD_PROCESOParameter, iD_ESTADO_PROParameter, iD_EMPRESA_PROParameter, nOMBRE_PROCESOParameter, fECHA_INICIOParameter, fECHA_TERMINOParameter);
+        }
     }
 }

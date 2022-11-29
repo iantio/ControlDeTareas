@@ -4,6 +4,8 @@
     <EntitySetMapping Name="DETALLE_TAREA">
       <EntityTypeMapping TypeName="Model.DETALLE_TAREA">
         <MappingFragment StoreEntitySet="DETALLE_TAREA">
+          <ScalarProperty Name="JUSTIFICACION" ColumnName="JUSTIFICACION" />
+          <ScalarProperty Name="ID_ESTADO_DETALLE" ColumnName="ID_ESTADO_DETALLE" />
           <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
           <ScalarProperty Name="ID_RUT_DETALLE" ColumnName="ID_RUT_DETALLE" />
           <ScalarProperty Name="ID_TAREA_DETALLE" ColumnName="ID_TAREA_DETALLE" />
@@ -95,5 +97,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CT_CREATE_PROCESO" FunctionName="Model.Store.CT_CREATE_PROCESO" />
   </EntityContainerMapping>
 </Mapping>

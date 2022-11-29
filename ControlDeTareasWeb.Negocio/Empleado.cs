@@ -33,6 +33,7 @@ namespace ControlDeTareasWeb.Negocio
         }
         public List<Empleado> ReadAll()
         {
+
             return this.db.EMPLEADO.Select(p => new Empleado()
             {
                 id_rut = (decimal)p.ID_RUT,

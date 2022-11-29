@@ -9,6 +9,9 @@
     <Property Name="ID_TAREA_DETALLE" Type="Int32" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.SYS_C008530" FromRole="DETALLE_TAREA" ToRole="EMPLEADO" />
     <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008531" FromRole="DETALLE_TAREA" ToRole="TAREA" />
+    <Property Name="ID_ESTADO_DETALLE" Type="Int16" />
+    <Property Name="JUSTIFICACION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ESTADO" Relationship="Model.SYS_C008327" FromRole="DETALLE_TAREA" ToRole="ESTADO" />
   </EntityType>
   <EntityType Name="EMPLEADO">
     <Key>
@@ -46,6 +49,7 @@
     <NavigationProperty Name="PROCESO" Relationship="Self.SYS_C008522" FromRole="ESTADO" ToRole="PROCESO" />
     <NavigationProperty Name="UNIDAD" Relationship="Self.SYS_C008525" FromRole="ESTADO" ToRole="UNIDAD" />
     <NavigationProperty Name="TAREA" Relationship="Self.SYS_C008529" FromRole="ESTADO" ToRole="TAREA" />
+    <NavigationProperty Name="DETALLE_TAREA" Relationship="Model.SYS_C008327" FromRole="ESTADO" ToRole="DETALLE_TAREA" />
   </EntityType>
   <EntityType Name="FLUJO">
     <Key>
@@ -365,5 +369,29 @@
       <End Role="UNIDAD" EntitySet="UNIDAD" />
       <End Role="TAREA" EntitySet="TAREA" />
     </AssociationSet>
+    <AssociationSet Name="SYS_C008327" Association="Model.SYS_C008327">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="DETALLE_TAREA" EntitySet="DETALLE_TAREA" />
+    </AssociationSet>
+    <FunctionImport Name="CT_CREATE_PROCESO">
+      <Parameter Name="ID_PROCESO" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_ESTADO_PRO" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_EMPRESA_PRO" Mode="In" Type="Decimal" />
+      <Parameter Name="NOMBRE_PROCESO" Mode="In" Type="String" />
+      <Parameter Name="FECHA_INICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="FECHA_TERMINO" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
+  <Association Name="SYS_C008327">
+    <End Type="Model.ESTADO" Role="ESTADO" Multiplicity="0..1" />
+    <End Type="Model.DETALLE_TAREA" Role="DETALLE_TAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Principal>
+      <Dependent Role="DETALLE_TAREA">
+        <PropertyRef Name="ID_ESTADO_DETALLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
