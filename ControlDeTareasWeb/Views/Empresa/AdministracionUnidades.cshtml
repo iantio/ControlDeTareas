@@ -21,13 +21,17 @@
                 <a class="btn btn-outline-light btn-sm m-2 p-2 text-nowrap float-end" href="/Empresa/" role="button">Menu</a>
             </div>
         </div>
-        @using (Html.BeginForm("BuscarUsuario", "Empresa", FormMethod.Post)) {
+        @using (Html.BeginForm("AdministracionUnidades", "Empresa", FormMethod.Post))
+        {
             <div class="row">
                 <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
-                    <form class="d-flex" role="search">
-                        <input id="buscar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        @Html.TextBox(p => p, new { @class = "form-control m-1" })
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    <form class="row w-100" role="search">
+                        <div class="col-auto">
+                            @Html.TextBox("buscar", "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -23,14 +23,21 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+        @using (Html.BeginForm("AdministracionProcesos", "Empresa", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
+                    <form class="row w-100" role="search">
+                        <div class="col-auto">
+                            @Html.TextBox("buscar", "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        }
 
         <div class="row d-none d-sm-block">
 
@@ -52,15 +59,15 @@
 
                     @foreach (var proceso in procesos)
                     {
-                    <tr>
-                        <td>@proceso.id_proceso</td>
-                        <td>@proceso.nombre_proceso</td>
-                        <td>@proceso.estado.nombre_estado</td>
-                        <td>@proceso.fecha_inicio</td>
-                        <td>@proceso.fecha_termino</td>
-                        <td>@Html.ActionLink("Eliminar", "DeleteProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-danger w-100" })</td>
-                        <td>@Html.ActionLink("Editar", "EditarProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-info w-100" })</td>
-                    </tr>
+                        <tr>
+                            <td>@proceso.id_proceso</td>
+                            <td>@proceso.nombre_proceso</td>
+                            <td>@proceso.estado.nombre_estado</td>
+                            <td>@proceso.fecha_inicio</td>
+                            <td>@proceso.fecha_termino</td>
+                            <td>@Html.ActionLink("Eliminar", "DeleteProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-danger w-100" })</td>
+                            <td>@Html.ActionLink("Editar", "EditarProceso", new { id = proceso.id_proceso }, new { @class = "btn btn-info w-100" })</td>
+                        </tr>
                     }
 
                 </tbody>

@@ -170,6 +170,7 @@
     <Content Include="Views\Empresa\EditarEmpleado.cshtml" />
     <Content Include="Views\Empresa\EditarProceso.cshtml" />
     <Content Include="Views\Empresa\BuscarUsuario.cshtml" />
+    <Content Include="Views\Empresa\AdministracionTareas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -23,14 +23,21 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+        @using (Html.BeginForm("AdministracionUsuarios", "Empresa", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col bg-light rounded m-2 p-2 d-none d-sm-block">
+                    <form class="row w-100" role="search">
+                        <div class="col-auto">
+                            @Html.TextBox("buscar", "", new { @class = "form-control" })
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        }
 
         <div class="row d-none d-sm-block">
 
@@ -53,17 +60,17 @@
                 <tbody>
                     @foreach (var empleado in empleados)
                     {
-                    <tr>
-                        <td>@empleado.id_rut</td>
-                        <td>@empleado.empresa.nombre_empresa</td>
-                        <td>@empleado.rol.nombre_rol</td>
-                        <td>@empleado.fecha_ingreso</td>
-                        <td>@empleado.nombre_emp</td>
-                        <td>@empleado.usuario</td>
-                        <td>@empleado.clave</td>
-                        <td>@Html.ActionLink("Eliminar", "DeleteEmpleado", new { id = empleado.id_rut }, new { @class = "btn btn-danger w-100" })</td>
-                        <td>@Html.ActionLink("Editar", "EditarEmpleado", new { id = empleado.id_rut }, new { @class = "btn btn-info w-100" })</td>
-                    </tr>
+                        <tr>
+                            <td>@empleado.id_rut</td>
+                            <td>@empleado.empresa.nombre_empresa</td>
+                            <td>@empleado.rol.nombre_rol</td>
+                            <td>@empleado.fecha_ingreso</td>
+                            <td>@empleado.nombre_emp</td>
+                            <td>@empleado.usuario</td>
+                            <td>@empleado.clave</td>
+                            <td>@Html.ActionLink("Eliminar", "DeleteEmpleado", new { id = empleado.id_rut }, new { @class = "btn btn-danger w-100" })</td>
+                            <td>@Html.ActionLink("Editar", "EditarEmpleado", new { id = empleado.id_rut }, new { @class = "btn btn-info w-100" })</td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -75,10 +82,10 @@
 
         <div class="row bg-light rounded d-none d-sm-block">
             <div class="col m-2 p-2 text-white text-nowrap rounded">
-                <a type="button" class="btn btn-success" href="/Empresa/CreateEmpleado">Crear Usuario</a>               
+                <a type="button" class="btn btn-success" href="/Empresa/CreateEmpleado">Crear Usuario</a>
                 <label>@TempData["mensaje"]</label>
 
-                
+
             </div>
         </div>
     </div>

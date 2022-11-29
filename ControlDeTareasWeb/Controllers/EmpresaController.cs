@@ -31,7 +31,10 @@ namespace ControlDeTareasWeb.Controllers
             }
         }
 
+
+        //////////////////////////////////////////
         ////// ADMINISTRACION UNIDADES CRUD //////
+        //////////////////////////////////////////
         public ActionResult AdministracionUnidades()
         {
             ViewBag.unidad = new Negocio.Unidad().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
@@ -40,10 +43,17 @@ namespace ControlDeTareasWeb.Controllers
         }
         
         [HttpPost]
-        public ActionResult BuscarUsuario(int id)
+        public ActionResult AdministracionUnidades(FormCollection form)
         {
+            string buscar = (form["buscar"]).ToUpper();
 
-            
+            Unidad unidad = new Unidad();
+
+            List<Unidad> listaunidad = (unidad.Read((Decimal)Session["id_empresa_emp"]));
+
+            List<Unidad> buscadounidad = listaunidad.Where(x => x.nombre_unidad.Contains(buscar) || x.id_unidad.ToString() == (buscar)).ToList();
+
+            ViewBag.unidad = buscadounidad;
             return View();
         }
 
@@ -114,12 +124,31 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
+        //////////////////////
         ////// FIN CRUD //////
+        //////////////////////
 
+        //////////////////////////////////////////
         ////// ADMINISTRACION USUARIOS CRUD //////
+        //////////////////////////////////////////
         public ActionResult AdministracionUsuarios()
         {
             ViewBag.empleados = new Negocio.EmpleadoCollection().ReadByEmpresa(Decimal.Parse(Session["id_empresa_emp"].ToString()));
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdministracionUsuarios(FormCollection form)
+        {
+            string buscar = (form["buscar"]).ToUpper();
+
+            EmpleadoCollection empleado = new EmpleadoCollection();
+
+            List<Empleado> listaempleado = (empleado.ReadByEmpresa((Decimal)Session["id_empresa_emp"]));
+
+            List<Empleado> buscadoempleado = listaempleado.Where(x => x.nombre_emp.Contains(buscar) || x.id_rut.ToString() == (buscar)).ToList();
+
+            ViewBag.empleados = buscadoempleado;
             return View();
         }
 
@@ -187,14 +216,32 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
+        //////////////////////
         ////// FIN CRUD //////
+        //////////////////////
 
-
+        //////////////////////////////////////////
         ////// ADMINISTRACION PROCESOS CRUD //////
+        //////////////////////////////////////////
         public ActionResult AdministracionProcesos()
         {
             Console.WriteLine(User.Identity.Name);
             ViewBag.procesos = new Negocio.Proceso().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdministracionProcesos(FormCollection form)
+        {
+            string buscar = (form["buscar"]).ToUpper();
+
+            Proceso proceso = new Proceso();
+
+            List<Proceso> listaproceso = (proceso.Read((Decimal)Session["id_empresa_emp"]));
+
+            List<Proceso> buscadoproceso = listaproceso.Where(x => x.nombre_proceso.Contains(buscar) || x.id_proceso.ToString() == (buscar)).ToList();
+
+            ViewBag.procesos = buscadoproceso;
             return View();
         }
 
@@ -261,9 +308,65 @@ namespace ControlDeTareasWeb.Controllers
                 return View();
             }
         }
+        //////////////////////
         ////// FIN CRUD //////
+        //////////////////////
 
+        //////////////////////////////////////////
+        ////// ADMINISTRACION TAREAS CRUD ////////
+        //////////////////////////////////////////
+        public ActionResult AdministracionTareas()
+        {
+            Console.WriteLine(User.Identity.Name);
+            ViewBag.tareas = new Tarea().Read(Decimal.Parse(Session["id_empresa_emp"].ToString()));
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdministracionTareas(FormCollection form)
+        {
+            string buscar = (form["buscar"]).ToUpper();
+
+            Tarea tarea = new Tarea();
+
+            List<Tarea> listatarea = (tarea.Read((Decimal)Session["id_empresa_emp"]));
+
+            List<Tarea> buscadotarea = listatarea.Where(x => x.nombre_tarea.Contains(buscar) || x.id_tarea.ToString() == (buscar)).ToList();
+
+            ViewBag.procesos = buscadotarea;
+            return View();
+        }
+
+        public ActionResult CreateTarea()
+        {
+            EnviarEstado();
+            EnviarEmpresa();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateTarea([Bind(Include = "ID_PROCESO, ID_ESTADO_PRO, NOMBRE_PROCESO, FECHA_INICIO, FECHA_TERMINO")] Proceso proceso)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                proceso.id_empresa_pro = int.Parse(Session["id_empresa_emp"].ToString());
+                proceso.Create();
+                TempData["mensaje"] = "Guardado correctamente";
+                return RedirectToAction("AdministracionProcesos", "Empresa");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        //////////////////////
+        ////// FIN CRUD //////
+        //////////////////////
+
+        /////////////////////////////////
         ////// VARIABLES GLOGABLES //////
+        /////////////////////////////////
         private void EnviarProcesos()
         {
             try
