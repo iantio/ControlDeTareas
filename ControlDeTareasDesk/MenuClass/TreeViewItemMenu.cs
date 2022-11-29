@@ -27,6 +27,7 @@ namespace ControlDeTareasDesk
         public List<TreeViewItemMenu> Items { get; set; }
         public DetalleTarea detalleTarea { get; set; }
         public String justificacion { get; set; }
+        public String colorSemaforo { get; set; } = "Green";
 
         public TreeViewItemMenu ReadDetalle(Empleado empleadoAux)
         {
@@ -57,6 +58,20 @@ namespace ControlDeTareasDesk
 
                     itemProceso.Porcentaje = (porcentajeProceso / porcentajeProcesoTotal);
                     Console.WriteLine(proceso.nombre_proceso);
+                    if (itemProceso.proceso.id_estado_pro != 1 || itemProceso.proceso.id_estado_pro != 5)
+                    {
+                        switch (itemProceso.ObtenerSemaforo())
+                        {
+                            case "Green":
+                                break;
+                            case "Yellow":
+                                break;
+                            case "Red":
+                                itemProceso.proceso.id_estado_pro = 4;
+                                itemProceso.proceso.Update();
+                                break;
+                        }
+                    }
                     foreach (decimal idUnidad in listaUnidades)
                     {
                         Unidad unidad = new Unidad();
@@ -72,6 +87,21 @@ namespace ControlDeTareasDesk
                         double porcentajeUnidadTotal = listaDetalles.Count(x => x.tarea.unidad.id_unidad == idUnidad);
                         itemUnidad.Porcentaje = porcentajeUnidad / porcentajeUnidadTotal;
                         Console.WriteLine("|_"+unidad.nombre_unidad);
+                        //COLOR SEMAFORO
+                        if (itemUnidad.unidad.id_estado_uni != 1 || itemUnidad.unidad.id_estado_uni != 5)
+                        {
+                            switch (itemUnidad.ObtenerSemaforo())
+                            {
+                                case "Green":
+                                    break;
+                                case "Yellow":
+                                    break;
+                                case "Red":
+                                    itemUnidad.unidad.id_estado_uni = 4;
+                                    itemUnidad.unidad.Update();
+                                    break;
+                            }
+                        }
                         foreach (decimal idTarea in listaTareas)
                         {
                             if (idTarea != 0)
@@ -90,6 +120,21 @@ namespace ControlDeTareasDesk
                                 itemProceso.proceso = tarea.unidad.proceso;
                                 itemUnidad.Items.Add(itemTarea);
                                 Console.WriteLine(" |_" + tarea.nombre_tarea);
+                                //COLOR SEMAFORO
+                                if (itemTarea.tarea.id_estado_tarea != 1 || itemTarea.tarea.id_estado_tarea != 5)
+                                {
+                                    switch (itemTarea.ObtenerSemaforo())
+                                    {
+                                        case "Green":
+                                            break;
+                                        case "Yellow":
+                                            break;
+                                        case "Red":
+                                            itemTarea.tarea.id_estado_tarea = 4;
+                                            itemTarea.tarea.Update();
+                                            break;
+                                    }
+                                }
                             }
                         }
                         itemProceso.Items.Add(itemUnidad);
@@ -136,6 +181,21 @@ namespace ControlDeTareasDesk
                     itemProceso.Porcentaje = (porcentajeProceso / porcentajeProcesoTotal);
 
                     Console.WriteLine(proceso.nombre_proceso);
+                    //COLOR SEMAFORO
+                    if (itemProceso.proceso.id_estado_pro != 1 || itemProceso.proceso.id_estado_pro != 5)
+                    {
+                        switch (itemProceso.ObtenerSemaforo())
+                        {
+                            case "Green":
+                                break;
+                            case "Yellow":
+                                break;
+                            case "Red":
+                                itemProceso.proceso.id_estado_pro = 4;
+                                itemProceso.proceso.Update();
+                                break;
+                        }
+                    }
                     //ENCONTRAR UNIDADES
                     foreach (decimal idUnidad in listaUnidades)
                     {
@@ -152,6 +212,22 @@ namespace ControlDeTareasDesk
                         double porcentajeUnidadTotal = listaDetalles.Count(x => x.tarea.unidad.id_unidad == idUnidad);
                         itemUnidad.Porcentaje = porcentajeUnidad / porcentajeUnidadTotal;
                         Console.WriteLine("|_" + unidad.nombre_unidad);
+                        //COLOR SEMAFORO
+                        if (itemUnidad.unidad.id_estado_uni != 1 || itemUnidad.unidad.id_estado_uni != 5)
+                        {
+                            switch (itemUnidad.ObtenerSemaforo())
+                            {
+                                case "Green":
+                                    break;
+                                case "Yellow":
+                                    break;
+                                case "Red":
+                                    itemUnidad.unidad.id_estado_uni = 4;
+                                    itemUnidad.unidad.Update();
+                                    break;
+                            }
+                        }
+
                         //ENCONTRAR TAREAS
                         foreach (decimal id_tarea in listaTareas)
                         {
@@ -168,6 +244,21 @@ namespace ControlDeTareasDesk
                             double porcentajeTareaTotal = listaDetalles.Count(x => x.tarea.id_tarea == id_tarea);
                             itemTarea.Porcentaje = porcentajeTarea / porcentajeTareaTotal;
                             Console.WriteLine(" |_" + tarea.nombre_tarea);
+                            //COLOR SEMAFORO
+                            if (itemTarea.tarea.id_estado_tarea != 1 || itemTarea.tarea.id_estado_tarea != 5)
+                            {
+                                switch (itemTarea.ObtenerSemaforo())
+                                {
+                                    case "Green":
+                                        break;
+                                    case "Yellow":
+                                        break;
+                                    case "Red":
+                                        itemTarea.tarea.id_estado_tarea = 4;
+                                        itemTarea.tarea.Update();
+                                        break;
+                                }
+                            }
                             //ENCONTRAR EMPLEADOS
                             foreach (decimal idEmpleado in listaEmpleados)
                             {
@@ -187,6 +278,21 @@ namespace ControlDeTareasDesk
                                 TreeViewItemMenu itemEmpleado = new TreeViewItemMenu() { Titulo = empleado.nombre_emp, Porcentaje = porcentajeTemp, empleado = empleado, tarea = tarea, idItemTarea = idItemTarea, idItemEmpleado = idItemEmpleado, detalleTarea = detalleTareaTemp, justificacion=detalleTareaTemp.justificacion };
 
                                 Console.WriteLine("  |_" + empleado.nombre_emp);
+                                //COLOR SEMAFORO
+                                if (itemEmpleado.detalleTarea.id_estado_detalle != 1 || itemEmpleado.detalleTarea.id_estado_detalle != 5)
+                                {
+                                    switch (itemEmpleado.ObtenerSemaforo())
+                                    {
+                                        case "Green":
+                                            break;
+                                        case "Yellow":
+                                            break;
+                                        case "Red":
+                                            itemEmpleado.detalleTarea.id_estado_detalle = 4;
+                                            itemEmpleado.detalleTarea.Update();
+                                            break;
+                                    }
+                                }
                                 itemTarea.Items.Add(itemEmpleado);
                                 idItemEmpleado += 1;
                             }
@@ -204,6 +310,42 @@ namespace ControlDeTareasDesk
                 Console.WriteLine("Error");
             }
             return this;
+        }
+        private String ObtenerSemaforo()
+        {
+            TimeSpan resto = (TimeSpan)System.DateTime.Now.TimeOfDay;
+            if (proceso != null)
+            {
+                resto = proceso.fecha_termino - System.DateTime.Now;
+            }
+            else if (unidad != null)
+            {
+                resto = unidad.fecha_termino - System.DateTime.Now;
+            }
+            else if (tarea != null)
+            {
+                resto = tarea.fecha_termino - System.DateTime.Now;
+            }
+            else if (empleado != null && tarea != null)
+            {
+                DetalleTarea detalleTareaTemp = new DetalleTarea();
+                detalleTareaTemp.FindByEmpleadoTarea(empleado.id_rut, tarea.id_tarea);
+                resto = tarea.fecha_termino - System.DateTime.Now;
+            }
+            if (resto.Days < 0)
+            {
+                colorSemaforo = "Red";
+            }
+            else if (resto.Days >= 0 && resto.Days <= 7)
+            {
+                colorSemaforo = "Yellow";
+            }
+            else if (resto.Days > 7)
+            {
+                colorSemaforo = "Green";
+            }
+            Console.WriteLine("TimeSpan: "+resto.Days+colorSemaforo);
+            return colorSemaforo;
         }
     }
 }

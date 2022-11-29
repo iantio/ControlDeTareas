@@ -43,7 +43,7 @@
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:TreeViewItemMenu}" ItemsSource="{Binding Items}" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="Green"/>
+                            <Ellipse Width="10" Height="10" Margin="0,0,5,0" Fill="{Binding colorSemaforo}"/>
                             <TextBlock HorizontalAlignment="Stretch" Text="{Binding Titulo}"/>
                             <ProgressBar HorizontalAlignment="Right" Height="10" Width="100" Margin="50,0,0,0" Minimum="0" Maximum="1" Value="{Binding Porcentaje}" materialDesign:TransitionAssist.DisableTransitions="True"/>
                         </StackPanel>
